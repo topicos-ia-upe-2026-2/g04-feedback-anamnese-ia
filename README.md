@@ -313,16 +313,64 @@ pip install -r requirements.txt
 # python src/app.py ...
 ```
 
+> **E1 é só documentação.** Os scripts de preparo, baseline e treino LoRA entram em `src/` na E2, com dependências
+> fixadas em `requirements.txt`. Pesos-base são baixados do Hugging Face (links acima); os adaptadores gerados ficam
+> locais enquanto a licença das anotações não for esclarecida.
+
 ## Resultados
 
-<!-- Preencher a partir da E2: baseline, configuração do ajuste, métricas,
-exemplos de sucesso e falha, comparação final. Detalhes em docs/experimentos.md -->
+Nenhum resultado medido até aqui. Baseline, configuração do ajuste, métricas e exemplos de sucesso e falha serão
+registrados a partir da E2 em [`docs/experimentos.md`](docs/experimentos.md).
 
 ## Limitações e uso responsável
 
-<!-- Limitações conhecidas, anonimização de dados sensíveis, cuidados de uso,
-custo/latência quando relevante -->
+- **Finalidade educacional.** Não oferece diagnóstico, prescrição nem recomendação de conduta; não é apoio à decisão
+  clínica e não deve ser usado com pacientes reais. O feedback é revisável pelo preceptor antes do uso no ensino.
+- **Erro do modelo não vira acusação.** Saída inválida, transcrição de baixa confiança ou falantes não revisados geram
+  "avaliação inconclusiva", nunca "o estudante não perguntou".
+- **Cobertura parcial.** O CMAS não representa bem alergias, vacinação e revisão completa de sistemas; o sistema não
+  avalia a anamnese inteira. O mapeamento CMAS → pedagógico ainda não foi validado pela cliente.
+- **Idioma.** O ajuste é feito em inglês; o desempenho em português é desconhecido até ser medido.
+- **Dados e licenças.** Anotações do MediTOD sem licença identificada → nada de dados ou adaptadores derivados no
+  repositório. Futuras gravações exigem consentimento e anonimização antes de qualquer uso.
+- **Feedback sem julgamento pessoal.** Os três blocos (acertos, pontos de melhoria, etapas não identificadas) descrevem
+  condutas observáveis com cautela e indicam uma oportunidade de prática (Bastos e Castro et al., 2021; van de Ridder et al., 2015).
+- **Custo.** Execução local, sem serviço pago; latência e memória serão medidas na E2.
 
 ## Referências
 
-<!-- Artigo-base e demais referências citadas (formato ABNT ou APA) -->
+Saley, V. V.; Saha, G.; Das, R. J.; Raghu, D.; Mausam. (2024). MediTOD: An English Dialogue Dataset for Medical History Taking with Comprehensive Annotations. *EMNLP*, 16843–16877. https://doi.org/10.18653/v1/2024.emnlp-main.936
+
+Fareez, F. et al. (2022). A dataset of simulated patient-physician medical interviews with a focus on respiratory cases. *Scientific Data*, 9, 313. https://doi.org/10.1038/s41597-022-01423-1
+
+Hu, E. J. et al. (2022). LoRA: Low-Rank Adaptation of Large Language Models. *ICLR*. https://arxiv.org/abs/2106.09685
+
+Dettmers, T. et al. (2023). QLoRA: Efficient Finetuning of Quantized LLMs. *NeurIPS*. https://arxiv.org/abs/2305.14314
+
+Qwen Team. (2025). Qwen3 Technical Report. https://arxiv.org/abs/2505.09388
+
+Van Veen, D. et al. (2024). Adapted large language models can outperform medical experts in clinical text summarization. *Nature Medicine*, 30, 1134–1142. https://doi.org/10.1038/s41591-024-02855-5
+
+Haring, C. M. et al. (2017). Observable phenomena that reveal medical students' clinical reasoning ability during expert assessment of their history taking: a qualitative study. *BMC Medical Education*, 17, 147. https://doi.org/10.1186/s12909-017-0983-3
+
+Spencer, J. (2003). Learning and teaching in the clinical environment. *BMJ*, 326, 591–594. https://doi.org/10.1136/bmj.326.7389.591
+
+Cheung, W. J. et al. (2019). Barriers and Enablers to Direct Observation of Trainees' Clinical Performance: A Qualitative Study Using the Theoretical Domains Framework. *Academic Medicine*, 94, 101–114. https://doi.org/10.1097/ACM.0000000000002396
+
+Alex, C. P. et al. (2024). Exploring Medical Student Experiences With Direct Observation During the Pediatric Clerkship. *Academic Medicine*, 99, 997–1006. https://doi.org/10.1097/ACM.0000000000005747
+
+Blanch-Hartigan, D. (2011). Medical students' self-assessment of performance: Results from three meta-analyses. *Patient Education and Counseling*, 84, 3–9. https://doi.org/10.1016/j.pec.2010.06.037
+
+Davis, D. A. et al. (2006). Accuracy of Physician Self-assessment Compared With Observed Measures of Competence. *JAMA*, 296, 1094–1102. https://doi.org/10.1001/jama.296.9.1094
+
+Bastos e Castro, M. A. et al. (2021). The Use of Feedback in Improving the Knowledge, Attitudes and Skills of Medical Students: a Systematic Review and Meta-analysis of Randomized Controlled Trials. *Medical Science Educator*, 31, 2093–2104. https://doi.org/10.1007/s40670-021-01443-3
+
+van de Ridder, J. M. M. et al. (2015). Variables that affect the process and outcome of feedback, relevant for medical training: a meta-review. *Medical Education*, 49, 658–673. https://doi.org/10.1111/medu.12744
+
+Gordon, M. et al. (2024). A scoping review of artificial intelligence in medical education: BEME Guide No. 84. *Medical Teacher*, 46, 446–470. https://doi.org/10.1080/0142159X.2024.2314198
+
+Varughese, E. et al. (2026). Medical Students' Perceptions of Artificial Intelligence Use in Medical Practice: A Systematic Review. *Medical Science Educator*, 36, 1003–1014. https://doi.org/10.1007/s40670-025-02630-2
+
+Costa, M. (2026). Motor de IA especializado em educação médica: o problema e as características da solução. Relato documental fornecido para o projeto.
+
+BibTeX: [`referencias.bib`](referencias.bib).
