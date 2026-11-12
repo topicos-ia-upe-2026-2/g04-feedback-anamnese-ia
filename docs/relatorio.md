@@ -1,6 +1,6 @@
 # Relatório técnico — Motor de IA para feedback educacional de anamnese
 
-**Grupo:** GXX <!-- TODO: número do grupo --> | **Integrantes:** Leonardo Marcelo, André Lucas | **2026.2**
+**Grupo:** G03 | **Integrantes:** Leonardo Marcelo, André Lucas | **2026.2**
 
 > Estado: **E1**. As seções 1–5 resumem a definição do projeto (texto completo em [`E1-definicao.md`](E1-definicao.md));
 > as seções 6–8 serão escritas a partir da E2 com resultados medidos.

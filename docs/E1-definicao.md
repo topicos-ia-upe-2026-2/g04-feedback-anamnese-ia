@@ -6,7 +6,7 @@
 **Professor:** Marcondes Ricarte  
 **Integrantes:** Leonardo Marcelo e André Lucas  
 **Cliente indicada:** Marília Costa, docente de medicina  
-**Versão revisada:** 03/11/2026 · **Entrega E1:** 11/11/2026, por Pull Request
+**Versão revisada:** 03/11/2026 · **Grupo:** G03 · **Entrega E1:** 13/11/2026 (prazo prorrogado; original 11/11/2026), por Pull Request
 
 ## 1. Resumo da proposta
 
@@ -263,7 +263,7 @@ A tabela é uma proposta de trabalho. Não certifica participação já realizad
 
 | Entrega | Versionamento | Encontro |
 |---|---|---|
-| E1 · Definição | 11/11/2026 | Não previsto |
+| E1 · Definição | 13/11/2026 (prorrogado; original 11/11/2026) | Não previsto |
 | E2 · Modelo e dados | 22/11/2026 | Alinhamento em 23/11/2026 |
 | E3 · Aplicação | 29/11/2026 | Alinhamento em 30/11/2026 |
 | E4 · Apresentação | 07/12/2026 | Apresentação em 07/12/2026 |
