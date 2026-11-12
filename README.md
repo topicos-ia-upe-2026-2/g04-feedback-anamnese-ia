@@ -108,19 +108,56 @@ Primeiro recorte: entrevistas simuladas predominantemente **respiratórias** (pe
 
 ## Artigo-base
 
-- **Título:**
-- **Autores:**
-- **Ano:**
-- **DOI/URL:**
-- **Componentes utilizados/adaptados:** <!-- método, arquitetura, protocolo experimental -->
+- **Título:** MediTOD: An English Dialogue Dataset for Medical History Taking with Comprehensive Annotations
+- **Autores:** Vishal Vivek Saley, Goonjan Saha, Rocktim Jyoti Das, Dinesh Raghu e Mausam
+- **Ano:** 2024 (EMNLP 2024, p. 16843–16877)
+- **DOI/URL:** <https://doi.org/10.18653/v1/2024.emnlp-main.936> · [ACL Anthology](https://aclanthology.org/2024.emnlp-main.936/) · código e dados: <https://github.com/dair-iitd/MediTOD>
+- **Componentes utilizados/adaptados:** esquema de anotação CMAS e ajuste supervisionado de um LLM pré-treinado para emitir estrutura (detalhes abaixo)
+
+**Método do artigo.** O MediTOD reúne diálogos de coleta de história clínica anotados com o *Comprehensive Medical
+Attribute Schema* (CMAS). A anotação separa atos como `inquire` (pergunta) e `inform` (informação) e liga cada fala a
+categorias (sintoma, antecedentes, medicação, hábitos…) e atributos (início, duração, intensidade…). O artigo avalia
+compreensão (NLU), política de diálogo e geração, com modelos ajustados por supervisão. Na NLU, que olha a fala mais
+recente do **paciente**, o Llama3-8B supervisionado chega a F1 0,7139.
+
+**O que muda aqui.** Nosso projeto extrai atos `inquire` das falas já proferidas pelo **entrevistador**, com outra
+divisão dos dados e outra correspondência entre rótulos. Não é uma reprodução da NLU original, e os números do artigo
+**não serão comparados diretamente** aos nossos.
+
+| Componente do artigo | Uso no projeto | Mudança ou limite |
+|---|---|---|
+| Esquema CMAS | Categorias e atributos da extração | Foco retrospectivo em `inquire` |
+| Falas e anotações textuais abertas (`raw_data/`) | Preparação local e experimento inicial | Licença das anotações não identificada; sem redistribuição |
+| Ajuste supervisionado de modelo pré-treinado | Aprender a emitir estrutura a partir do contexto | Qwen 4B + LoRA em hardware local, no lugar do Llama3-8B |
+| Avaliação publicada | Referência de desenho experimental | Métricas próprias explícitas, sem alegar equivalência numérica |
+| Política e geração de perguntas | Não utilizadas | O sistema não entrevista no lugar do aluno |
+| Canonicalização UMLS | Não utilizada | Evita depender de licença UMLS (exigida para o conjunto canonicalizado) |
+
+O código de métricas original (`metrics/nlu_metrics.py`) não será copiado: ele inclui canonicalização e
+correspondência que não equivalem à nossa avaliação por conjuntos de rótulos. A correspondência metodológica está em
+usar **contexto de diálogo + supervisão estruturada + modelo pré-treinado adaptado**, não em manter a tarefa inteira.
+
+**Referências de apoio ao método:** Hu et al. (2022) — LoRA; Dettmers et al. (2023) — QLoRA, adaptação sobre
+modelos quantizados (o MLX usa LoRA sobre pesos 4-bit; não presumimos equivalência exata ao NF4 do QLoRA);
+Van Veen et al. (2024) — LLMs adaptados no domínio clínico e avaliação humana em dimensões separadas.
 
 ## Modelo pré-treinado
 
-- **Nome e versão:**
-- **Origem dos pesos:** <!-- link (ex.: Hugging Face) -->
-- **Licença:**
-- **Tarefa original:**
-- **Relação com o artigo-base:** <!-- justificativa, se não for o mesmo modelo do artigo -->
+- **Nome e versão:** Qwen3-4B-Instruct-2507 (revisão consultada em 12/11/2026: `cdbee75`)
+- **Origem dos pesos:** <https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507> · distribuição para execução local em MLX: <https://huggingface.co/mlx-community/Qwen3-4B-Instruct-2507-4bit> (revisão `50d4277`)
+- **Licença:** Apache-2.0 (as duas fichas)
+- **Tarefa original:** geração de texto e seguimento de instruções, multilíngue
+- **Tarefa adaptada:** contexto + pergunta do entrevistador → lista de atos `inquire` em JSON
+- **Parâmetros ajustados:** matrizes LoRA em parte das camadas; pesos-base congelados
+- **Relação com o artigo-base:** o artigo usa Llama3-8B. Trocamos por um modelo de 4B para caber em 16 GiB de memória
+  unificada, mantendo a mesma formulação (geração supervisionada de estrutura a partir do diálogo). O suporte
+  multilíngue do Qwen torna o português **uma hipótese a testar**, não uma qualidade comprovada após ajuste em inglês.
+  Plano B, se o professor pedir redução de escopo: Qwen3-1.7B com a mesma receita (ver [`docs/decisoes.md`](docs/decisoes.md)).
+
+**Componente de áudio (E3/E4, sem ajuste):** [Whisper large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo),
+licença MIT. Fora da avaliação da E2; qualidade em português e custo serão medidos quando houver áudio de teste.
+
+Ficha completa no contexto do projeto: [`docs/model_card.md`](docs/model_card.md).
 
 ## Conjunto de dados-base
 
