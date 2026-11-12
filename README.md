@@ -161,13 +161,52 @@ Ficha completa no contexto do projeto: [`docs/model_card.md`](docs/model_card.md
 
 ## Conjunto de dados-base
 
-- **Fonte e acesso:** <!-- link + como obter -->
-- **Licença/autorização:**
-- **Formato e volume:**
-- **Rótulos e adequação ao problema:**
+- **Fonte e acesso:** repositório público [dair-iitd/MediTOD](https://github.com/dair-iitd/MediTOD), arquivos
+  `raw_data/dialogs.json` (~4,4 MB) e `raw_data/annotations.json` (~4,3 MB), revisão `0b7a87c` consultada em 12/11/2026
+- **Licença/autorização:** ⚠️ o repositório **não tem arquivo LICENSE** e não identificamos declaração de licença para
+  as anotações. Os diálogos de origem vêm de Fareez et al. (2022), publicados como **CC0**, mas isso não define a
+  licença das anotações do MediTOD. Por isso dados e adaptadores derivados ficam **só no ambiente local**; o
+  repositório guarda código, configurações e estatísticas agregadas. Nenhum contato foi feito com os autores em nome da dupla.
+- **Formato e volume:** JSON. Cada diálogo tem falas com identificador, texto e falante; as anotações têm atos com
+  `uid`, intenção, categoria, valor e atributos. **231 diálogos alinhados** (contagem a confirmar no manifesto da E2).
+- **Rótulos e adequação ao problema:** usamos os atos `inquire`, que marcam exatamente o que o entrevistador perguntou —
+  o sinal que o feedback precisa. Informações espontâneas do paciente **não** provam que uma pergunta foi feita, e o
+  sistema também não deve punir o estudante por não repetir algo já informado: presença de informação e evidência de
+  investigação são conceitos separados.
 
-> Arquivos de dados grandes **não** devem ser versionados no repositório.
-> Use este espaço para o link (Google Drive, Hugging Face, etc.) e as instruções de download.
+| Fonte | Conteúdo e acesso | Licença ou condição | Papel |
+|---|---|---|---|
+| MediTOD `raw_data/` | JSON público no GitHub; 231 diálogos | Sem LICENSE identificado | Dados do experimento textual (E2) |
+| [Fareez et al. (2022)](https://doi.org/10.1038/s41597-022-01423-1), [Figshare 16550013](https://springernature.figshare.com/articles/dataset/Collection_of_simulated_medical_exams/16550013) | Entrevistas simuladas, `Data.zip` (~1,03 GB) com áudio | CC0 | Áudio para E3/E4; não necessário à primeira adaptação |
+| Exemplos em português do projeto | Didáticos/sintéticos, quando criados | Origem e finalidade registradas em cada arquivo | Testes técnicos; não substituem validação humana |
+| Futuras gravações da dupla | Ainda não coletadas | Exigem consentimento e regra de compartilhamento | Avaliação futura de áudio e português |
+
+**Divisão dos dados.** Os arquivos de divisão publicados (`data/train_ids.json`, `valid_ids.json`, `test_ids.json`)
+têm **um único id cada** (`115`, `317`, `407`) e não recuperam a divisão do artigo. Usaremos divisão própria,
+determinística e documentada por **listas de diálogo**; diálogos textualmente idênticos com ids diferentes ficam no
+mesmo grupo, para que nenhuma entrevista apareça em treino e teste ao mesmo tempo.
+
+**Preparação planejada (executada e detalhada na E2):**
+1. Fixar a revisão do repositório-fonte e registrar o SHA-256 dos arquivos baixados.
+2. Verificar o alinhamento diálogo ↔ falante ↔ id da fala ↔ anotação.
+3. Normalizar variantes de grafia declaradas, sem inferir atributos não anotados.
+4. Agrupar diálogos idênticos e separar os **grupos** em treino/validação/teste **antes** de gerar amostras por fala.
+5. Montar histórico limitado, sem nenhum rótulo-alvo na entrada.
+6. Selecionar piloto de treino e amostra de avaliação por regra e semente registradas.
+7. Exportar no formato do `mlx-lm` e registrar contagens e exclusões (inclusive falas com resposta esperada vazia).
+
+**Como obter (E2):**
+
+```bash
+git clone https://github.com/dair-iitd/MediTOD.git ../MediTOD
+git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
+# os arquivos ficam fora do repositório; data/ e *.json já estão no .gitignore
+```
+
+A avaliação inicial é em inglês e mede a adaptação ao corpus. A generalização ao público brasileiro continua sendo uma
+questão experimental. Detalhes: [`docs/data_card.md`](docs/data_card.md).
+
+> Arquivos de dados grandes **não** são versionados neste repositório.
 
 ## Plano de adaptação e avaliação
 
