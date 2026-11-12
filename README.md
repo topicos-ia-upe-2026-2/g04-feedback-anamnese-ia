@@ -6,7 +6,7 @@ Projeto aplicado da disciplina **Tópicos Avançados em Inteligência Artificial
 |---|---|
 | G03 | Leonardo Marcelo (@LeonardoMarcelo), André Lucas (@andredutradev) |
 
-**Etapa atual:** E1 · Definição (só documentação). Documento completo: [`docs/E1-definicao.md`](docs/E1-definicao.md) · [PDF](docs/E1-definicao.pdf).
+**Etapa atual:** E1 · Definição (só documentação). Documento completo: [`docs/E1-definicao.md`](docs/E1-definicao.md) · [PDF](docs/E1-definicao.pdf). Pendências: [`TODO.md`](TODO.md).
 
 > **Em uma frase:** um modelo de linguagem pré-treinado (Qwen3-4B-Instruct-2507), ajustado com LoRA sobre o corpus
 > MediTOD, identifica quais perguntas o estudante de medicina fez numa anamnese simulada, para gerar feedback
