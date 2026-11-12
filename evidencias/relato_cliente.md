@@ -13,10 +13,10 @@ observação independente do ambulatório.
 - **Necessidade:** na preceptoria de ambulatório universitário, o docente acompanha vários estudantes enquanto atende
   à demanda assistencial. A observação da entrevista e o feedback individual dependem da disponibilidade do preceptor,
   e o estudante pode terminar a atividade sem saber o que deixou de investigar.
-- **Fluxo desejado:** o estudante realiza uma anamnese simulada; a entrevista é registrada; o sistema aponta as
-  investigações feitas e as não identificadas, com feedback revisável pelo preceptor.
-- **Qualidades esperadas do feedback:** acertos, pontos de melhoria e etapas investigativas não identificadas, em
-  português, ligados a trechos concretos da entrevista.
+- **Fluxo desejado e qualidades esperadas do feedback:** o documento da E1 registra que o relato trata desses dois
+  pontos, mas não os detalha. Ficam para a transcrição integral.
+- **Como a dupla traduziu isso na proposta (seção 1 da E1, não é fala da cliente):** feedback em português com
+  acertos, pontos de melhoria e etapas investigativas não identificadas, revisável pelo preceptor.
 
 ## Limites desta evidência
 
