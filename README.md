@@ -61,8 +61,50 @@ recebidos. Uma conversa com a cliente e a revisão do roteiro estão planejadas 
 
 ## Solução e escopo
 
-<!-- Explique a entrada, a saída e o fluxo de uso. Liste o que SERÁ e o que NÃO SERÁ
-implementado até a apresentação final. -->
+**Entrada (E2, experimento textual):** histórico recente e fala atual do entrevistador num diálogo simulado, com o
+falante já identificado pelo corpus.
+**Saída:** lista JSON de atos `inquire` (categoria, valor e atributos investigados).
+**Aplicação planejada (E3/E4):** transcrição identificada por falante ou áudio de anamnese simulada. O áudio passa por
+transcrição local e **revisão humana dos falantes** antes da análise. O Whisper, sozinho, não diz com segurança quem é
+estudante ou paciente, então a diarização não é tratada como pronta.
+
+```mermaid
+flowchart LR
+  subgraph E2["E2 · experimento textual"]
+    A[Histórico + fala do entrevistador] --> B{Qwen3-4B}
+    B -->|sem ajuste: baseline| C[Atos inquire em JSON]
+    B -->|com adaptador LoRA| C
+    C --> D[Comparação com rótulos retidos e métricas]
+  end
+  subgraph E34["E3/E4 · aplicação planejada"]
+    E[Áudio] --> F[Transcrição Whisper] --> G[Revisão de falantes e identificadores]
+    G --> H[Extração com o adaptador] --> I[Comparação com roteiro do caso]
+    I --> J[Acertos · melhorias · etapas não identificadas]
+  end
+```
+
+Cada afirmação do feedback futuro deverá apontar o trecho da entrevista que a sustenta. A comparação com o roteiro é
+determinística, mas recebe a saída de um modelo sujeito a erro. Por isso, **saída inválida, transcrição de baixa
+confiança ou falantes não revisados geram "avaliação inconclusiva"**, nunca "o estudante não perguntou".
+
+**Exemplo ilustrativo (não é resultado medido).** Pergunta: *"Quando a tosse começou?"*
+
+```json
+[{ "slot": "symptom", "value": "cough", "attributes": ["when check"] }]
+```
+
+Isso sustenta um retorno como: *"Você investigou o início da tosse. Na próxima prática, revise os demais aspectos
+previstos no roteiro do caso."* Não permite afirmar que a anamnese está completa, que o paciente tem uma doença ou que
+um procedimento é indicado. A equivalência entre perguntas em português e rótulos em inglês ainda precisa ser avaliada.
+
+| Será implementado até a apresentação | Não será implementado |
+|---|---|
+| E1: problema, artigo, modelo, dados e plano (este PR) | Diagnóstico, tratamento ou apoio à decisão clínica |
+| E2: preparo reproduzível do texto, partições, baseline, primeiro LoRA, logs e métricas | Uso com pacientes reais ou dados de prontuário |
+| E3: extração integrada ao fluxo de uso, rastreabilidade por trecho, comparação com roteiro | Treinamento do zero |
+| E4: demonstração de um caso completo e defesa técnica | Implantação multiusuário ou validação de eficácia educacional em larga escala |
+
+Primeiro recorte: entrevistas simuladas predominantemente **respiratórias** (perfil do corpus).
 
 ## Artigo-base
 
