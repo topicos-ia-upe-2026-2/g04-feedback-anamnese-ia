@@ -210,12 +210,94 @@ questão experimental. Detalhes: [`docs/data_card.md`](docs/data_card.md).
 
 ## Plano de adaptação e avaliação
 
-- **O que será ajustado:** <!-- full fine-tuning, parcial ou adaptadores (LoRA etc.) -->
-- **Recursos computacionais:** <!-- GPU/Colab/Kaggle, tempo estimado -->
-- **Baseline:**
+**Hipótese técnica.** Ajustar adaptadores LoRA melhora a emissão de atos de investigação em relação ao **mesmo modelo
+sem ajuste**, com a mesma entrada, a mesma saída esperada e a mesma regra de validação do JSON. A E2 exige uma primeira
+execução verificável, não superioridade garantida.
+
+- **O que será ajustado:** adaptadores **LoRA** em parte das camadas do Qwen3-4B-Instruct-2507, sobre pesos
+  quantizados em 4 bits (`mlx-lm`); pesos-base congelados. Treino por entropia cruzada só sobre a saída supervisionada.
+  Hiperparâmetros e número de passos efetivos ficam no arquivo de configuração da E2 e em [`docs/experimentos.md`](docs/experimentos.md).
+- **Recursos computacionais:** Apple M5 (arm64), 16 GiB de memória unificada, MLX/Metal, Python 3.12 em `.venv/`
+  (inspecionado em 03/11/2026). Sem GPU em nuvem nem serviço pago. A configuração piloto limita tamanho de sequência,
+  lote e número de camadas adaptadas. Tempo e memória serão **medidos** no log, não presumidos. Se faltar memória, a
+  ordem de redução é: contexto → camadas adaptadas → tamanho da execução, registrando a configuração final usada.
+- **Baseline:** (1) Qwen original sem adaptador — baseline principal, isola o efeito do ajuste; (2) regras simples por
+  busca textual, quando executadas — mostram o limite de uma solução sem modelo. Todos avaliados nas mesmas amostras.
 - **Métricas:**
-- **Riscos:**
-- **Divisão das atividades entre os integrantes:**
+
+  | Medida | Para quê |
+  |---|---|
+  | Precisão, recall e F1 micro dos rótulos `inquire` | Falsos positivos e falsos negativos da extração |
+  | Validade estrutural do JSON | Quantas respostas seguem o contrato **sem correção oportunista** |
+  | Perda de treino e validação | Evidência de execução (perda menor ≠ produto melhor) |
+  | Latência e memória | Viabilidade no equipamento usado |
+
+  Protocolo fixado **antes** de rodar: a validação acompanha o treino; o teste **não** orienta a escolha de
+  hiperparâmetros nesta rodada, e qualquer mudança motivada pela inspeção do teste é registrada à parte. Omissão,
+  qualidade pedagógica, WER e eficácia de aprendizagem **não** serão inferidas do F1 de extração — dependem de outros
+  dados e protocolos (avaliação do produto na E3/E4: recall **e** precisão de omissões contra um roteiro anotado de
+  forma independente; rubrica de especificidade, correção e tom com avaliadores independentes).
+- **Riscos** (probabilidade e impacto são estimativas qualitativas da dupla):
+
+  | Risco | Prob. | Impacto | Consequência | Resposta |
+  |---|---|---|---|---|
+  | Licença das anotações não esclarecida | Alta | Médio | Restrição ao compartilhamento de derivados | Dados e adaptadores locais; registrar a fonte; esclarecer antes de redistribuir |
+  | Piloto pequeno e desbalanceado | Alta | Médio | Métrica instável e pouco representativa | Publicar contagens, composição e exemplos de erro; ampliar depois |
+  | Ajuste feito em inglês | Alta | Alto | Desempenho em português desconhecido | Avaliar corpus próprio revisado em etapa posterior |
+  | Falha de extração ou transcrição | Média | Alto | Feedback incorreto | Evidência por trecho e estado "inconclusivo" na aplicação |
+  | Memória insuficiente | Média | Médio | Treino interrompido | Limitar contexto, lote e camadas; plano B Qwen3-1.7B |
+  | Roteiro sem revisão especializada | Média | Alto | Omissões pedagógicas indevidas | Marcar como proposta e revisar com a docente antes do uso |
+  | Professor pedir redução de escopo ou troca de modelo | Baixa | Médio | Retrabalho na E2 | Receita independente do tamanho do modelo; decisão registrada em `docs/decisoes.md` |
+
+- **Divisão das atividades entre os integrantes** (proposta de trabalho; não certifica participação já feita):
+
+  | Frente | Responsável | Revisão |
+  |---|---|---|
+  | Dados, ambiente e ajuste LoRA | Leonardo Marcelo | André Lucas |
+  | Roteiro pedagógico e protocolo de avaliação | André Lucas | Leonardo Marcelo |
+  | Integração e rastreabilidade | Leonardo Marcelo | André Lucas |
+  | Análise de erros, documentação e demonstração | Ambos | Revisão cruzada |
+  | Conversa com a cliente e defesa técnica | Ambos | A confirmar na execução |
+
+  Os dois integrantes devem conseguir explicar e reproduzir os experimentos que apresentarem.
+
+**Do rótulo ao feedback (proposta, ainda sem validação clínica da cliente).** O roteiro de cada caso escolhe quais
+itens do CMAS são pertinentes; a frequência de um item no corpus não o torna obrigatório.
+
+| Categoria CMAS | Interpretação educacional proposta |
+|---|---|
+| `symptom` e atributos | Caracterização da queixa e investigação de outros sintomas previstos no caso |
+| `medical history` | Exploração de antecedentes |
+| `medication` | Investigação de medicamentos relatados ou em uso |
+| `habit` | Hábitos pertinentes ao caso |
+| `family history` | História familiar |
+| `occupation`, `exposure`, `travel` | Contexto ocupacional, ambiental e de deslocamentos, quando pertinente |
+
+Cada item do roteiro poderá sair como: investigação identificada · parcial · não identificada · informação
+espontânea presente · não aplicável · **avaliação inconclusiva**. Alergias, vacinação e revisão completa de sistemas
+não têm categoria própria neste recorte, então o sistema não poderá dizer que avalia a anamnese inteira.
+
+**Cronograma**
+
+| Entrega | Versionamento (PR) | Encontro |
+|---|---|---|
+| E1 · Definição | 11/11/2026 | — |
+| E2 · Modelo e dados | 22/11/2026 | Alinhamento 23/11/2026 |
+| E3 · Aplicação | 29/11/2026 | Alinhamento 30/11/2026 |
+| E4 · Apresentação | 07/12/2026 | Apresentação 07/12/2026 |
+
+### Matriz de atendimento da E1
+
+| Exigência do enunciado | Onde está |
+|---|---|
+| Problema, beneficiário e evidência inicial | [Cliente, problema e beneficiário](#cliente-problema-e-beneficiário) · [`evidencias/relato_cliente.md`](evidencias/relato_cliente.md) |
+| Entrada, saída, fluxo de uso e escopo | [Solução e escopo](#solução-e-escopo) |
+| Artigo: título, autores, ano, DOI, método e componentes | [Artigo-base](#artigo-base) |
+| Modelo: nome, versão, pesos, licença, tarefa original, relação com o artigo | [Modelo pré-treinado](#modelo-pré-treinado) · [`docs/model_card.md`](docs/model_card.md) |
+| Dados: fonte, acesso, licença, formato, volume, rótulos, adequação | [Conjunto de dados-base](#conjunto-de-dados-base) · [`docs/data_card.md`](docs/data_card.md) |
+| Adaptação, recursos, baseline, métricas | [Plano de adaptação e avaliação](#plano-de-adaptação-e-avaliação) · [`docs/experimentos.md`](docs/experimentos.md) |
+| Riscos e divisão das atividades | Tabelas acima · [`docs/decisoes.md`](docs/decisoes.md) |
+| Critério de aceite (problema específico, método fundamentado, pesos acessíveis, caminho viável) | Problema delimitado a perguntas do entrevistador; método do MediTOD; pesos públicos Apache-2.0; preparo em 7 passos e treino local |
 
 ## Como executar
 
