@@ -168,7 +168,18 @@ Ficha completa no contexto do projeto: [`docs/model_card.md`](docs/model_card.md
   licença das anotações do MediTOD. Por isso dados e adaptadores derivados ficam **só no ambiente local**; o
   repositório guarda código, configurações e estatísticas agregadas. Nenhum contato foi feito com os autores em nome da dupla.
 - **Formato e volume:** JSON. Cada diálogo tem falas com identificador, texto e falante; as anotações têm atos com
-  `uid`, intenção, categoria, valor e atributos. **231 diálogos alinhados** (contagem a confirmar no manifesto da E2).
+  `uid`, intenção, categoria, valor e atributos. Volume medido em 12/11/2026 (estatísticas agregadas, sem treino):
+
+  | Medida | Valor |
+  |---|---|
+  | Diálogos (com anotação alinhada fala a fala) | **231** (100% alinhados) |
+  | Falas | 22.317 (11.097 do médico · 10.989 do paciente · 231 de controle) |
+  | Falas do médico com ≥ 1 ato `inquire` / sem `inquire` | 9.707 / 1.390 (as sem `inquire` viram amostras de lista vazia) |
+  | Atos `inquire` | 10.082 em 13 categorias |
+  | Categorias mais frequentes | `symptom` 5.527 · `medical history` 1.406 · `habit` 795 · `medication` 520 · `exposure` 488 · `family history` 457 |
+  | Pares de diálogos com texto idêntico e ids diferentes | **18** → 213 grupos únicos para a divisão |
+
+  Detalhes, SHA-256 dos arquivos e como reproduzir: [`docs/data_card.md`](docs/data_card.md).
 - **Rótulos e adequação ao problema:** usamos os atos `inquire`, que marcam exatamente o que o entrevistador perguntou —
   o sinal que o feedback precisa. Informações espontâneas do paciente **não** provam que uma pergunta foi feita, e o
   sistema também não deve punir o estudante por não repetir algo já informado: presença de informação e evidência de
@@ -176,7 +187,7 @@ Ficha completa no contexto do projeto: [`docs/model_card.md`](docs/model_card.md
 
 | Fonte | Conteúdo e acesso | Licença ou condição | Papel |
 |---|---|---|---|
-| MediTOD `raw_data/` | JSON público no GitHub; 231 diálogos | Sem LICENSE identificado | Dados do experimento textual (E2) |
+| MediTOD `raw_data/` | JSON público no GitHub; 231 diálogos, 10.082 atos `inquire` | Sem LICENSE identificado | Dados do experimento textual (E2) |
 | [Fareez et al. (2022)](https://doi.org/10.1038/s41597-022-01423-1), [Figshare 16550013](https://springernature.figshare.com/articles/dataset/Collection_of_simulated_medical_exams/16550013) | Entrevistas simuladas, `Data.zip` (~1,03 GB) com áudio | CC0 | Áudio para E3/E4; não necessário à primeira adaptação |
 | Exemplos em português do projeto | Didáticos/sintéticos, quando criados | Origem e finalidade registradas em cada arquivo | Testes técnicos; não substituem validação humana |
 | Futuras gravações da dupla | Ainda não coletadas | Exigem consentimento e regra de compartilhamento | Avaliação futura de áudio e português |
@@ -184,12 +195,13 @@ Ficha completa no contexto do projeto: [`docs/model_card.md`](docs/model_card.md
 **Divisão dos dados.** Os arquivos de divisão publicados (`data/train_ids.json`, `valid_ids.json`, `test_ids.json`)
 têm **um único id cada** (`115`, `317`, `407`) e não recuperam a divisão do artigo. Usaremos divisão própria,
 determinística e documentada por **listas de diálogo**; diálogos textualmente idênticos com ids diferentes ficam no
-mesmo grupo, para que nenhuma entrevista apareça em treino e teste ao mesmo tempo.
+mesmo grupo, para que nenhuma entrevista apareça em treino e teste ao mesmo tempo. Isso não é hipotético: há **18 pares**
+de diálogos idênticos (ex.: `106`/`206`, `124`/`624`), que um sorteio por id espalharia entre as partições.
 
 **Preparação planejada (executada e detalhada na E2):**
-1. Fixar a revisão do repositório-fonte e registrar o SHA-256 dos arquivos baixados.
-2. Verificar o alinhamento diálogo ↔ falante ↔ id da fala ↔ anotação.
-3. Normalizar variantes de grafia declaradas, sem inferir atributos não anotados.
+1. Fixar a revisão do repositório-fonte e registrar o SHA-256 dos arquivos baixados (já registrado em [`docs/data_card.md`](docs/data_card.md)).
+2. Verificar o alinhamento diálogo ↔ falante ↔ id da fala ↔ anotação (checagem inicial: 231/231 alinhados).
+3. Normalizar variantes de grafia declaradas, sem inferir atributos não anotados (ex.: `frquency check` × `frequency check`).
 4. Agrupar diálogos idênticos e separar os **grupos** em treino/validação/teste **antes** de gerar amostras por fala.
 5. Montar histórico limitado, sem nenhum rótulo-alvo na entrada.
 6. Selecionar piloto de treino e amostra de avaliação por regra e semente registradas.
@@ -227,7 +239,7 @@ execução verificável, não superioridade garantida.
 
   | Medida | Para quê |
   |---|---|
-  | Precisão, recall e F1 micro dos rótulos `inquire` | Falsos positivos e falsos negativos da extração |
+  | Precisão, recall e F1 micro dos rótulos `inquire` (+ F1 por categoria) | Falsos positivos e falsos negativos da extração, sem esconder categorias raras |
   | Validade estrutural do JSON | Quantas respostas seguem o contrato **sem correção oportunista** |
   | Perda de treino e validação | Evidência de execução (perda menor ≠ produto melhor) |
   | Latência e memória | Viabilidade no equipamento usado |

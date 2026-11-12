@@ -38,8 +38,8 @@ Plano B: Qwen3-1.7B. Ver [`model_card.md`](model_card.md) e [`decisoes.md`](deci
 
 ## 4. Dados
 
-MediTOD `raw_data/` (231 diálogos, inglês, sem licença identificada para as anotações → uso apenas local). Partições
-próprias por grupo de diálogo para evitar vazamento. Preparo planejado em 7 passos (revisão fixada + SHA-256,
+MediTOD `raw_data/` (231 diálogos, 22.317 falas, 10.082 atos `inquire` em 13 categorias, inglês, sem licença identificada para as anotações → uso apenas local). Partições
+próprias por grupo de diálogo para evitar vazamento (há 18 pares de diálogos idênticos → 213 grupos). Preparo planejado em 7 passos (revisão fixada + SHA-256,
 alinhamento, normalização, agrupamento e split, histórico sem rótulo-alvo, piloto com semente, exportação `mlx-lm`).
 Áudio futuro: Fareez et al. (2022), CC0. Ver [`data_card.md`](data_card.md).
 

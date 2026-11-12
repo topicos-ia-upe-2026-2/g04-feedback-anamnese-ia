@@ -10,11 +10,11 @@ Fixado agora para que a escolha de métricas e partições não seja influenciad
 | Item | Definição |
 |---|---|
 | Tarefa | Histórico limitado + fala atual do entrevistador → lista JSON de atos `inquire` (`slot`, `value`, `attributes`) |
-| Unidade de amostra | Uma fala do entrevistador; inclui falas cuja resposta esperada é lista vazia |
+| Unidade de amostra | Uma fala do entrevistador; inclui falas cuja resposta esperada é lista vazia (11.097 falas do médico: 9.707 com `inquire`, 1.390 vazias) |
 | Partições | Treino / validação / teste por **grupo de diálogo** (diálogos idênticos no mesmo grupo), divisão determinística com semente registrada |
 | Sistemas comparados | (1) Qwen3-4B-Instruct-2507 sem adaptador · (2) regras simples por busca textual, quando executadas · (3) Qwen3-4B + LoRA |
 | Mesmas condições | Mesmo prompt, mesmas amostras de teste, mesma regra de validação do JSON para todos os sistemas |
-| Métricas principais | Precisão, recall e F1 **micro** sobre os rótulos `inquire` |
+| Métricas principais | Precisão, recall e F1 **micro** sobre os rótulos `inquire`, mais F1 **por categoria** (`symptom` tem 55% dos atos; o micro sozinho esconderia as categorias raras) |
 | Métricas de apoio | Taxa de JSON válido (sem correção oportunista), perda de treino/validação, latência por amostra, pico de memória |
 | Saídas inválidas | Contabilizadas como erro e reportadas à parte; a regra exata acompanha os resultados da E2 |
 | Uso do teste | O teste **não** orienta hiperparâmetros nesta rodada; alterações motivadas pelo teste são registradas separadamente |
