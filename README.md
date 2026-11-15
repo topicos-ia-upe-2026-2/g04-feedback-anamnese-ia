@@ -4,7 +4,7 @@ Projeto aplicado da disciplina **Tópicos Avançados em Inteligência Artificial
 
 | Grupo | Integrantes |
 |---|---|
-| G03 | Leonardo Marcelo (@LeonardoMarcelo), André Lucas (@andredutradev) |
+| G04 | Leonardo Marcelo (@LeonardoMarcelo), André Lucas (@andredutradev) |
 
 **Etapa atual:** E1 · Definição (só documentação). Documento completo: [`docs/E1-definicao.md`](docs/E1-definicao.md) · [PDF](docs/E1-definicao.pdf). Pendências: [`TODO.md`](TODO.md).
 
@@ -293,7 +293,7 @@ não têm categoria própria neste recorte, então o sistema não poderá dizer 
 
 | Entrega | Versionamento (PR) | Encontro |
 |---|---|---|
-| E1 · Definição | 13/11/2026 (prorrogado; data original 11/11) | — |
+| E1 · Definição | 17/11/2026 (prorrogado; data original 11/11) | — |
 | E2 · Modelo e dados | 22/11/2026 | Alinhamento 23/11/2026 |
 | E3 · Aplicação | 29/11/2026 | Alinhamento 30/11/2026 |
 | E4 · Apresentação | 07/12/2026 | Apresentação 07/12/2026 |
