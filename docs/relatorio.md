@@ -1,6 +1,6 @@
-# Relatório técnico — Nome do Projeto
+# Relatório técnico — Motor de IA para feedback educacional de anamnese
 
-**Grupo:** GXX | **Integrantes:** Nome 1, Nome 2 | **2026.2**
+**Grupo:** G04 | **Integrantes:** Leonardo Marcelo, André Lucas | **2026.2**
 
 ## 1. Problema e contexto
 
