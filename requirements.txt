@@ -1,5 +1,2 @@
 # Dependências do projeto — atualizar conforme a etapa
-# E1: apenas documentação, nenhuma dependência instalada.
-# Previstas para a E2 (versões fixadas quando o pipeline for versionado):
-# mlx-lm        # LoRA sobre Qwen3-4B-Instruct-2507 em 4 bits (Apple Silicon)
-# huggingface_hub
+# E1: apenas documentação; nenhuma dependência.
