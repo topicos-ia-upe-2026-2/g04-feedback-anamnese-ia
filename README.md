@@ -6,105 +6,130 @@ Projeto aplicado da disciplina **Tópicos Avançados em Inteligência Artificial
 |---|---|
 | G04 | Leonardo Marcelo (@LeonardoMarcelo), André Lucas (@andredutradev) |
 
-**Etapa atual:** E1 · Definição (só documentação). Documento completo: [`docs/E1-definicao.md`](docs/E1-definicao.md) · [PDF](docs/E1-definicao.pdf). Pendências: [`TODO.md`](TODO.md).
+**Etapa atual:** E1 · Definição do projeto. Documento completo: [`docs/E1-definicao.md`](docs/E1-definicao.md) · [PDF](docs/E1-definicao.pdf).
 
-> **Em uma frase:** um modelo de linguagem pré-treinado (Qwen3-4B-Instruct-2507), ajustado com LoRA sobre o corpus
-> MediTOD, identifica quais perguntas o estudante de medicina fez numa anamnese simulada, para gerar feedback
-> educacional verificável. **Não diagnostica, não prescreve e não recomenda conduta.**
+> **Em uma frase:** a partir do áudio da anamnese que o estudante de medicina faz com um paciente real, o sistema
+> transcreve a entrevista, identifica o que cada pergunta do estudante investigou (Qwen3-4B-Instruct-2507 ajustado com
+> LoRA sobre o corpus MediTOD) e devolve um feedback sobre cada interação, com o que ele acertou, o que precisa melhorar
+> e o que deixou de investigar. **Não diagnostica, não prescreve e não recomenda conduta.**
 
 | Ficha rápida | |
 |---|---|
-| Cliente | Marília Costa, docente de medicina (preceptoria em ambulatório universitário) |
-| Usuário principal | Estudante de medicina que pratica anamnese; preceptor como beneficiário indireto |
+| Cliente | Marília Costa, docente de medicina (semiologia, ambulatório universitário) |
+| Usuário principal | Estudante de medicina que faz anamnese com paciente real; professor como beneficiário indireto |
+| Entrada | Áudio da anamnese conduzida pelo estudante com um paciente real |
+| Saída | Feedback sobre cada interação e pergunta + resumo: acertos, o que errou ou precisa melhorar, o que deixou de fazer |
 | Artigo-base | Saley et al. (2024). *MediTOD*. EMNLP. [doi:10.18653/v1/2024.emnlp-main.936](https://doi.org/10.18653/v1/2024.emnlp-main.936) |
-| Modelo | [Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507) (Apache-2.0), LoRA sobre pesos 4-bit em MLX |
-| Dados | MediTOD `raw_data/` (diálogos + anotações CMAS) · Fareez et al. (2022), CC0, para áudio futuro |
+| Modelo | [Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507) (Apache-2.0), LoRA sobre pesos 4-bit em MLX · Whisper large-v3-turbo (MIT) na transcrição, sem ajuste |
+| Dados | MediTOD `raw_data/` (diálogos + anotações CMAS) · Fareez et al. (2022), CC0, áudios simulados para testar o fluxo |
 | Baseline | Mesmo Qwen sem adaptador (+ regras simples, se executadas) |
 | Métricas | Precisão, recall e F1 micro dos rótulos `inquire`; validade de JSON; perda; latência e memória |
 
 ## Cliente, problema e beneficiário
 
-**Contexto.** Marília Costa descreve um problema da preceptoria em ambulatório universitário: um docente precisa
-acompanhar vários estudantes e, ao mesmo tempo, atender à demanda assistencial. A observação da entrevista e o
-feedback individual dependem da disponibilidade do preceptor. O estudante pode terminar uma atividade sem saber
-quais partes da investigação deixou de realizar.
+**Contexto.** Marília Costa é docente de medicina. Na disciplina de semiologia, os estudantes vão ao ambulatório
+atender pacientes reais e fazem a anamnese: a entrevista em que, a partir da queixa principal ("o que te trouxe
+aqui?"), investigam a história do paciente. É uma habilidade investigativa, desenvolvida com prática e retorno. O
+exame físico, que vem depois da anamnese, não faz parte deste projeto.
 
-**Quem se beneficia.** O usuário principal é o estudante de medicina que pratica anamnese. O preceptor é
-beneficiário indireto: poderá consultar um registro das perguntas e revisar o feedback antes de usá-lo no ensino.
-A proposta parte de uma cliente real; não pressupõe parceria institucional, contratação ou aceite formal da solução.
+**Problema.** O ideal, segundo a cliente, é o professor acompanhar a entrevista e dizer ao estudante o que ele acertou,
+o que errou e o que deixou de fazer, para que ele corrija na próxima. Isso não acontece de forma adequada: um professor
+responde por mais de vinte alunos, além da rotina do consultório, e não consegue ver o que cada um faz nem dar esse
+retorno individual.
+
+**Quem se beneficia.** O usuário principal é o estudante de medicina que faz anamnese com paciente real. O professor é
+beneficiário indireto: pode consultar o registro e revisar o feedback antes de usá-lo no ensino. A cliente é real; o
+projeto não pressupõe parceria institucional, contratação ou aceite formal da solução.
 
 **Como é resolvido hoje e o que a aplicação muda:**
 
 | Processo atual | Limitação relevante | Benefício pretendido |
 |---|---|---|
-| Observação direta e comentários do preceptor | Dependem da presença e do tempo disponível | Organizar evidências da entrevista para facilitar a revisão |
-| Autoavaliação do estudante | Pode divergir da avaliação externa | Mostrar trechos concretos que sustentam o retorno |
-| Avaliações práticas em momentos específicos | Não acompanham necessariamente cada treino | Permitir revisão de entrevistas simuladas entre avaliações |
+| Professor observa e comenta a entrevista | Um professor para mais de vinte alunos; depende da presença e do tempo | Feedback para cada anamnese gravada, não só para as que o professor acompanha |
+| Autoavaliação do estudante | Pode divergir da avaliação externa | Mostrar os trechos da entrevista que sustentam cada observação |
+| Avaliações práticas pontuais | Não acompanham cada atendimento | Retorno logo após a anamnese, a tempo da próxima |
 
-**Problema específico:** a dificuldade de obter um registro **frequente e verificável** das etapas de investigação
-realizadas pelo estudante. A hipótese de benefício é que esse registro ajude a orientar a prática seguinte. Ganho de
-aprendizagem, redução da carga do preceptor e satisfação do usuário são objetivos futuros, não resultados demonstrados.
+**Problema específico:** o estudante termina a anamnese sem um retorno individual e verificável sobre o que investigou
+e o que deixou de investigar. A hipótese de benefício é que esse retorno ajude a melhorar a entrevista seguinte. Ganho
+de aprendizagem e redução da carga do professor são objetivos, não resultados demonstrados.
 
-**Evidência inicial.** Relato escrito *"Motor de IA especializado em educação médica: o problema e as
-características da solução"*, de Marília Costa, transcrito em [`evidencias/relato_cliente.md`](evidencias/relato_cliente.md).
-Ele descreve a necessidade, o fluxo desejado e as qualidades esperadas do feedback. É um relato documental: não é
-uma entrevista conduzida pela dupla nem uma observação independente do ambulatório.
+**Evidência inicial.** Entrevista com a cliente por mensagens de voz, transcrita em
+[`evidencias/entrevista_cliente.md`](evidencias/entrevista_cliente.md). Ela descreve o cenário (ambulatório, paciente
+real, semiologia), o feedback esperado (acertos, erros e o que deixou de fazer), a causa do problema (um professor para
+mais de vinte alunos) e a solução que imagina: captar o áudio da entrevista, transformá-lo em texto e analisá-lo com os
+conhecimentos de anamnese.
 
-A literatura situa o problema sem medir o processo específico da cliente: Haring et al. (2017) sobre raciocínio
-clínico observável na anamnese; Spencer (2003) sobre ensino no ambiente clínico; Cheung et al. (2019) e Alex et al.
-(2024) sobre barreiras à observação direta. Sobre autoavaliação, Blanch-Hartigan (2011) encontrou capacidade
-**moderada** em estudantes. Por isso o feedback externo é tratado como complemento verificável à reflexão do aluno,
-e não como prova de que o estudante avalia mal o próprio desempenho.
+A literatura situa o problema sem medir o caso da cliente: Haring et al. (2017) sobre raciocínio clínico observável na
+anamnese; Spencer (2003) sobre ensino no ambiente clínico; Cheung et al. (2019) e Alex et al. (2024) sobre barreiras à
+observação direta; Bastos e Castro et al. (2021) sobre o efeito do feedback no aprendizado de estudantes de medicina.
+Sobre autoavaliação, Blanch-Hartigan (2011) encontrou capacidade **moderada** em estudantes. Por isso o feedback externo
+é tratado como complemento verificável à reflexão do aluno, e não como prova de que o estudante avalia mal o próprio
+desempenho.
 
-**Limites da evidência:** não há entrevista agendada, consentimento assinado nem validação clínica nos materiais
-recebidos. Uma conversa com a cliente e a revisão do roteiro estão planejadas para as próximas etapas.
+**Limites da evidência:** é a visão de uma docente; a dupla não observou o ambulatório, e o roteiro de itens que o
+feedback vai cobrar ainda precisa ser validado com a cliente.
 
 ## Solução e escopo
 
-**Entrada (E2, experimento textual):** histórico recente e fala atual do entrevistador num diálogo simulado, com o
-falante já identificado pelo corpus.
-**Saída:** lista JSON de atos `inquire` (categoria, valor e atributos investigados).
-**Aplicação planejada (E3/E4):** transcrição identificada por falante ou áudio de anamnese simulada. O áudio passa por
-transcrição local e **revisão humana dos falantes** antes da análise. O Whisper, sozinho, não diz com segurança quem é
-estudante ou paciente, então a diarização não é tratada como pronta.
+**Entrada:** gravação de áudio da anamnese conduzida pelo estudante com um paciente real (só a entrevista, sem o exame
+físico).
+
+**Saída:** feedback ao estudante, em português, em duas partes:
+
+1. **Avaliação de cada interação.** Para cada pergunta do estudante: o trecho transcrito, o que ela investigou (por
+   exemplo, o início da tosse) e como ficou cada item do roteiro tocado por ela (investigado, parcial, inconclusivo).
+2. **Resumo da anamnese**, nos três blocos pedidos pela cliente: o que o estudante **acertou** (itens do roteiro
+   investigados), o que **errou ou precisa melhorar** (itens abordados sem a caracterização esperada, como perguntar pela
+   tosse sem investigar início, duração ou fatores de piora) e o que **deixou de fazer** (itens do roteiro sem nenhuma
+   pergunta identificada).
+
+**Fluxo de uso:**
+
+1. O estudante grava a anamnese no ambulatório, com consentimento do paciente.
+2. O áudio é transcrito localmente pelo Whisper.
+3. As falas são separadas entre estudante e paciente, e o estudante ou o professor confirma quem falou o quê.
+4. Para cada fala do estudante, o modelo ajustado (Qwen3-4B + LoRA) lista em JSON o que foi investigado: categoria,
+   valor e atributos do CMAS.
+5. Uma comparação determinística com o roteiro de anamnese do caso classifica cada item.
+6. O sistema monta o feedback por interação e o resumo, cada observação ligada ao trecho que a sustenta. O professor pode
+   revisar antes de liberar ao estudante.
 
 ```mermaid
 flowchart LR
-  subgraph E2["E2 · experimento textual"]
-    A[Histórico + fala do entrevistador] --> B{Qwen3-4B}
-    B -->|sem ajuste: baseline| C[Atos inquire em JSON]
-    B -->|com adaptador LoRA| C
-    C --> D[Comparação com rótulos retidos e métricas]
-  end
-  subgraph E34["E3/E4 · aplicação planejada"]
-    E[Áudio] --> F[Transcrição Whisper] --> G[Revisão de falantes e identificadores]
-    G --> H[Extração com o adaptador] --> I[Comparação com roteiro do caso]
-    I --> J[Acertos · melhorias · etapas não identificadas]
-  end
+  A[Áudio da anamnese<br/>estudante + paciente real] --> B[Transcrição<br/>Whisper]
+  B --> C[Separação e revisão<br/>das falas]
+  C --> D{Qwen3-4B + LoRA}
+  D --> E[O que cada pergunta investigou<br/>JSON no esquema CMAS]
+  E --> F[Comparação com o<br/>roteiro de anamnese]
+  F --> G[Feedback por interação<br/>acertos · a melhorar · deixou de fazer]
 ```
 
-Cada afirmação do feedback futuro deverá apontar o trecho da entrevista que a sustenta. A comparação com o roteiro é
-determinística, mas recebe a saída de um modelo sujeito a erro. Por isso, **saída inválida, transcrição de baixa
-confiança ou falantes não revisados geram "avaliação inconclusiva"**, nunca "o estudante não perguntou".
+Cada afirmação do feedback aponta o trecho da entrevista que a sustenta. A comparação com o roteiro é determinística, mas
+recebe a saída de um modelo sujeito a erro. Por isso, **saída inválida, transcrição de baixa confiança ou falantes não
+revisados geram "avaliação inconclusiva"**, nunca "o estudante não perguntou".
 
-**Exemplo ilustrativo (não é resultado medido).** Pergunta: *"Quando a tosse começou?"*
+**Exemplo ilustrativo (não é resultado medido).** Pergunta do estudante: *"Quando a tosse começou?"*
 
 ```json
 [{ "slot": "symptom", "value": "cough", "attributes": ["when check"] }]
 ```
 
-Isso sustenta um retorno como: *"Você investigou o início da tosse. Na próxima prática, revise os demais aspectos
-previstos no roteiro do caso."* Não permite afirmar que a anamnese está completa, que o paciente tem uma doença ou que
-um procedimento é indicado. A equivalência entre perguntas em português e rótulos em inglês ainda precisa ser avaliada.
+Feedback da interação: *"Nesta pergunta você investigou o início da tosse. O roteiro do caso também prevê duração e
+fatores de piora, que não apareceram na entrevista."* O exemplo não permite afirmar que a anamnese está completa, que o
+paciente tem uma doença ou que um procedimento é indicado. O extrator é ajustado sobre um corpus em inglês e aplicado a
+anamneses em português; essa transferência é uma hipótese a medir.
 
 | Será implementado até a apresentação | Não será implementado |
 |---|---|
-| E1: problema, artigo, modelo, dados e plano (este PR) | Diagnóstico, tratamento ou apoio à decisão clínica |
-| E2: preparo reproduzível do texto, partições, baseline, primeiro LoRA, logs e métricas | Uso com pacientes reais ou dados de prontuário |
-| E3: extração integrada ao fluxo de uso, rastreabilidade por trecho, comparação com roteiro | Treinamento do zero |
-| E4: demonstração de um caso completo e defesa técnica | Implantação multiusuário ou validação de eficácia educacional em larga escala |
+| Preparo dos dados do MediTOD, baseline e ajuste LoRA do extrator de perguntas | Avaliação do exame físico |
+| Transcrição local do áudio (Whisper, sem ajuste) com revisão de quem falou | Diagnóstico, hipótese diagnóstica, tratamento ou apoio à decisão clínica |
+| Extração do que cada pergunta investigou e comparação com um roteiro de anamnese | Separação automática e confiável de falantes (diarização) |
+| Feedback por interação e resumo (acertos, a melhorar, deixou de fazer), com trechos | Treinamento do zero ou ajuste do Whisper |
+| Demonstração do fluxo completo com uma anamnese | Integração com prontuário, implantação multiusuário ou validação de eficácia educacional em larga escala |
 
-Primeiro recorte: entrevistas simuladas predominantemente **respiratórias** (perfil do corpus).
+O desenvolvimento e a demonstração usam áudios de entrevistas simuladas (Fareez et al., 2022, CC0), para não expor
+pacientes. Gravações com pacientes reais só entram com consentimento do paciente e do estudante e autorização do
+ambulatório. Primeiro recorte: queixas predominantemente **respiratórias** (perfil do corpus).
 
 ## Artigo-base
 
@@ -120,14 +145,14 @@ categorias (sintoma, antecedentes, medicação, hábitos…) e atributos (iníci
 compreensão (NLU), política de diálogo e geração, com modelos ajustados por supervisão. Na NLU, que olha a fala mais
 recente do **paciente**, o Llama3-8B supervisionado chega a F1 0,7139.
 
-**O que muda aqui.** Nosso projeto extrai atos `inquire` das falas já proferidas pelo **entrevistador**, com outra
-divisão dos dados e outra correspondência entre rótulos. Não é uma reprodução da NLU original, e os números do artigo
-**não serão comparados diretamente** aos nossos.
+**O que muda aqui.** Nosso projeto extrai atos `inquire` das falas já proferidas pelo **entrevistador** (o estudante),
+com outra divisão dos dados e outra correspondência entre rótulos. Não é uma reprodução da NLU original, e os números do
+artigo **não serão comparados diretamente** aos nossos.
 
 | Componente do artigo | Uso no projeto | Mudança ou limite |
 |---|---|---|
-| Esquema CMAS | Categorias e atributos da extração | Foco retrospectivo em `inquire` |
-| Falas e anotações textuais abertas (`raw_data/`) | Preparação local e experimento inicial | Licença das anotações não identificada; sem redistribuição |
+| Esquema CMAS | Categorias e atributos do que cada pergunta investigou | Foco retrospectivo em `inquire` |
+| Falas e anotações textuais abertas (`raw_data/`) | Preparação local e ajuste do extrator | Licença das anotações não identificada; sem redistribuição |
 | Ajuste supervisionado de modelo pré-treinado | Aprender a emitir estrutura a partir do contexto | Qwen 4B + LoRA em hardware local, no lugar do Llama3-8B |
 | Avaliação publicada | Referência de desenho experimental | Métricas próprias explícitas, sem alegar equivalência numérica |
 | Política e geração de perguntas | Não utilizadas | O sistema não entrevista no lugar do aluno |
@@ -147,17 +172,16 @@ Van Veen et al. (2024) — LLMs adaptados no domínio clínico e avaliação hum
 - **Origem dos pesos:** <https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507> · distribuição para execução local em MLX: <https://huggingface.co/mlx-community/Qwen3-4B-Instruct-2507-4bit> (revisão `50d4277`)
 - **Licença:** Apache-2.0 (as duas fichas)
 - **Tarefa original:** geração de texto e seguimento de instruções, multilíngue
-- **Tarefa adaptada:** contexto + pergunta do entrevistador → lista de atos `inquire` em JSON
+- **Tarefa adaptada:** contexto + pergunta do estudante → lista de atos `inquire` em JSON
 - **Parâmetros ajustados:** matrizes LoRA em parte das camadas; pesos-base congelados
 - **Relação com o artigo-base:** o artigo usa Llama3-8B. Trocamos por um modelo de 4B para caber em 16 GiB de memória
   unificada, mantendo a mesma formulação (geração supervisionada de estrutura a partir do diálogo). O suporte
   multilíngue do Qwen torna o português **uma hipótese a testar**, não uma qualidade comprovada após ajuste em inglês.
   Plano B, se o professor pedir redução de escopo: Qwen3-1.7B com a mesma receita (ver [`docs/decisoes.md`](docs/decisoes.md)).
 
-**Componente de áudio (E3/E4, sem ajuste):** [Whisper large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo),
-licença MIT. Fora da avaliação da E2; qualidade em português e custo serão medidos quando houver áudio de teste.
-
-Ficha completa no contexto do projeto: [`docs/model_card.md`](docs/model_card.md).
+**Componente de transcrição (usado sem ajuste):** [Whisper large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo),
+licença MIT, transcreve o áudio da anamnese em português. Não é ajustado nem faz parte da avaliação do extrator; sua
+qualidade na fala do ambulatório será medida em áudio de teste.
 
 ## Conjunto de dados-base
 
@@ -179,18 +203,16 @@ Ficha completa no contexto do projeto: [`docs/model_card.md`](docs/model_card.md
   | Categorias mais frequentes | `symptom` 5.527 · `medical history` 1.406 · `habit` 795 · `medication` 520 · `exposure` 488 · `family history` 457 |
   | Pares de diálogos com texto idêntico e ids diferentes | **18** → 213 grupos únicos para a divisão |
 
-  Detalhes, SHA-256 dos arquivos e como reproduzir: [`docs/data_card.md`](docs/data_card.md).
 - **Rótulos e adequação ao problema:** usamos os atos `inquire`, que marcam exatamente o que o entrevistador perguntou —
-  o sinal que o feedback precisa. Informações espontâneas do paciente **não** provam que uma pergunta foi feita, e o
-  sistema também não deve punir o estudante por não repetir algo já informado: presença de informação e evidência de
-  investigação são conceitos separados.
+  o sinal de que o feedback por interação precisa. Informações espontâneas do paciente **não** provam que uma pergunta
+  foi feita, e o sistema também não deve punir o estudante por não repetir algo já informado: presença de informação e
+  evidência de investigação são conceitos separados.
 
 | Fonte | Conteúdo e acesso | Licença ou condição | Papel |
 |---|---|---|---|
-| MediTOD `raw_data/` | JSON público no GitHub; 231 diálogos, 10.082 atos `inquire` | Sem LICENSE identificado | Dados do experimento textual (E2) |
-| [Fareez et al. (2022)](https://doi.org/10.1038/s41597-022-01423-1), [Figshare 16550013](https://springernature.figshare.com/articles/dataset/Collection_of_simulated_medical_exams/16550013) | Entrevistas simuladas, `Data.zip` (~1,03 GB) com áudio | CC0 | Áudio para E3/E4; não necessário à primeira adaptação |
-| Exemplos em português do projeto | Didáticos/sintéticos, quando criados | Origem e finalidade registradas em cada arquivo | Testes técnicos; não substituem validação humana |
-| Futuras gravações da dupla | Ainda não coletadas | Exigem consentimento e regra de compartilhamento | Avaliação futura de áudio e português |
+| MediTOD `raw_data/` | JSON público no GitHub; 231 diálogos, 10.082 atos `inquire` | Sem LICENSE identificado | Treino e teste do extrator de perguntas |
+| [Fareez et al. (2022)](https://doi.org/10.1038/s41597-022-01423-1), [Figshare 16550013](https://springernature.figshare.com/articles/dataset/Collection_of_simulated_medical_exams/16550013) | Entrevistas simuladas, `Data.zip` (~1,03 GB) com áudio | CC0 | Testar e demonstrar o fluxo a partir do áudio sem expor pacientes |
+| Gravações de anamneses com pacientes reais | Ainda não coletadas | Consentimento do paciente e do estudante, autorização do ambulatório e anonimização | Validar o fluxo no cenário da cliente, quando autorizadas |
 
 **Divisão dos dados.** Os arquivos de divisão publicados (`data/train_ids.json`, `valid_ids.json`, `test_ids.json`)
 têm **um único id cada** (`115`, `317`, `407`) e não recuperam a divisão do artigo. Usaremos divisão própria,
@@ -198,8 +220,8 @@ determinística e documentada por **listas de diálogo**; diálogos textualmente
 mesmo grupo, para que nenhuma entrevista apareça em treino e teste ao mesmo tempo. Isso não é hipotético: há **18 pares**
 de diálogos idênticos (ex.: `106`/`206`, `124`/`624`), que um sorteio por id espalharia entre as partições.
 
-**Preparação planejada (executada e detalhada na E2):**
-1. Fixar a revisão do repositório-fonte e registrar o SHA-256 dos arquivos baixados (já registrado em [`docs/data_card.md`](docs/data_card.md)).
+**Preparação planejada:**
+1. Fixar a revisão do repositório-fonte e registrar o SHA-256 dos arquivos baixados.
 2. Verificar o alinhamento diálogo ↔ falante ↔ id da fala ↔ anotação (checagem inicial: 231/231 alinhados).
 3. Normalizar variantes de grafia declaradas, sem inferir atributos não anotados (ex.: `frquency check` × `frequency check`).
 4. Agrupar diálogos idênticos e separar os **grupos** em treino/validação/teste **antes** de gerar amostras por fala.
@@ -207,7 +229,7 @@ de diálogos idênticos (ex.: `106`/`206`, `124`/`624`), que um sorteio por id e
 6. Selecionar piloto de treino e amostra de avaliação por regra e semente registradas.
 7. Exportar no formato do `mlx-lm` e registrar contagens e exclusões (inclusive falas com resposta esperada vazia).
 
-**Como obter (E2):**
+**Como obter:**
 
 ```bash
 git clone https://github.com/dair-iitd/MediTOD.git ../MediTOD
@@ -215,20 +237,17 @@ git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
 # os arquivos ficam fora do repositório; data/ e *.json já estão no .gitignore
 ```
 
-A avaliação inicial é em inglês e mede a adaptação ao corpus. A generalização ao público brasileiro continua sendo uma
-questão experimental. Detalhes: [`docs/data_card.md`](docs/data_card.md).
-
 > Arquivos de dados grandes **não** são versionados neste repositório.
 
 ## Plano de adaptação e avaliação
 
-**Hipótese técnica.** Ajustar adaptadores LoRA melhora a emissão de atos de investigação em relação ao **mesmo modelo
-sem ajuste**, com a mesma entrada, a mesma saída esperada e a mesma regra de validação do JSON. A E2 exige uma primeira
-execução verificável, não superioridade garantida.
+**Hipótese técnica.** Ajustar adaptadores LoRA melhora a identificação do que cada pergunta investigou em relação ao
+**mesmo modelo sem ajuste**, com a mesma entrada, a mesma saída esperada e a mesma regra de validação do JSON.
 
 - **O que será ajustado:** adaptadores **LoRA** em parte das camadas do Qwen3-4B-Instruct-2507, sobre pesos
   quantizados em 4 bits (`mlx-lm`); pesos-base congelados. Treino por entropia cruzada só sobre a saída supervisionada.
-  Hiperparâmetros e número de passos efetivos ficam no arquivo de configuração da E2 e em [`docs/experimentos.md`](docs/experimentos.md).
+  Hiperparâmetros e número de passos ficam num arquivo de configuração versionado junto com o código de treino. O
+  Whisper não é ajustado.
 - **Recursos computacionais:** Apple M5 (arm64), 16 GiB de memória unificada, MLX/Metal, Python 3.12 em `.venv/`
   (inspecionado em 03/11/2026). Sem GPU em nuvem nem serviço pago. A configuração piloto limita tamanho de sequência,
   lote e número de camadas adaptadas. Tempo e memória serão **medidos** no log, não presumidos. Se faltar memória, a
@@ -245,42 +264,43 @@ execução verificável, não superioridade garantida.
   | Latência e memória | Viabilidade no equipamento usado |
 
   Protocolo fixado **antes** de rodar: a validação acompanha o treino; o teste **não** orienta a escolha de
-  hiperparâmetros nesta rodada, e qualquer mudança motivada pela inspeção do teste é registrada à parte. Omissão,
-  qualidade pedagógica, WER e eficácia de aprendizagem **não** serão inferidas do F1 de extração — dependem de outros
-  dados e protocolos (avaliação do produto na E3/E4: recall **e** precisão de omissões contra um roteiro anotado de
-  forma independente; rubrica de especificidade, correção e tom com avaliadores independentes).
+  hiperparâmetros, e qualquer mudança motivada pela inspeção do teste é registrada à parte. Qualidade da transcrição
+  (WER), acerto das omissões apontadas, qualidade pedagógica e eficácia de aprendizagem **não** serão inferidos do F1 de
+  extração: o feedback é avaliado à parte, com recall **e** precisão de omissões contra um roteiro anotado de forma
+  independente e rubrica de especificidade, correção e tom aplicada por avaliadores independentes.
 - **Riscos** (probabilidade e impacto são estimativas qualitativas da dupla):
 
   | Risco | Prob. | Impacto | Consequência | Resposta |
   |---|---|---|---|---|
+  | Gravação de paciente real sem as autorizações | Média | Alto | Exposição de dado de saúde | Desenvolver com áudio simulado; gravação real só com consentimento e autorização; processamento local; áudio fora do repositório |
   | Licença das anotações não esclarecida | Alta | Médio | Restrição ao compartilhamento de derivados | Dados e adaptadores locais; registrar a fonte; esclarecer antes de redistribuir |
+  | Ajuste feito em inglês, uso em português | Alta | Alto | Desempenho em português desconhecido | Medir em transcrições em português revisadas antes de liberar o feedback |
+  | Falha de transcrição ou de extração | Média | Alto | Feedback incorreto | Revisão de falantes, evidência por trecho e estado "inconclusivo" |
   | Piloto pequeno e desbalanceado | Alta | Médio | Métrica instável e pouco representativa | Publicar contagens, composição e exemplos de erro; ampliar depois |
-  | Ajuste feito em inglês | Alta | Alto | Desempenho em português desconhecido | Avaliar corpus próprio revisado em etapa posterior |
-  | Falha de extração ou transcrição | Média | Alto | Feedback incorreto | Evidência por trecho e estado "inconclusivo" na aplicação |
   | Memória insuficiente | Média | Médio | Treino interrompido | Limitar contexto, lote e camadas; plano B Qwen3-1.7B |
-  | Roteiro sem revisão especializada | Média | Alto | Omissões pedagógicas indevidas | Marcar como proposta e revisar com a docente antes do uso |
-  | Professor pedir redução de escopo ou troca de modelo | Baixa | Médio | Retrabalho na E2 | Receita independente do tamanho do modelo; decisão registrada em `docs/decisoes.md` |
+  | Roteiro sem revisão especializada | Média | Alto | Omissões apontadas indevidamente | Marcar como proposta e revisar com a cliente antes do uso |
+  | Professor pedir redução de escopo ou troca de modelo | Baixa | Médio | Retrabalho no treino | Receita independente do tamanho do modelo; decisão registrada em `docs/decisoes.md` |
 
-- **Divisão das atividades entre os integrantes** (proposta de trabalho; não certifica participação já feita):
+- **Divisão das atividades entre os integrantes:**
 
   | Frente | Responsável | Revisão |
   |---|---|---|
   | Dados, ambiente e ajuste LoRA | Leonardo Marcelo | André Lucas |
-  | Roteiro pedagógico e protocolo de avaliação | André Lucas | Leonardo Marcelo |
-  | Integração e rastreabilidade | Leonardo Marcelo | André Lucas |
+  | Roteiro de anamnese e protocolo de avaliação do feedback | André Lucas | Leonardo Marcelo |
+  | Transcrição, integração e rastreabilidade | Leonardo Marcelo | André Lucas |
   | Análise de erros, documentação e demonstração | Ambos | Revisão cruzada |
-  | Conversa com a cliente e defesa técnica | Ambos | A confirmar na execução |
+  | Validação do roteiro com a cliente e defesa técnica | Ambos | Revisão cruzada |
 
   Os dois integrantes devem conseguir explicar e reproduzir os experimentos que apresentarem.
 
-**Do rótulo ao feedback (proposta, ainda sem validação clínica da cliente).** O roteiro de cada caso escolhe quais
-itens do CMAS são pertinentes; a frequência de um item no corpus não o torna obrigatório.
+**Do rótulo ao feedback (proposta, ainda sem validação da cliente).** O roteiro de cada caso segue a anamnese ensinada
+em semiologia e escolhe quais itens do CMAS são pertinentes; a frequência de um item no corpus não o torna obrigatório.
 
 | Categoria CMAS | Interpretação educacional proposta |
 |---|---|
-| `symptom` e atributos | Caracterização da queixa e investigação de outros sintomas previstos no caso |
-| `medical history` | Exploração de antecedentes |
-| `medication` | Investigação de medicamentos relatados ou em uso |
+| `symptom` e atributos | Queixa principal, caracterização dos sintomas (início, duração, intensidade…) e outros sintomas previstos no caso |
+| `medical history` | Antecedentes pessoais |
+| `medication` | Medicamentos relatados ou em uso |
 | `habit` | Hábitos pertinentes ao caso |
 | `family history` | História familiar |
 | `occupation`, `exposure`, `travel` | Contexto ocupacional, ambiental e de deslocamentos, quando pertinente |
@@ -289,65 +309,43 @@ Cada item do roteiro poderá sair como: investigação identificada · parcial �
 espontânea presente · não aplicável · **avaliação inconclusiva**. Alergias, vacinação e revisão completa de sistemas
 não têm categoria própria neste recorte, então o sistema não poderá dizer que avalia a anamnese inteira.
 
-**Cronograma**
-
-| Entrega | Versionamento (PR) | Encontro |
-|---|---|---|
-| E1 · Definição | 17/11/2026 (prorrogado; data original 11/11) | — |
-| E2 · Modelo e dados | 22/11/2026 | Alinhamento 23/11/2026 |
-| E3 · Aplicação | 29/11/2026 | Alinhamento 30/11/2026 |
-| E4 · Apresentação | 07/12/2026 | Apresentação 07/12/2026 |
-
 ### Matriz de atendimento da E1
 
 | Exigência do enunciado | Onde está |
 |---|---|
-| Problema, beneficiário e evidência inicial | [Cliente, problema e beneficiário](#cliente-problema-e-beneficiário) · [`evidencias/relato_cliente.md`](evidencias/relato_cliente.md) |
+| Problema, beneficiário, cliente e evidência inicial | [Cliente, problema e beneficiário](#cliente-problema-e-beneficiário) · [`evidencias/entrevista_cliente.md`](evidencias/entrevista_cliente.md) |
 | Entrada, saída, fluxo de uso e escopo | [Solução e escopo](#solução-e-escopo) |
 | Artigo: título, autores, ano, DOI, método e componentes | [Artigo-base](#artigo-base) |
-| Modelo: nome, versão, pesos, licença, tarefa original, relação com o artigo | [Modelo pré-treinado](#modelo-pré-treinado) · [`docs/model_card.md`](docs/model_card.md) |
-| Dados: fonte, acesso, licença, formato, volume, rótulos, adequação | [Conjunto de dados-base](#conjunto-de-dados-base) · [`docs/data_card.md`](docs/data_card.md) |
-| Adaptação, recursos, baseline, métricas | [Plano de adaptação e avaliação](#plano-de-adaptação-e-avaliação) · [`docs/experimentos.md`](docs/experimentos.md) |
-| Riscos e divisão das atividades | Tabelas acima · [`docs/decisoes.md`](docs/decisoes.md) |
-| Critério de aceite (problema específico, método fundamentado, pesos acessíveis, caminho viável) | Problema delimitado a perguntas do entrevistador; método do MediTOD; pesos públicos Apache-2.0; preparo em 7 passos e treino local |
+| Modelo: nome, versão, pesos, licença, tarefa original, relação com o artigo | [Modelo pré-treinado](#modelo-pré-treinado) |
+| Dados: fonte, acesso, licença, formato, volume, rótulos, adequação | [Conjunto de dados-base](#conjunto-de-dados-base) |
+| Adaptação, recursos, baseline, métricas, riscos e divisão das atividades | [Plano de adaptação e avaliação](#plano-de-adaptação-e-avaliação) · [`docs/decisoes.md`](docs/decisoes.md) |
 
 ## Como executar
 
-```bash
-# 1. Criar ambiente
-python -m venv .venv && source .venv/bin/activate  # Windows: .venv\Scripts\activate
-pip install -r requirements.txt
-
-# 2. (Se aplicável) baixar dados e pesos conforme as seções acima
-
-# 3. Executar
-# python src/train.py ...
-# python src/app.py ...
-```
-
-> **E1 é só documentação.** Os scripts de preparo, baseline e treino LoRA entram em `src/` na E2, com dependências
-> fixadas em `requirements.txt`. Pesos-base são baixados do Hugging Face (links acima); os adaptadores gerados ficam
-> locais enquanto a licença das anotações não for esclarecida.
+Não há código nesta etapa: a E1 é a definição do projeto.
 
 ## Resultados
 
-Nenhum resultado medido até aqui. Baseline, configuração do ajuste, métricas e exemplos de sucesso e falha serão
-registrados a partir da E2 em [`docs/experimentos.md`](docs/experimentos.md).
+Nenhum resultado nesta etapa.
 
 ## Limitações e uso responsável
 
-- **Finalidade educacional.** Não oferece diagnóstico, prescrição nem recomendação de conduta; não é apoio à decisão
-  clínica e não deve ser usado com pacientes reais. O feedback é revisável pelo preceptor antes do uso no ensino.
+- **Finalidade educacional.** Não oferece diagnóstico, hipótese diagnóstica, prescrição nem recomendação de conduta; não
+  é apoio à decisão clínica. O feedback pode ser revisado pelo professor antes do uso no ensino.
+- **Paciente real e privacidade.** A gravação contém dado de saúde de paciente real (dado sensível pela LGPD). Exige
+  consentimento do paciente e do estudante e autorização do ambulatório. Áudio e transcrição são processados localmente,
+  não são versionados, e identificadores são removidos da transcrição antes da análise.
 - **Erro do modelo não vira acusação.** Saída inválida, transcrição de baixa confiança ou falantes não revisados geram
   "avaliação inconclusiva", nunca "o estudante não perguntou".
 - **Cobertura parcial.** O CMAS não representa bem alergias, vacinação e revisão completa de sistemas; o sistema não
-  avalia a anamnese inteira. O mapeamento CMAS → pedagógico ainda não foi validado pela cliente.
-- **Idioma.** O ajuste é feito em inglês; o desempenho em português é desconhecido até ser medido.
+  avalia a anamnese inteira. O mapeamento CMAS → roteiro de anamnese ainda não foi validado pela cliente.
+- **Idioma.** O extrator é ajustado em inglês e aplicado a anamneses em português; o desempenho em português é
+  desconhecido até ser medido.
 - **Dados e licenças.** Anotações do MediTOD sem licença identificada → nada de dados ou adaptadores derivados no
-  repositório. Futuras gravações exigem consentimento e anonimização antes de qualquer uso.
-- **Feedback sem julgamento pessoal.** Os três blocos (acertos, pontos de melhoria, etapas não identificadas) descrevem
-  condutas observáveis com cautela e indicam uma oportunidade de prática (Bastos e Castro et al., 2021; van de Ridder et al., 2015).
-- **Custo.** Execução local, sem serviço pago; latência e memória serão medidas na E2.
+  repositório.
+- **Feedback sem julgamento pessoal.** Os três blocos (acertos, o que melhorar, o que deixou de fazer) descrevem condutas
+  observáveis com cautela e indicam uma oportunidade de prática (Bastos e Castro et al., 2021; van de Ridder et al., 2015).
+- **Custo.** Execução local, sem serviço pago.
 
 ## Referências
 
@@ -360,6 +358,8 @@ Hu, E. J. et al. (2022). LoRA: Low-Rank Adaptation of Large Language Models. *IC
 Dettmers, T. et al. (2023). QLoRA: Efficient Finetuning of Quantized LLMs. *NeurIPS*. https://arxiv.org/abs/2305.14314
 
 Qwen Team. (2025). Qwen3 Technical Report. https://arxiv.org/abs/2505.09388
+
+Radford, A. et al. (2023). Robust Speech Recognition via Large-Scale Weak Supervision. *ICML*. https://arxiv.org/abs/2212.04356
 
 Van Veen, D. et al. (2024). Adapted large language models can outperform medical experts in clinical text summarization. *Nature Medicine*, 30, 1134–1142. https://doi.org/10.1038/s41591-024-02855-5
 
@@ -383,6 +383,6 @@ Gordon, M. et al. (2024). A scoping review of artificial intelligence in medical
 
 Varughese, E. et al. (2026). Medical Students' Perceptions of Artificial Intelligence Use in Medical Practice: A Systematic Review. *Medical Science Educator*, 36, 1003–1014. https://doi.org/10.1007/s40670-025-02630-2
 
-Costa, M. (2026). Motor de IA especializado em educação médica: o problema e as características da solução. Relato documental fornecido para o projeto.
+Costa, M. (2026). Entrevista concedida a André Lucas sobre o ensino de anamnese e a proposta do projeto [mensagens de voz]. Transcrição em `evidencias/entrevista_cliente.md`.
 
 BibTeX: [`referencias.bib`](referencias.bib).
