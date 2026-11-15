@@ -53,11 +53,11 @@ projeto não pressupõe parceria institucional, contratação ou aceite formal d
 e o que deixou de investigar. A hipótese de benefício é que esse retorno ajude a melhorar a entrevista seguinte. Ganho
 de aprendizagem e redução da carga do professor são objetivos, não resultados demonstrados.
 
-**Evidência inicial.** Entrevista com a cliente por mensagens de voz, transcrita em
-[`evidencias/entrevista_cliente.md`](evidencias/entrevista_cliente.md). Ela descreve o cenário (ambulatório, paciente
+**Evidência inicial.** Entrevista com a cliente por mensagens de voz e vídeo explicativo enviado por ela, registrados
+em [`evidencias/entrevista_cliente.md`](evidencias/entrevista_cliente.md). A cliente descreve o cenário (ambulatório, paciente
 real, semiologia), o feedback esperado (acertos, erros e o que deixou de fazer), a causa do problema (um professor para
-mais de vinte alunos) e a solução que imagina: captar o áudio da entrevista, transformá-lo em texto e analisá-lo com os
-conhecimentos de anamnese.
+mais de vinte alunos, com retorno pouco consistente e tardio) e a solução que imagina: captar o áudio da entrevista,
+transformá-lo em texto e analisá-lo com os conhecimentos de anamnese.
 
 A literatura situa o problema sem medir o caso da cliente: Haring et al. (2017) sobre raciocínio clínico observável na
 anamnese; Spencer (2003) sobre ensino no ambiente clínico; Cheung et al. (2019) e Alex et al. (2024) sobre barreiras à
@@ -126,6 +126,7 @@ anamneses em português; essa transferência é uma hipótese a medir.
 | Extração do que cada pergunta investigou e comparação com um roteiro de anamnese | Separação automática e confiável de falantes (diarização) |
 | Feedback por interação e resumo (acertos, a melhorar, deixou de fazer), com trechos | Treinamento do zero ou ajuste do Whisper |
 | Demonstração do fluxo completo com uma anamnese | Integração com prontuário, implantação multiusuário ou validação de eficácia educacional em larga escala |
+| | Painel da turma para o professor e histórico do aluno ao longo do curso |
 
 O desenvolvimento e a demonstração usam áudios de entrevistas simuladas (Fareez et al., 2022, CC0), para não expor
 pacientes. Gravações com pacientes reais só entram com consentimento do paciente e do estudante e autorização do

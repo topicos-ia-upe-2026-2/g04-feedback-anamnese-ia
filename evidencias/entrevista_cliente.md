@@ -2,7 +2,8 @@
 
 **Cliente:** Marília Costa, docente de medicina
 **Entrevistador:** André Lucas (G04)
-**Forma:** mensagens de voz trocadas pelo WhatsApp, em resposta ao pedido da dupla para explicar o problema
+**Forma:** mensagens de voz trocadas pelo WhatsApp, em resposta ao pedido da dupla para explicar o problema, e um vídeo
+explicativo enviado pela cliente
 **Registro:** transcrição automática do próprio WhatsApp, reproduzida abaixo com correções mínimas de reconhecimento
 (indicadas entre colchetes). Trechos que a transcrição automática perdeu estão marcados com […].
 **Dados pessoais:** nenhum dado de paciente ou de estudante consta da conversa.
@@ -36,6 +37,22 @@
 > texto, eh, com esses conhecimentos de entrevista médica, que é a semiologia, a anamnese. Eh, ficou claro? Eu não sei o
 > quanto eu preciso detalhar, e o vídeo fala um pouco disso também. Vou te mandar aqui, tá?
 
+## Vídeo explicativo enviado pela cliente
+
+Na mensagem 1 a cliente cita um vídeo que explica a proposta; ela o enviou depois. É um vídeo curto (cerca de 3 minutos)
+em que ela apresenta o problema e a solução que imagina. O link não é reproduzido aqui porque o vídeo não é público.
+Resumo, nas palavras da dupla:
+
+- O preceptor dá feedback verbal, mas não consegue acompanhar mais de um estudante ao mesmo tempo e tem dificuldade de
+  registrar esses retornos depois.
+- O feedback que o estudante recebe hoje é pouco consistente, muitas vezes subjetivo e tardio, e não escala.
+- A solução capta o áudio das entrevistas do aluno com os pacientes e o analisa com conhecimento de semiologia médica,
+  devolvendo ao aluno um feedback sobre o que ele precisa melhorar.
+- O foco é educacional, não clínico, e ética e privacidade são consideradas desde o início.
+- O objetivo é reduzir erros na investigação clínica e aumentar a qualidade das anamneses.
+- A visão da cliente vai além do feedback individual: inclui um painel para o professor com dados consolidados da turma e
+  o acompanhamento do desempenho do aluno ao longo do curso. Essas partes ficam fora do escopo deste projeto.
+
 ## O que a entrevista estabelece
 
 | Ponto | O que a cliente disse |
@@ -54,10 +71,10 @@ Esta parte é interpretação da dupla, não fala da cliente.
 - **Entrada:** áudio da anamnese conduzida pelo estudante com um paciente real.
 - **Saída:** feedback ao estudante que observa e avalia **cada interação e pergunta** da entrevista e fecha com os três
   blocos pedidos pela cliente: acertos, erros (pontos a melhorar) e o que deixou de fazer.
-- **Fora do escopo:** exame físico e hipótese diagnóstica.
+- **Fora do escopo:** exame físico, hipótese diagnóstica, painel da turma para o professor e histórico do aluno ao longo
+  do curso.
 
 ## Limites desta evidência
 
 - É a visão de uma docente; não houve observação direta do ambulatório pela dupla.
-- A cliente citou um vídeo explicativo do projeto, que não está anexado a este registro.
 - A conversa não substitui a validação, pela cliente, do roteiro de itens que o feedback vai cobrar.
