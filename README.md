@@ -21,27 +21,26 @@ Projeto aplicado da disciplina **Tópicos Avançados em Inteligência Artificial
 | Saída | Feedback sobre cada interação e pergunta + resumo: acertos, o que errou ou precisa melhorar, o que deixou de fazer |
 | Artigo-base | Saley et al. (2024). *MediTOD*. EMNLP. [doi:10.18653/v1/2024.emnlp-main.936](https://doi.org/10.18653/v1/2024.emnlp-main.936) |
 | Modelo | [Qwen3-4B-Instruct-2507](https://huggingface.co/Qwen/Qwen3-4B-Instruct-2507) (Apache-2.0), LoRA sobre pesos 4-bit em MLX · Whisper large-v3-turbo (MIT) na transcrição, sem ajuste |
-| Dados | MediTOD `raw_data/` (diálogos + anotações CMAS) · Fareez et al. (2022), CC0, áudios simulados para testar o fluxo |
+| Dados | MediTOD `raw_data/` (diálogos + anotações CMAS) · Fareez et al. (2022), CC0, áudios simulados · versão em português por tradução (hipótese) |
 | Baseline | Mesmo Qwen sem adaptador (+ regras simples, se executadas) |
-| Métricas | Precisão, recall e F1 micro dos rótulos `inquire`; validade de JSON; perda; latência e memória |
+| Métricas | Precisão, recall e F1 dos rótulos `inquire` (inglês e português traduzido); validade de JSON; latência e memória |
 
 ## Cliente, problema e beneficiário
 
-**Contexto.** Marília Costa é docente de medicina. Na disciplina de semiologia, os estudantes vão ao ambulatório
+### Cliente e contexto
+
+Marília Costa é docente de medicina. Na disciplina de semiologia, os estudantes vão ao ambulatório universitário
 atender pacientes reais e fazem a anamnese: a entrevista em que, a partir da queixa principal ("o que te trouxe
 aqui?"), investigam a história do paciente. É uma habilidade investigativa, desenvolvida com prática e retorno. O
-exame físico, que vem depois da anamnese, não faz parte deste projeto.
+exame físico, que vem depois da anamnese, não faz parte deste projeto. A cliente é real; o projeto não pressupõe
+parceria institucional, contratação ou aceite formal da solução.
 
-**Problema.** O ideal, segundo a cliente, é o professor acompanhar a entrevista e dizer ao estudante o que ele acertou,
-o que errou e o que deixou de fazer, para que ele corrija na próxima. Isso não acontece de forma adequada: um professor
-responde por mais de vinte alunos, além da rotina do consultório, e não consegue ver o que cada um faz nem dar esse
-retorno individual.
+### Necessidade
 
-**Quem se beneficia.** O usuário principal é o estudante de medicina que faz anamnese com paciente real. O professor é
-beneficiário indireto: pode consultar o registro e revisar o feedback antes de usá-lo no ensino. A cliente é real; o
-projeto não pressupõe parceria institucional, contratação ou aceite formal da solução.
-
-**Como é resolvido hoje e o que a aplicação muda:**
+O ideal, segundo a cliente, é o professor acompanhar a entrevista e dizer ao estudante o que ele acertou, o que errou e
+o que deixou de fazer, para que ele corrija na próxima. Isso não acontece de forma adequada: um professor responde por
+mais de vinte alunos, além da rotina do consultório, e não consegue ver o que cada um faz nem dar esse retorno
+individual. Quando o retorno existe, é verbal, pouco consistente e tardio.
 
 | Processo atual | Limitação relevante | Benefício pretendido |
 |---|---|---|
@@ -53,28 +52,52 @@ projeto não pressupõe parceria institucional, contratação ou aceite formal d
 e o que deixou de investigar. A hipótese de benefício é que esse retorno ajude a melhorar a entrevista seguinte. Ganho
 de aprendizagem e redução da carga do professor são objetivos, não resultados demonstrados.
 
-**Evidência inicial.** Entrevista com a cliente por mensagens de voz e vídeo explicativo enviado por ela, registrados
-em [`evidencias/entrevista_cliente.md`](evidencias/entrevista_cliente.md). A cliente descreve o cenário (ambulatório, paciente
-real, semiologia), o feedback esperado (acertos, erros e o que deixou de fazer), a causa do problema (um professor para
-mais de vinte alunos, com retorno pouco consistente e tardio) e a solução que imagina: captar o áudio da entrevista,
-transformá-lo em texto e analisá-lo com os conhecimentos de anamnese.
+### Perfil do usuário
+
+- **Usuário principal:** estudante de medicina em formação clínica, cursando semiologia, que conduz anamneses com
+  pacientes reais no ambulatório e precisa saber o que investigou bem e o que deixou de investigar.
+- **Beneficiário indireto:** o professor (preceptor), que pode consultar o registro e revisar o feedback antes de
+  usá-lo no ensino.
+
+### Evidência inicial
+
+Entrevista com a cliente por mensagens de voz e vídeo explicativo enviado por ela, registrados em
+[`evidencias/entrevista_cliente.md`](evidencias/entrevista_cliente.md). A cliente descreve o cenário (ambulatório,
+paciente real, semiologia), o feedback esperado (acertos, erros e o que deixou de fazer), a causa do problema (um
+professor para mais de vinte alunos, com retorno pouco consistente e tardio) e a solução que imagina: captar o áudio da
+entrevista, transformá-lo em texto e analisá-lo com os conhecimentos de anamnese.
 
 A literatura situa o problema sem medir o caso da cliente: Haring et al. (2017) sobre raciocínio clínico observável na
 anamnese; Spencer (2003) sobre ensino no ambiente clínico; Cheung et al. (2019) e Alex et al. (2024) sobre barreiras à
 observação direta; Bastos e Castro et al. (2021) sobre o efeito do feedback no aprendizado de estudantes de medicina.
-Sobre autoavaliação, Blanch-Hartigan (2011) encontrou capacidade **moderada** em estudantes. Por isso o feedback externo
-é tratado como complemento verificável à reflexão do aluno, e não como prova de que o estudante avalia mal o próprio
-desempenho.
+Sobre autoavaliação, Blanch-Hartigan (2011) encontrou capacidade **moderada** em estudantes, e Davis et al. (2006)
+analisaram médicos, não estudantes. Por isso o feedback externo é tratado como complemento verificável à reflexão do
+aluno, e não como prova de que o estudante avalia mal o próprio desempenho. Sobre o uso de IA no ensino, Gordon et al.
+(2024) mapeiam aplicações na educação médica, e Varughese et al. (2026) revisam a percepção de estudantes sobre IA na
+prática médica.
 
 **Limites da evidência:** é a visão de uma docente; a dupla não observou o ambulatório, e o roteiro de itens que o
 feedback vai cobrar ainda precisa ser validado com a cliente.
 
 ## Solução e escopo
 
-**Entrada:** gravação de áudio da anamnese conduzida pelo estudante com um paciente real (só a entrevista, sem o exame
-físico).
+### Por que esta solução
 
-**Saída:** feedback ao estudante, em português, em duas partes:
+A solução combina as três bases que o projeto pede:
+
+| Base | O que ela indica | Decisão de projeto |
+|---|---|---|
+| Necessidade da cliente | O estudante precisa saber o que acertou, errou e deixou de fazer; o professor não acompanha todos | Feedback automático para cada anamnese, revisável pelo professor |
+| Evidência do processo atual | A anamnese é uma entrevista investigativa, conduzida por perguntas, que pode ser gravada em áudio | A entrada é o áudio, e a unidade de análise é cada pergunta do estudante |
+| Artigo-base (MediTOD) | As perguntas de uma anamnese podem ser representadas por atos `inquire` com categoria e atributos (CMAS), e um LLM ajustado por supervisão aprende a extraí-los | "O que cada pergunta investigou" vira uma extração mensurável; o feedback vem da comparação com um roteiro, não de texto livre do modelo |
+
+### Entrada
+
+Gravação de áudio da anamnese conduzida pelo estudante com um paciente real (só a entrevista, sem o exame físico).
+
+### Saída
+
+Feedback ao estudante, em português, em duas partes:
 
 1. **Avaliação de cada interação.** Para cada pergunta do estudante: o trecho transcrito, o que ela investigou (por
    exemplo, o início da tosse) e como ficou cada item do roteiro tocado por ela (investigado, parcial, inconclusivo).
@@ -83,7 +106,10 @@ físico).
    tosse sem investigar início, duração ou fatores de piora) e o que **deixou de fazer** (itens do roteiro sem nenhuma
    pergunta identificada).
 
-**Fluxo de uso:**
+Cada observação aponta o trecho da entrevista que a sustenta. Saída inválida do modelo, transcrição de baixa confiança
+ou falantes não revisados geram **"avaliação inconclusiva"**, nunca "o estudante não perguntou".
+
+### Fluxo de uso
 
 1. O estudante grava a anamnese no ambulatório, com consentimento do paciente.
 2. O áudio é transcrito localmente pelo Whisper.
@@ -91,8 +117,7 @@ físico).
 4. Para cada fala do estudante, o modelo ajustado (Qwen3-4B + LoRA) lista em JSON o que foi investigado: categoria,
    valor e atributos do CMAS.
 5. Uma comparação determinística com o roteiro de anamnese do caso classifica cada item.
-6. O sistema monta o feedback por interação e o resumo, cada observação ligada ao trecho que a sustenta. O professor pode
-   revisar antes de liberar ao estudante.
+6. O sistema monta o feedback por interação e o resumo. O professor pode revisar antes de liberar ao estudante.
 
 ```mermaid
 flowchart LR
@@ -104,9 +129,24 @@ flowchart LR
   F --> G[Feedback por interação<br/>acertos · a melhorar · deixou de fazer]
 ```
 
-Cada afirmação do feedback aponta o trecho da entrevista que a sustenta. A comparação com o roteiro é determinística, mas
-recebe a saída de um modelo sujeito a erro. Por isso, **saída inválida, transcrição de baixa confiança ou falantes não
-revisados geram "avaliação inconclusiva"**, nunca "o estudante não perguntou".
+### Do rótulo ao feedback
+
+O roteiro de cada caso segue a anamnese ensinada em semiologia e escolhe quais itens do CMAS são pertinentes; a
+frequência de um item no corpus não o torna obrigatório. O mapeamento abaixo é uma proposta da dupla, ainda sem
+validação da cliente.
+
+| Categoria CMAS | Item do roteiro de anamnese |
+|---|---|
+| `symptom` e atributos | Queixa principal, caracterização dos sintomas (início, duração, intensidade…) e outros sintomas previstos no caso |
+| `medical history` | Antecedentes pessoais |
+| `medication` | Medicamentos relatados ou em uso |
+| `habit` | Hábitos pertinentes ao caso |
+| `family history` | História familiar |
+| `occupation`, `exposure`, `travel` | Contexto ocupacional, ambiental e de deslocamentos, quando pertinente |
+
+Cada item pode sair como: investigação identificada · parcial · não identificada · informação espontânea presente ·
+não aplicável · **avaliação inconclusiva**. Alergias, vacinação e revisão completa de sistemas não têm categoria
+própria no CMAS, então o sistema não poderá dizer que avalia a anamnese inteira.
 
 **Exemplo ilustrativo (não é resultado medido).** Pergunta do estudante: *"Quando a tosse começou?"*
 
@@ -115,18 +155,20 @@ revisados geram "avaliação inconclusiva"**, nunca "o estudante não perguntou"
 ```
 
 Feedback da interação: *"Nesta pergunta você investigou o início da tosse. O roteiro do caso também prevê duração e
-fatores de piora, que não apareceram na entrevista."* O exemplo não permite afirmar que a anamnese está completa, que o
-paciente tem uma doença ou que um procedimento é indicado. O extrator é ajustado sobre um corpus em inglês e aplicado a
-anamneses em português; essa transferência é uma hipótese a medir.
+fatores de piora, que não apareceram na entrevista."* Os rótulos ficam no vocabulário do CMAS, em inglês, e o feedback
+os traduz para os termos do roteiro em português. O exemplo não permite afirmar que a anamnese está completa, que o
+paciente tem uma doença ou que um procedimento é indicado.
+
+### O que será e o que não será implementado
 
 | Será implementado até a apresentação | Não será implementado |
 |---|---|
 | Preparo dos dados do MediTOD, baseline e ajuste LoRA do extrator de perguntas | Avaliação do exame físico |
-| Transcrição local do áudio (Whisper, sem ajuste) com revisão de quem falou | Diagnóstico, hipótese diagnóstica, tratamento ou apoio à decisão clínica |
-| Extração do que cada pergunta investigou e comparação com um roteiro de anamnese | Separação automática e confiável de falantes (diarização) |
-| Feedback por interação e resumo (acertos, a melhorar, deixou de fazer), com trechos | Treinamento do zero ou ajuste do Whisper |
-| Demonstração do fluxo completo com uma anamnese | Integração com prontuário, implantação multiusuário ou validação de eficácia educacional em larga escala |
-| | Painel da turma para o professor e histórico do aluno ao longo do curso |
+| Versão em português dos dados por tradução, para medir e reduzir a perda no idioma (hipótese) | Diagnóstico, hipótese diagnóstica, tratamento ou apoio à decisão clínica |
+| Transcrição local do áudio (Whisper, sem ajuste) com revisão de quem falou | Separação automática e confiável de falantes (diarização) |
+| Extração do que cada pergunta investigou e comparação com um roteiro de anamnese | Treinamento do zero ou ajuste do Whisper |
+| Feedback por interação e resumo (acertos, a melhorar, deixou de fazer), com trechos | Integração com prontuário, implantação multiusuário ou validação de eficácia educacional em larga escala |
+| Demonstração do fluxo completo com uma anamnese simulada | Painel da turma para o professor e histórico do aluno ao longo do curso |
 
 O desenvolvimento e a demonstração usam áudios de entrevistas simuladas (Fareez et al., 2022, CC0), para não expor
 pacientes. Gravações com pacientes reais só entram com consentimento do paciente e do estudante e autorização do
@@ -138,17 +180,21 @@ ambulatório. Primeiro recorte: queixas predominantemente **respiratórias** (pe
 - **Autores:** Vishal Vivek Saley, Goonjan Saha, Rocktim Jyoti Das, Dinesh Raghu e Mausam
 - **Ano:** 2024 (EMNLP 2024, p. 16843–16877)
 - **DOI/URL:** <https://doi.org/10.18653/v1/2024.emnlp-main.936> · [ACL Anthology](https://aclanthology.org/2024.emnlp-main.936/) · código e dados: <https://github.com/dair-iitd/MediTOD>
-- **Componentes utilizados/adaptados:** esquema de anotação CMAS e ajuste supervisionado de um LLM pré-treinado para emitir estrutura (detalhes abaixo)
+- **Componentes utilizados/adaptados:** esquema de anotação CMAS, diálogos anotados e ajuste supervisionado de um LLM pré-treinado para emitir estrutura (tabela abaixo)
 
-**Método do artigo.** O MediTOD reúne diálogos de coleta de história clínica anotados com o *Comprehensive Medical
-Attribute Schema* (CMAS). A anotação separa atos como `inquire` (pergunta) e `inform` (informação) e liga cada fala a
-categorias (sintoma, antecedentes, medicação, hábitos…) e atributos (início, duração, intensidade…). O artigo avalia
-compreensão (NLU), política de diálogo e geração, com modelos ajustados por supervisão. Na NLU, que olha a fala mais
-recente do **paciente**, o Llama3-8B supervisionado chega a F1 0,7139.
+### Método
 
-**O que muda aqui.** Nosso projeto extrai atos `inquire` das falas já proferidas pelo **entrevistador** (o estudante),
-com outra divisão dos dados e outra correspondência entre rótulos. Não é uma reprodução da NLU original, e os números do
-artigo **não serão comparados diretamente** aos nossos.
+O MediTOD reúne diálogos de coleta de história clínica anotados com o *Comprehensive Medical Attribute Schema* (CMAS).
+A anotação separa atos como `inquire` (pergunta) e `inform` (informação) e liga cada fala a categorias (sintoma,
+antecedentes, medicação, hábitos…) e atributos (início, duração, intensidade…). O artigo avalia compreensão (NLU),
+política de diálogo e geração, com modelos ajustados por supervisão. Na NLU, que olha a fala mais recente do
+**paciente**, o Llama3-8B supervisionado chega a F1 0,7139.
+
+Nosso projeto extrai atos `inquire` das falas já proferidas pelo **entrevistador** (o estudante), com outra divisão dos
+dados e outra correspondência entre rótulos. Não é uma reprodução da NLU original, e os números do artigo **não serão
+comparados diretamente** aos nossos.
+
+### Componentes utilizados ou adaptados
 
 | Componente do artigo | Uso no projeto | Mudança ou limite |
 |---|---|---|
@@ -160,8 +206,7 @@ artigo **não serão comparados diretamente** aos nossos.
 | Canonicalização UMLS | Não utilizada | Evita depender de licença UMLS (exigida para o conjunto canonicalizado) |
 
 O código de métricas original (`metrics/nlu_metrics.py`) não será copiado: ele inclui canonicalização e
-correspondência que não equivalem à nossa avaliação por conjuntos de rótulos. A correspondência metodológica está em
-usar **contexto de diálogo + supervisão estruturada + modelo pré-treinado adaptado**, não em manter a tarefa inteira.
+correspondência que não equivalem à nossa avaliação por conjuntos de rótulos.
 
 **Referências de apoio ao método:** Hu et al. (2022) — LoRA; Dettmers et al. (2023) — QLoRA, adaptação sobre
 modelos quantizados (o MLX usa LoRA sobre pesos 4-bit; não presumimos equivalência exata ao NF4 do QLoRA);
@@ -174,26 +219,30 @@ Van Veen et al. (2024) — LLMs adaptados no domínio clínico e avaliação hum
 - **Licença:** Apache-2.0 (as duas fichas)
 - **Tarefa original:** geração de texto e seguimento de instruções, multilíngue
 - **Tarefa adaptada:** contexto + pergunta do estudante → lista de atos `inquire` em JSON
-- **Parâmetros ajustados:** matrizes LoRA em parte das camadas; pesos-base congelados
 - **Relação com o artigo-base:** o artigo usa Llama3-8B. Trocamos por um modelo de 4B para caber em 16 GiB de memória
-  unificada, mantendo a mesma formulação (geração supervisionada de estrutura a partir do diálogo). O suporte
-  multilíngue do Qwen torna o português **uma hipótese a testar**, não uma qualidade comprovada após ajuste em inglês.
-  Plano B, se o professor pedir redução de escopo: Qwen3-1.7B com a mesma receita (ver [`docs/decisoes.md`](docs/decisoes.md)).
+  unificada. A correspondência metodológica está mantida: um LLM pré-treinado, decoder-only e ajustado por instrução,
+  recebe o contexto do diálogo e é ajustado por supervisão para gerar a estrutura CMAS. O suporte multilíngue do Qwen é
+  o que torna viável a hipótese do português (ver [Conjunto de dados-base](#conjunto-de-dados-base)). Plano B, se o
+  professor pedir redução de escopo: Qwen3-1.7B com a mesma receita (ver [`docs/decisoes.md`](docs/decisoes.md)).
 
 **Componente de transcrição (usado sem ajuste):** [Whisper large-v3-turbo](https://huggingface.co/openai/whisper-large-v3-turbo),
-licença MIT, transcreve o áudio da anamnese em português. Não é ajustado nem faz parte da avaliação do extrator; sua
-qualidade na fala do ambulatório será medida em áudio de teste.
+licença MIT, tarefa original de reconhecimento de fala multilíngue (Radford et al., 2023). Transcreve o áudio da anamnese e não faz parte da
+avaliação do extrator; sua qualidade na fala do ambulatório será medida em áudio de teste.
 
 ## Conjunto de dados-base
 
 - **Fonte e acesso:** repositório público [dair-iitd/MediTOD](https://github.com/dair-iitd/MediTOD), arquivos
-  `raw_data/dialogs.json` (~4,4 MB) e `raw_data/annotations.json` (~4,3 MB), revisão `0b7a87c` consultada em 12/11/2026
-- **Licença/autorização:** ⚠️ o repositório **não tem arquivo LICENSE** e não identificamos declaração de licença para
-  as anotações. Os diálogos de origem vêm de Fareez et al. (2022), publicados como **CC0**, mas isso não define a
-  licença das anotações do MediTOD. Por isso dados e adaptadores derivados ficam **só no ambiente local**; o
-  repositório guarda código, configurações e estatísticas agregadas. Nenhum contato foi feito com os autores em nome da dupla.
-- **Formato e volume:** JSON. Cada diálogo tem falas com identificador, texto e falante; as anotações têm atos com
-  `uid`, intenção, categoria, valor e atributos. Volume medido em 12/11/2026 (estatísticas agregadas, sem treino):
+  `raw_data/dialogs.json` (~4,4 MB) e `raw_data/annotations.json` (~4,3 MB), revisão `0b7a87c` consultada em 12/11/2026.
+  Os áudios vêm do [Figshare 16550013](https://springernature.figshare.com/articles/dataset/Collection_of_simulated_medical_exams/16550013)
+  (Fareez et al., 2022).
+- **Licença/autorização:** ⚠️ o repositório do MediTOD **não tem arquivo LICENSE** e não identificamos declaração de
+  licença para as anotações. Os diálogos de origem vêm de Fareez et al. (2022), publicados como **CC0**, mas isso não
+  define a licença das anotações. Por isso dados, traduções e adaptadores derivados ficam **só no ambiente local**, e a
+  dupla vai pedir autorização aos autores antes de qualquer redistribuição.
+- **Formato e volume:** MediTOD em JSON: cada diálogo tem falas com identificador, texto e falante; as anotações têm atos
+  com `uid`, intenção, categoria, valor e atributos. Fareez: 272 entrevistas simuladas no formato OSCE, em inglês, com
+  áudio mp3 e transcrição em texto (`Data.zip`, ~1,03 GB). Volume do MediTOD medido em 12/11/2026 (estatísticas
+  agregadas, sem treino):
 
   | Medida | Valor |
   |---|---|
@@ -204,37 +253,63 @@ qualidade na fala do ambulatório será medida em áudio de teste.
   | Categorias mais frequentes | `symptom` 5.527 · `medical history` 1.406 · `habit` 795 · `medication` 520 · `exposure` 488 · `family history` 457 |
   | Pares de diálogos com texto idêntico e ids diferentes | **18** → 213 grupos únicos para a divisão |
 
-- **Rótulos e adequação ao problema:** usamos os atos `inquire`, que marcam exatamente o que o entrevistador perguntou —
-  o sinal de que o feedback por interação precisa. Informações espontâneas do paciente **não** provam que uma pergunta
-  foi feita, e o sistema também não deve punir o estudante por não repetir algo já informado: presença de informação e
-  evidência de investigação são conceitos separados.
+- **Rótulos e adequação ao problema:** os atos `inquire` marcam exatamente o que o entrevistador perguntou — o sinal de
+  que o feedback por interação precisa. Informações espontâneas do paciente **não** provam que uma pergunta foi feita, e
+  o sistema também não deve punir o estudante por não repetir algo já informado: presença de informação e evidência de
+  investigação são conceitos separados.
+
+### Representatividade do cenário e tradução para o português
+
+Os dados públicos cobrem bem a tarefa (perguntas de anamnese com rótulos finos), mas não o idioma nem o contexto da
+cliente: são entrevistas simuladas, em inglês, de estudantes canadenses. Como **hipótese para os próximos passos**, a base
+será tratada com traduções para o português:
+
+1. Traduzir para o português as falas dos diálogos do MediTOD, preservando o identificador e o alinhamento de cada
+   fala. Os rótulos continuam no vocabulário do CMAS, em inglês, então a anotação vale para as duas versões.
+2. Usar a tradução da **partição de teste** para medir quanto o extrator perde do inglês para o português nas mesmas
+   amostras.
+3. Testar se incluir a tradução do **treino** no ajuste LoRA reduz essa perda.
+4. Revisar manualmente uma amostra das traduções, com atenção à terminologia médica e aos atributos investigados
+   (início, duração, intensidade…), e registrar o método de tradução e a taxa de revisão.
+
+Texto traduzido não reproduz a fala espontânea de um ambulatório brasileiro (coloquialismos, variação regional, ruído).
+Por isso a tradução aproxima o cenário, mas não o substitui: a validação final pede gravações reais em português,
+quando autorizadas.
 
 | Fonte | Conteúdo e acesso | Licença ou condição | Papel |
 |---|---|---|---|
-| MediTOD `raw_data/` | JSON público no GitHub; 231 diálogos, 10.082 atos `inquire` | Sem LICENSE identificado | Treino e teste do extrator de perguntas |
-| [Fareez et al. (2022)](https://doi.org/10.1038/s41597-022-01423-1), [Figshare 16550013](https://springernature.figshare.com/articles/dataset/Collection_of_simulated_medical_exams/16550013) | Entrevistas simuladas, `Data.zip` (~1,03 GB) com áudio | CC0 | Testar e demonstrar o fluxo a partir do áudio sem expor pacientes |
+| MediTOD `raw_data/` | JSON público no GitHub; 231 diálogos, 10.082 atos `inquire` | Sem LICENSE identificado | Treino e teste do extrator, em inglês |
+| Tradução do MediTOD para o português | Gerada pela dupla, localmente | Derivada do MediTOD: não redistribuída | Medir e reduzir a perda em português (hipótese) |
+| [Fareez et al. (2022)](https://doi.org/10.1038/s41597-022-01423-1) | 272 entrevistas simuladas com áudio mp3 e transcrição | CC0 | Testar e demonstrar o fluxo a partir do áudio sem expor pacientes |
 | Gravações de anamneses com pacientes reais | Ainda não coletadas | Consentimento do paciente e do estudante, autorização do ambulatório e anonimização | Validar o fluxo no cenário da cliente, quando autorizadas |
 
-**Divisão dos dados.** Os arquivos de divisão publicados (`data/train_ids.json`, `valid_ids.json`, `test_ids.json`)
-têm **um único id cada** (`115`, `317`, `407`) e não recuperam a divisão do artigo. Usaremos divisão própria,
-determinística e documentada por **listas de diálogo**; diálogos textualmente idênticos com ids diferentes ficam no
-mesmo grupo, para que nenhuma entrevista apareça em treino e teste ao mesmo tempo. Isso não é hipotético: há **18 pares**
-de diálogos idênticos (ex.: `106`/`206`, `124`/`624`), que um sorteio por id espalharia entre as partições.
+### Preparação e divisão dos dados
 
-**Preparação planejada:**
+Os arquivos de divisão publicados (`data/train_ids.json`, `valid_ids.json`, `test_ids.json`) têm **um único id cada**
+(`115`, `317`, `407`) e não recuperam a divisão do artigo. Usaremos divisão própria, determinística e documentada por
+**listas de diálogo**; diálogos textualmente idênticos com ids diferentes ficam no mesmo grupo, para que nenhuma
+entrevista apareça em treino e teste ao mesmo tempo. Isso não é hipotético: há **18 pares** de diálogos idênticos (ex.:
+`106`/`206`, `124`/`624`), que um sorteio por id espalharia entre as partições.
+
+Como os diálogos do MediTOD vêm das entrevistas do Fareez, os áudios usados na demonstração e na avaliação do fluxo serão
+**só os da partição de teste**; a correspondência entre os ids do MediTOD e os arquivos do Fareez será conferida na
+preparação.
+
 1. Fixar a revisão do repositório-fonte e registrar o SHA-256 dos arquivos baixados.
 2. Verificar o alinhamento diálogo ↔ falante ↔ id da fala ↔ anotação (checagem inicial: 231/231 alinhados).
 3. Normalizar variantes de grafia declaradas, sem inferir atributos não anotados (ex.: `frquency check` × `frequency check`).
 4. Agrupar diálogos idênticos e separar os **grupos** em treino/validação/teste **antes** de gerar amostras por fala.
 5. Montar histórico limitado, sem nenhum rótulo-alvo na entrada.
 6. Selecionar piloto de treino e amostra de avaliação por regra e semente registradas.
-7. Exportar no formato do `mlx-lm` e registrar contagens e exclusões (inclusive falas com resposta esperada vazia).
+7. Gerar a versão traduzida das partições e revisar uma amostra.
+8. Exportar no formato do `mlx-lm` e registrar contagens e exclusões (inclusive falas com resposta esperada vazia).
 
-**Como obter:**
+### Como obter
 
 ```bash
 git clone https://github.com/dair-iitd/MediTOD.git ../MediTOD
 git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
+# áudios: baixar Data.zip em https://springernature.figshare.com/articles/dataset/Collection_of_simulated_medical_exams/16550013
 # os arquivos ficam fora do repositório; data/ e *.json já estão no .gitignore
 ```
 
@@ -246,9 +321,9 @@ git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
 **mesmo modelo sem ajuste**, com a mesma entrada, a mesma saída esperada e a mesma regra de validação do JSON.
 
 - **O que será ajustado:** adaptadores **LoRA** em parte das camadas do Qwen3-4B-Instruct-2507, sobre pesos
-  quantizados em 4 bits (`mlx-lm`); pesos-base congelados. Treino por entropia cruzada só sobre a saída supervisionada.
-  Hiperparâmetros e número de passos ficam num arquivo de configuração versionado junto com o código de treino. O
-  Whisper não é ajustado.
+  quantizados em 4 bits (`mlx-lm`); pesos-base congelados. Treino por entropia cruzada só sobre a saída supervisionada,
+  primeiro com o treino em inglês e, se a hipótese do português se confirmar, com inglês + tradução. Hiperparâmetros e
+  número de passos ficam num arquivo de configuração versionado junto com o código de treino. O Whisper não é ajustado.
 - **Recursos computacionais:** Apple M5 (arm64), 16 GiB de memória unificada, MLX/Metal, Python 3.12 em `.venv/`
   (inspecionado em 03/11/2026). Sem GPU em nuvem nem serviço pago. A configuração piloto limita tamanho de sequência,
   lote e número de camadas adaptadas. Tempo e memória serão **medidos** no log, não presumidos. Se faltar memória, a
@@ -260,6 +335,7 @@ git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
   | Medida | Para quê |
   |---|---|
   | Precisão, recall e F1 micro dos rótulos `inquire` (+ F1 por categoria) | Falsos positivos e falsos negativos da extração, sem esconder categorias raras |
+  | As mesmas métricas no teste traduzido para o português | Quanto o extrator perde no idioma da cliente |
   | Validade estrutural do JSON | Quantas respostas seguem o contrato **sem correção oportunista** |
   | Perda de treino e validação | Evidência de execução (perda menor ≠ produto melhor) |
   | Latência e memória | Viabilidade no equipamento usado |
@@ -274,8 +350,10 @@ git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
   | Risco | Prob. | Impacto | Consequência | Resposta |
   |---|---|---|---|---|
   | Gravação de paciente real sem as autorizações | Média | Alto | Exposição de dado de saúde | Desenvolver com áudio simulado; gravação real só com consentimento e autorização; processamento local; áudio fora do repositório |
-  | Licença das anotações não esclarecida | Alta | Médio | Restrição ao compartilhamento de derivados | Dados e adaptadores locais; registrar a fonte; esclarecer antes de redistribuir |
-  | Ajuste feito em inglês, uso em português | Alta | Alto | Desempenho em português desconhecido | Medir em transcrições em português revisadas antes de liberar o feedback |
+  | Licença das anotações não esclarecida | Alta | Médio | Restrição ao compartilhamento de derivados | Dados, traduções e adaptadores locais; pedir autorização aos autores antes de redistribuir |
+  | Ajuste em inglês, uso em português | Alta | Alto | Desempenho em português desconhecido | Medir no teste traduzido; incluir a tradução no treino se a perda for grande |
+  | Tradução altera o sentido clínico ou os atributos | Média | Alto | Rótulos deixam de corresponder ao texto | Revisão manual por amostra, com atenção à terminologia; descartar falas inconsistentes |
+  | Texto traduzido não representa a fala real | Alta | Médio | Resultado otimista em relação ao ambulatório | Declarar o limite; validar com gravações reais autorizadas |
   | Falha de transcrição ou de extração | Média | Alto | Feedback incorreto | Revisão de falantes, evidência por trecho e estado "inconclusivo" |
   | Piloto pequeno e desbalanceado | Alta | Médio | Métrica instável e pouco representativa | Publicar contagens, composição e exemplos de erro; ampliar depois |
   | Memória insuficiente | Média | Médio | Treino interrompido | Limitar contexto, lote e camadas; plano B Qwen3-1.7B |
@@ -287,6 +365,7 @@ git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
   | Frente | Responsável | Revisão |
   |---|---|---|
   | Dados, ambiente e ajuste LoRA | Leonardo Marcelo | André Lucas |
+  | Tradução para o português e revisão da amostra | Ambos | Revisão cruzada |
   | Roteiro de anamnese e protocolo de avaliação do feedback | André Lucas | Leonardo Marcelo |
   | Transcrição, integração e rastreabilidade | Leonardo Marcelo | André Lucas |
   | Análise de erros, documentação e demonstração | Ambos | Revisão cruzada |
@@ -294,32 +373,16 @@ git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
 
   Os dois integrantes devem conseguir explicar e reproduzir os experimentos que apresentarem.
 
-**Do rótulo ao feedback (proposta, ainda sem validação da cliente).** O roteiro de cada caso segue a anamnese ensinada
-em semiologia e escolhe quais itens do CMAS são pertinentes; a frequência de um item no corpus não o torna obrigatório.
+### Critério de aceite da E1
 
-| Categoria CMAS | Interpretação educacional proposta |
+| Critério | Como o projeto atende |
 |---|---|
-| `symptom` e atributos | Queixa principal, caracterização dos sintomas (início, duração, intensidade…) e outros sintomas previstos no caso |
-| `medical history` | Antecedentes pessoais |
-| `medication` | Medicamentos relatados ou em uso |
-| `habit` | Hábitos pertinentes ao caso |
-| `family history` | História familiar |
-| `occupation`, `exposure`, `travel` | Contexto ocupacional, ambiental e de deslocamentos, quando pertinente |
-
-Cada item do roteiro poderá sair como: investigação identificada · parcial · não identificada · informação
-espontânea presente · não aplicável · **avaliação inconclusiva**. Alergias, vacinação e revisão completa de sistemas
-não têm categoria própria neste recorte, então o sistema não poderá dizer que avalia a anamnese inteira.
-
-### Matriz de atendimento da E1
-
-| Exigência do enunciado | Onde está |
-|---|---|
-| Problema, beneficiário, cliente e evidência inicial | [Cliente, problema e beneficiário](#cliente-problema-e-beneficiário) · [`evidencias/entrevista_cliente.md`](evidencias/entrevista_cliente.md) |
-| Entrada, saída, fluxo de uso e escopo | [Solução e escopo](#solução-e-escopo) |
-| Artigo: título, autores, ano, DOI, método e componentes | [Artigo-base](#artigo-base) |
-| Modelo: nome, versão, pesos, licença, tarefa original, relação com o artigo | [Modelo pré-treinado](#modelo-pré-treinado) |
-| Dados: fonte, acesso, licença, formato, volume, rótulos, adequação | [Conjunto de dados-base](#conjunto-de-dados-base) |
-| Adaptação, recursos, baseline, métricas, riscos e divisão das atividades | [Plano de adaptação e avaliação](#plano-de-adaptação-e-avaliação) · [`docs/decisoes.md`](docs/decisoes.md) |
+| Problema específico | Retorno individual e verificável sobre o que o estudante investigou na anamnese com paciente real ([Necessidade](#necessidade)) |
+| Método fundamentado | Esquema CMAS e ajuste supervisionado do MediTOD; LoRA (Hu et al., 2022) sobre modelo quantizado (Dettmers et al., 2023) |
+| Pesos acessíveis | Qwen3-4B-Instruct-2507 (Apache-2.0) e Whisper large-v3-turbo (MIT), públicos no Hugging Face |
+| Caminho viável de preparação dos dados | MediTOD público com 231/231 diálogos alinhados, divisão por grupo, tradução para o português e 8 passos de preparo |
+| Caminho viável de treinamento | LoRA em 4 bits num Apple M5 de 16 GiB, com ordem de redução e plano B de 1,7B |
+| Caminho viável de demonstração | Áudio simulado do Fareez (partição de teste) → transcrição → extração → feedback por interação |
 
 ## Como executar
 
@@ -340,10 +403,10 @@ Nenhum resultado nesta etapa.
   "avaliação inconclusiva", nunca "o estudante não perguntou".
 - **Cobertura parcial.** O CMAS não representa bem alergias, vacinação e revisão completa de sistemas; o sistema não
   avalia a anamnese inteira. O mapeamento CMAS → roteiro de anamnese ainda não foi validado pela cliente.
-- **Idioma.** O extrator é ajustado em inglês e aplicado a anamneses em português; o desempenho em português é
-  desconhecido até ser medido.
-- **Dados e licenças.** Anotações do MediTOD sem licença identificada → nada de dados ou adaptadores derivados no
-  repositório.
+- **Idioma.** O extrator é ajustado sobre dados em inglês e, como hipótese, sobre sua tradução; o desempenho em
+  anamneses reais em português é desconhecido até ser medido.
+- **Dados e licenças.** Anotações do MediTOD sem licença identificada → nada de dados, traduções ou adaptadores
+  derivados no repositório.
 - **Feedback sem julgamento pessoal.** Os três blocos (acertos, o que melhorar, o que deixou de fazer) descrevem condutas
   observáveis com cautela e indicam uma oportunidade de prática (Bastos e Castro et al., 2021; van de Ridder et al., 2015).
 - **Custo.** Execução local, sem serviço pago.
@@ -384,6 +447,6 @@ Gordon, M. et al. (2024). A scoping review of artificial intelligence in medical
 
 Varughese, E. et al. (2026). Medical Students' Perceptions of Artificial Intelligence Use in Medical Practice: A Systematic Review. *Medical Science Educator*, 36, 1003–1014. https://doi.org/10.1007/s40670-025-02630-2
 
-Costa, M. (2026). Entrevista concedida a André Lucas sobre o ensino de anamnese e a proposta do projeto [mensagens de voz]. Transcrição em `evidencias/entrevista_cliente.md`.
+Costa, M. (2026). Entrevista concedida a André Lucas sobre o ensino de anamnese e a proposta do projeto [mensagens de voz e vídeo]. Registro em `evidencias/entrevista_cliente.md`.
 
 BibTeX: [`referencias.bib`](referencias.bib).
