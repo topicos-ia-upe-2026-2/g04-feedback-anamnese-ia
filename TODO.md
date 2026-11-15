@@ -3,14 +3,11 @@
 Lista viva de pendências. Cada item sai daqui quando vira commit, decisão em `docs/decisoes.md` ou resultado em
 `docs/experimentos.md`.
 
-## Antes de fechar a E1 (prazo 13/11/2026)
+## Antes de fechar a E1 (prazo 17/11/2026)
 
 - [ ] **Transcrever o relato da cliente na íntegra** em [`evidencias/relato_cliente.md`](evidencias/relato_cliente.md),
   separando o texto da cliente do resumo da dupla. Hoje o arquivo só tem o resumo (pesa no critério "evidência inicial", 0,6 pt).
-- [ ] **Dar acesso ao Leonardo (@LeonardoMarcelo)** ao repositório: ele ainda não aparece como membro da organização.
 - [ ] Revisão cruzada do README pelos dois integrantes (ambos precisam conseguir defender cada escolha).
-- [ ] Confirmar com o professor: repo **privado** num plano gratuito não permite proteção da `main` nem regras de
-  branch; perguntar se ele prefere o repo público ou outro arranjo.
 
 ## Pendências de validação (não bloqueiam a E1)
 
