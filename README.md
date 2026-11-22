@@ -426,7 +426,7 @@ de checkpoint nem diagnóstico:
 | Sistema | F1 ato | F1 item | F1 atributo | JSON válido | Acerto exato | s/fala |
 |---|---|---|---|---|---|---|
 | B0 · regras | 0,134 | 0,182 | 0,070 | 100,0% | 14,5% | 0,001 |
-| B1 · Qwen sem adaptador | em execução | | | | | |
+| B1 · Qwen sem adaptador | 0,002 | 0,125 | 0,010 | 87,5% | 4,6% | 2,793 |
 | LoRA-04 · Qwen com adaptador | 0,521 | 0,634 | 0,372 | 99,5% | 56,3% | 1,887 |
 
 A primeira adaptação (LoRA-02, 40 passos) respondia lista vazia em todas as falas. O diagnóstico mostrou que os poucos

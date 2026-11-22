@@ -33,5 +33,5 @@ experimento 01; **não é teste cego**. A comparação final usa a partição de
 | Data | Sistema | Métricas (1.014 falas) | Observações |
 |---|---|---|---|
 | 22/11/2026 | B0 · regras | F1 ato 0,134 · item 0,182 · atributo 0,070 · JSON 100% · exato 14,5% | `evidencias/teste_completo/metricas_b0.json` |
-| 22/11/2026 | B1 · Qwen sem adaptador | em execução | |
+| 22/11/2026 | B1 · Qwen sem adaptador | F1 ato 0,002 · item 0,125 · atributo 0,010 · JSON 87,5% · exato 4,6% · 2,79 s/fala | 127 saídas inválidas (89 com atributo fora do vocabulário, 23 fora de JSON estrito, 15 com categoria inválida); 5.937 atributos a mais |
 | 22/11/2026 | LoRA-04 (passo 600) | F1 ato 0,521 · item 0,634 · atributo 0,372 · JSON 99,5% · exato 56,3% | Atribuiu investigação a 36 de 137 falas sem pergunta; vazio em 8 de 877 falas com pergunta |

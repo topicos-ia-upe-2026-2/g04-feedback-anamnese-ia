@@ -14,7 +14,7 @@ Esta etapa implementa a preparação dos dados e a primeira adaptação de Qwen3
 
 O experimento é um piloto textual em inglês. Não inclui áudio e transcrição, aplicação, tradução para o português (hipótese D10 da E1), avaliação de omissões por caso ou avaliação humana do feedback. Esses componentes dependem das próximas etapas. A entrega inicial exigida pelo enunciado permite uma execução pequena; por isso, o relatório distingue o corpus preparado do subconjunto efetivamente utilizado no treino.
 
-**Resumo dos resultados.** A primeira adaptação (LoRA-02, 40 passos) respondeu lista vazia em todas as falas. A investigação da seção 6.5 isolou a causa, e a correção (mais passos e escolha do checkpoint pela extração na validação) produziu o LoRA-04. Na partição de teste completa, com 1.014 falas, o LoRA-04 obteve F1 de item 0,634 e acerto exato por fala de 56,3%, contra 0,182 e 14,5% da baseline por regras. O resultado do modelo original (B1) na partição de teste completa está em execução e será acrescentado; no holdout de 24 falas, o B1 obteve F1 de item 0,098 e o LoRA-04, 0,683.
+**Resumo dos resultados.** A primeira adaptação (LoRA-02, 40 passos) respondeu lista vazia em todas as falas. A investigação da seção 6.5 isolou a causa, e a correção (mais passos e escolha do checkpoint pela extração na validação) produziu o LoRA-04. Na partição de teste completa, com 1.014 falas, o LoRA-04 obteve F1 de item 0,634 e acerto exato por fala de 56,3%, contra 0,182 e 14,5% da baseline por regras. O modelo original sem ajuste (B1) obteve 0,125 e 4,6% na mesma partição. No holdout de 24 falas, o F1 de item foi 0,098 (B1) e 0,683 (LoRA-04).
 
 A tarefa é inspirada no CMAS do MediTOD. Ela não reproduz a NLU publicada no artigo-base, que avalia informações do paciente. As métricas abaixo são locais, baseadas em correspondência exata de rótulos, e não podem ser comparadas diretamente ao F1 0,7139 do artigo.
 
@@ -252,8 +252,10 @@ A partição de teste inteira (1.014 falas, 877 com pergunta e 137 sem) não par
 | Sistema | F1 ato | F1 item | F1 atributo | Precisão / recall de item | JSON válido | Acerto exato | Macro-F1 de item | s/fala |
 |---|---|---|---|---|---|---|---|---|
 | B0 · regras | 0,134 | 0,182 | 0,070 | 0,194 / 0,172 | 100,0% | 14,5% | 0,069 | 0,001 |
-| B1 · original | em execução | | | | | | | |
+| B1 · original | 0,002 | 0,125 | 0,010 | 0,120 / 0,129 | 87,5% | 4,6% | 0,056 | 2,793 |
 | LoRA-04 | 0,521 | 0,634 | 0,372 | 0,642 / 0,628 | 99,5% | 56,3% | 0,515 | 1,887 |
+
+O B1 reconhece parte dos assuntos (F1 de item 0,125), mas quase nunca acerta o ato completo: listou 5.937 atributos que não estavam na referência e teve 127 saídas inválidas (89 com atributo fora do vocabulário, 23 fora de JSON estrito e 15 com categoria inválida). O ajuste melhorou tanto o formato quanto o conteúdo; a baseline por regras (B0) ficou acima do B1 no F1 de item.
 
 O macro-F1 usa as 13 categorias com suporte no teste. F1 de item do LoRA-04 por categoria, com o número de itens de referência entre parênteses: `symptom` 0,648 (498), `medical history` 0,532 (131), `habit` 0,790 (76), `medication` 0,571 (47), `family history` 0,581 (46), `exposure` 0,667 (41), `residence` 0,745 (22), `symptom (dermatology)` 0,400 (20), `travel` 0,850 (19), `occupation` 0,909 (6), `medical test` 0,000 (9), `other` 0,000 (5), `basic information` 0,000 (1). Categorias com menos de 10 itens não permitem conclusão.
 
