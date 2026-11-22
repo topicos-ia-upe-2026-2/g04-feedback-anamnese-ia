@@ -28,7 +28,7 @@ E2: B0 (regras), B1 (Qwen sem adaptador) e LoRA no mesmo holdout de 24 falas, co
 
 ## 7. Resultados e análise de falhas
 
-Primeiros resultados (E2, holdout diagnóstico): F1 de item 0,121 (B0), 0,098 (B1) e 0,000 (LoRA-02). O LoRA-02 gerou JSON válido em todas as falas, mas sempre lista vazia; a primeira rodada já colapsava para `[]`. A causa não foi isolada; o plano de correção até a E3 está em `docs/E2-modelo-dados.md`, seção 8.
+E2, partição de teste completa (1.014 falas): F1 de item 0,182 (B0) e 0,634 (LoRA-04), com acerto exato por fala de 14,5% e 56,3%. A primeira adaptação (LoRA-02) colapsava para lista vazia; a causa (deslocamento do primeiro token pelos alvos vazios no início do treino) e a correção (treino mais longo com checkpoint escolhido pela validação) estão em `docs/E2-modelo-dados.md`, seções 6.5 a 6.7.
 
 ## 8. Limitações e uso responsável
 
