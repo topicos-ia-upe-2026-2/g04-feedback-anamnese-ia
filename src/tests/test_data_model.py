@@ -153,6 +153,22 @@ def test_real_tokenizer_supervised_target_is_json_without_hidden_reasoning():
     assert continuation == '[]<|im_end|>\n'
 
 
+def test_checkpoint_selection_sample_excludes_validation_loss_rows_and_is_fixed(tmp_path, monkeypatch):
+    select = importlib.import_module('motor.select')
+    rows = [{'dialogue_id': 'd', 'uid': str(i), 'text': 'q', 'history': [], 'acts': []} for i in range(30)]
+    (tmp_path / 'data' / 'prepared').mkdir(parents=True)
+    (tmp_path / 'data' / 'prepared' / 'valid_rows.jsonl').write_text(''.join(json.dumps(r) + '\n' for r in rows))
+    (tmp_path / 'ev' / 'r').mkdir(parents=True)
+    (tmp_path / 'ev' / 'r' / 'manifesto_piloto.json').write_text(
+        json.dumps({'valid': {'sample_ids': ['d:' + str(i) for i in range(10)]}}))
+    monkeypatch.setattr(select, 'CODE_ROOT', tmp_path)
+    monkeypatch.setattr(select, 'EVIDENCE', tmp_path / 'ev')
+    first, _ = select.validation_sample('r', 12)
+    second, _ = select.validation_sample('r', 12)
+    assert first == second
+    assert all(int(r['uid']) >= 10 for r in first)
+
+
 def test_prompt_contains_only_past_context_and_fixed_inquire_contract():
     messages = api('model', 'build_messages')('Do you smoke?', [{'speaker': 'patient', 'text': 'I cough'}])
     assert messages[0]['role'] == 'system'
@@ -160,3 +176,10 @@ def test_prompt_contains_only_past_context_and_fixed_inquire_contract():
     payload = json.loads(messages[1]['content'])
     assert payload['current_doctor_turn'] == 'Do you smoke?'
     assert payload['history'] == [{'speaker': 'patient', 'text': 'I cough'}]
+
+
+def test_portable_hides_machine_paths():
+    train = importlib.import_module('motor.train')
+    from pathlib import Path
+    text = str(train.CODE_ROOT.parent / 'src' / 'data') + ' ' + str(Path.home() / '.cache')
+    assert train.portable(text) == '<projeto>/src/data ~/.cache'

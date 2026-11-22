@@ -6,6 +6,7 @@ import resource
 import time
 from collections import Counter
 from datetime import datetime, timezone
+from pathlib import Path
 
 from motor.data import CODE_ROOT, EVIDENCE, read_jsonl, sha256, write_json
 from motor.model import MLXExtractor, parse_output
@@ -94,20 +95,25 @@ class KeywordBaseline:
                 if re.search(r'(?<!\w)' + re.escape(value) + r'(?!\w)', lowered)]
 
 
-def evaluate(variant):
+def evaluate(variant, adapter=None, rows_file=None, evidence_dir=None, tag=None):
+    """Sem opções, reproduz a avaliação do holdout; opções permitem outra rodada ou outro conjunto."""
     holdout_path = CODE_ROOT / 'data' / 'prepared' / 'holdout_rows.jsonl'
-    rows = read_jsonl(holdout_path)
+    rows_path = CODE_ROOT / rows_file if rows_file else holdout_path
+    rows = read_jsonl(rows_path)
     data_manifest = json.loads((EVIDENCE / 'manifesto_dados.json').read_text())
-    if sha256(holdout_path) != data_manifest['holdout']['sha256']:
+    if rows_path == holdout_path and sha256(holdout_path) != data_manifest['holdout']['sha256']:
         raise ValueError('Holdout SHA-256 differs from frozen manifest')
-    output_path = CODE_ROOT / 'artifacts' / ('predictions_' + variant + '.jsonl')
+    evidence_dir = Path(evidence_dir) if evidence_dir else EVIDENCE
+    evidence_dir.mkdir(parents=True, exist_ok=True)
+    name = tag or variant
+    output_path = CODE_ROOT / 'artifacts' / (evidence_dir.name if evidence_dir != EVIDENCE else '') / ('predictions_' + name + '.jsonl')
     output_path.parent.mkdir(parents=True, exist_ok=True)
     started = time.perf_counter()
     if variant == 'b0':
         backend = KeywordBaseline(read_jsonl(CODE_ROOT / 'data' / 'prepared' / 'train_rows.jsonl'))
     else:
-        backend = MLXExtractor(adapter_path=str(CODE_ROOT / 'artifacts' / 'lora_piloto')
-                               if variant == 'lora' else None)
+        adapter = adapter or (str(CODE_ROOT / 'artifacts' / 'lora_piloto') if variant == 'lora' else None)
+        backend = MLXExtractor(adapter_path=adapter)
     load_seconds = time.perf_counter() - started
     predictions, records = [], []
     with output_path.open('w') as stream:
@@ -133,8 +139,11 @@ def evaluate(variant):
             stream.flush()
             print(f'{variant} {len(predictions)}/{len(rows)} valid={error is None} {duration:.2f}s', flush=True)
     result = score_predictions([row['acts'] for row in rows], predictions)
-    result.update(variant=variant, created_utc=datetime.now(timezone.utc).isoformat(),
-                  holdout_sha256=sha256(holdout_path), predictions_sha256=sha256(output_path),
+    result.update(variant=variant, tag=name, adapter=adapter, rows_file=str(rows_path.relative_to(CODE_ROOT)),
+                  created_utc=datetime.now(timezone.utc).isoformat(),
+                  holdout_sha256=sha256(holdout_path) if rows_path == holdout_path else None,
+                  rows_sha256=sha256(rows_path), predictions_sha256=sha256(output_path),
+                  empty_predictions=sum(p == [] for p in predictions),
                   load_seconds=load_seconds, total_seconds=time.perf_counter() - started,
                   peak_process_rss_bytes=resource.getrusage(resource.RUSAGE_SELF).ru_maxrss,
                   latency_seconds={'mean': sum(r['seconds'] for r in records) / len(records),
@@ -152,11 +161,16 @@ def evaluate(variant):
     if variant != 'b0':
         import mlx.core as mx
         result['peak_mlx_allocated_bytes'] = mx.get_peak_memory()
-    write_json(EVIDENCE / ('metricas_' + variant + '.json'), result)
+    write_json(evidence_dir / ('metricas_' + name + '.json'), result)
     print(json.dumps({k: result[k] for k in ('variant', 'n', 'json_schema_valid_rate', 'act_micro', 'slot_value_micro')}, indent=2))
 
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--variant', required=True, choices=('b0', 'b1', 'lora'))
-    evaluate(parser.parse_args().variant)
+    parser.add_argument('--adapter', help='Pasta do adaptador (padrão: artifacts/lora_piloto)')
+    parser.add_argument('--rows', help='Arquivo *_rows.jsonl relativo a src/ (padrão: holdout)')
+    parser.add_argument('--evidence', help='Pasta de evidências da rodada (padrão: evidencias/)')
+    parser.add_argument('--tag', help='Nome dos arquivos de saída (padrão: a variante)')
+    a = parser.parse_args()
+    evaluate(a.variant, a.adapter, a.rows, a.evidence, a.tag)
