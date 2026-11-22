@@ -1,0 +1,25 @@
+# LoRA-03: mesma receita e mesmos exemplos do LoRA-02; só muda o número de passos (40 -> 400).
+# Testa a correção da causa raiz: com 40 passos o treino parava no pico do desvio para "[]".
+# Checkpoints a cada 50 passos, escolhidos por extração na validação (motor.select).
+train: true
+fine_tune_type: lora
+seed: 42
+num_layers: 4
+batch_size: 1
+iters: 400
+val_batches: 4
+learning_rate: 0.0001
+steps_per_report: 10
+steps_per_eval: 50
+save_every: 50
+max_seq_length: 512
+grad_checkpoint: true
+mask_prompt: true
+optimizer: adam
+lora_parameters:
+  rank: 8
+  dropout: 0.0
+  scale: 16.0
+pilot_train: 256
+pilot_valid: 16
+fixed_ids: configs/piloto_ids.json

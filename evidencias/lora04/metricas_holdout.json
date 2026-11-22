@@ -1,0 +1,269 @@
+{
+  "n": 24,
+  "invalid_outputs": 0,
+  "json_schema_valid_rate": 1.0,
+  "act_micro": {
+    "tp": 9,
+    "fp": 12,
+    "fn": 11,
+    "precision": 0.42857142857142855,
+    "recall": 0.45,
+    "f1": 0.4390243902439024
+  },
+  "slot_value_micro": {
+    "tp": 14,
+    "fp": 7,
+    "fn": 6,
+    "precision": 0.6666666666666666,
+    "recall": 0.7,
+    "f1": 0.6829268292682926
+  },
+  "attribute_micro": {
+    "tp": 4,
+    "fp": 6,
+    "fn": 6,
+    "precision": 0.4,
+    "recall": 0.4,
+    "f1": 0.4000000000000001
+  },
+  "per_slot": {
+    "exposure": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "family history": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "habit": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "medical history": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 2,
+      "precision": 0.5,
+      "recall": 0.3333333333333333,
+      "f1": 0.4
+    },
+    "residence": {
+      "tp": 2,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "symptom": {
+      "tp": 8,
+      "fp": 4,
+      "fn": 3,
+      "precision": 0.6666666666666666,
+      "recall": 0.7272727272727273,
+      "f1": 0.6956521739130435
+    },
+    "travel": {
+      "tp": 2,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.6666666666666666,
+      "recall": 1.0,
+      "f1": 0.8
+    }
+  },
+  "macro_slots": [
+    "exposure",
+    "habit",
+    "medical history",
+    "residence",
+    "symptom",
+    "travel"
+  ],
+  "macro_convention": "Mean over gold-supported slots, fixed across systems; zero_division=0",
+  "slot_value_macro_f1": 0.6492753623188406,
+  "exact_turn_accuracy": 0.5,
+  "variant": "lora",
+  "tag": "holdout",
+  "adapter": "artifacts/lora04/melhor",
+  "rows_file": "data/prepared/holdout_rows.jsonl",
+  "created_utc": "2026-11-22T22:34:18.402442+00:00",
+  "holdout_sha256": "1699057205767186c67020b5dd682c79d0c1305140cac921cd16c756c3725283",
+  "rows_sha256": "1699057205767186c67020b5dd682c79d0c1305140cac921cd16c756c3725283",
+  "predictions_sha256": "8890f7fd2b62ef5b192310b83d338ff287237619c73b3830cde987f70091c643",
+  "empty_predictions": 3,
+  "load_seconds": 1.7153283750012633,
+  "total_seconds": 47.74526633300411,
+  "peak_process_rss_bytes": 2665381888,
+  "latency_seconds": {
+    "mean": 1.9178271788747832,
+    "min": 1.5807200830022339,
+    "max": 2.333984500000952
+  },
+  "decoding": {
+    "temperature": 0,
+    "max_tokens": 192,
+    "seed": 42
+  },
+  "metric_definition": "Exact micro sets per turn: act=(slot,value,sorted attributes); slot_value=(slot,value); attribute=(slot,value,attribute). Casefold/whitespace only. Invalid JSON contributes gold FN. Not the original paper metric.",
+  "label_budget": "B0 vocabulary from all training rows; LoRA pilot subset256/40steps. This comparison does not equalize annotation budget.",
+  "per_sample": [
+    {
+      "sample_id": "208:59",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7303334999960498
+    },
+    {
+      "sample_id": "105:96",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6375389589957194
+    },
+    {
+      "sample_id": "123:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0907052909969934
+    },
+    {
+      "sample_id": "616:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.073408666998148
+    },
+    {
+      "sample_id": "427:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.037258208001731
+    },
+    {
+      "sample_id": "616:92",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7876429170064512
+    },
+    {
+      "sample_id": "222:72",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9226916670013452
+    },
+    {
+      "sample_id": "217:28",
+      "valid": true,
+      "error": null,
+      "seconds": 1.793140832996869
+    },
+    {
+      "sample_id": "427:16",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9267789579971577
+    },
+    {
+      "sample_id": "427:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.084622082998976
+    },
+    {
+      "sample_id": "214:54",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9697198750000098
+    },
+    {
+      "sample_id": "228:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1572556249957415
+    },
+    {
+      "sample_id": "1011:60",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8031876660024864
+    },
+    {
+      "sample_id": "211:42",
+      "valid": true,
+      "error": null,
+      "seconds": 1.703047292001429
+    },
+    {
+      "sample_id": "120:44",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8752293750003446
+    },
+    {
+      "sample_id": "208:67",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1869674589979695
+    },
+    {
+      "sample_id": "508:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8699549170050886
+    },
+    {
+      "sample_id": "508:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.133898791995307
+    },
+    {
+      "sample_id": "120:124",
+      "valid": true,
+      "error": null,
+      "seconds": 1.5807200830022339
+    },
+    {
+      "sample_id": "105:62",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9068007080059033
+    },
+    {
+      "sample_id": "217:58",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6598020419987733
+    },
+    {
+      "sample_id": "1011:104",
+      "valid": true,
+      "error": null,
+      "seconds": 2.333984500000952
+    },
+    {
+      "sample_id": "1011:12",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7755754169993452
+    },
+    {
+      "sample_id": "228:4",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9875874589997693
+    }
+  ],
+  "peak_mlx_allocated_bytes": 3310092764
+}
