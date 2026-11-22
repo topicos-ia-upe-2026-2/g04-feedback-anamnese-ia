@@ -36,6 +36,16 @@ data/*
 # Mas mantenha versões pequenas e essenciais, se necessário:
 !data/exemplo-pequeno.csv
 
+# E2: dados do MediTOD, previsões e adaptadores ficam só locais (licença das anotações não identificada, D6)
+src/data/
+src/artifacts/
+.pytest_cache/
+.ruff_cache/
+
+# E2: manifestos, métricas, partições e IDs do piloto são evidência pequena e versionada
+!evidencias/**/*.json
+!src/configs/*.json
+
 # Sistema operacional / editor
 .DS_Store
 Thumbs.db
