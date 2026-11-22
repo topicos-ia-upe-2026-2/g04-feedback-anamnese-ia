@@ -29,6 +29,17 @@ export HF_HUB_DOWNLOAD_TIMEOUT=60
 .venv/bin/python configs/registrar_proveniencia.py
 ```
 
+Os comandos acima reproduzem a primeira adaptação (LoRA-02). As rodadas de correção usam pastas próprias
+(`data/<run>/`, `artifacts/<run>/`, `../evidencias/<run>/`), sem sobrescrever as anteriores:
+
+```sh
+.venv/bin/python -m motor.train --config configs/lora04.yaml --run lora04
+.venv/bin/python -m motor.select --run lora04        # F1 de extração por checkpoint na validação
+.venv/bin/python -m motor.evaluate --variant lora --adapter artifacts/lora04/melhor --evidence ../evidencias/lora04 --tag holdout
+.venv/bin/python -m motor.evaluate --variant lora --adapter artifacts/lora04/melhor \
+  --rows data/prepared/test_rows.jsonl --evidence ../evidencias/teste_completo --tag lora04
+```
+
 Sem o tokenizer do modelo no cache do Hugging Face, os testes terminam com 17
 aprovados e 1 ignorado (o teste de integração do template); com o cache, 18 aprovados.
 

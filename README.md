@@ -398,9 +398,14 @@ export PYTHONPATH="$PWD" HF_HUB_DISABLE_XET=1 HF_HUB_DOWNLOAD_TIMEOUT=60
 .venv/bin/python -m motor.data                           # baixa, valida, prepara e divide os dados
 .venv/bin/python -m motor.evaluate --variant b0          # baseline por regras
 .venv/bin/python -m motor.evaluate --variant b1          # Qwen sem adaptador
-.venv/bin/python -m motor.train                          # LoRA piloto
+.venv/bin/python -m motor.train                          # LoRA-02 (primeira adaptação)
 .venv/bin/python -m motor.evaluate --variant lora        # Qwen com adaptador
 .venv/bin/python configs/registrar_proveniencia.py       # vincula métricas, modelo e adaptador por hash
+# Correção (LoRA-04): treino, escolha do checkpoint pela validação e teste completo
+.venv/bin/python -m motor.train --config configs/lora04.yaml --run lora04
+.venv/bin/python -m motor.select --run lora04
+.venv/bin/python -m motor.evaluate --variant lora --adapter artifacts/lora04/melhor \
+  --rows data/prepared/test_rows.jsonl --evidence ../evidencias/teste_completo --tag lora04
 ```
 
 Detalhes, contrato do extrator e uso programático em [`src/README.md`](src/README.md). Reexecutar substitui as
@@ -409,23 +414,27 @@ evidências de mesmo nome em `evidencias/`; copie antes se quiser preservar a ro
 **Origem dos dados:** [`evidencias/manifesto_dados.json`](evidencias/manifesto_dados.json) (URL, commit, SHA-256,
 contagens, normalizações) e [`evidencias/splits_dialogos.json`](evidencias/splits_dialogos.json) (IDs por partição).
 
-**Adaptadores:** gerados em `src/artifacts/lora_piloto/` (7,3 MB cada) e mantidos fora do repositório, assim como os
+**Adaptadores:** gerados em `src/artifacts/` (LoRA-02: 7,3 MB; LoRA-04: 59 MB por checkpoint) e mantidos fora do repositório, assim como os
 dados preparados e as previsões, porque as anotações do MediTOD não têm licença identificada (D6). Os hashes estão em
 [`evidencias/execucao_treino.json`](evidencias/execucao_treino.json), e os comandos acima os reconstroem.
 
 ## Resultados
 
-Primeiros resultados da E2, medidos nas mesmas 24 falas retidas (holdout diagnóstico, em inglês, não cego):
+Resultados medidos na E2. A **partição de teste completa** (1.014 falas, em inglês) não participou de treino, escolha
+de checkpoint nem diagnóstico:
 
 | Sistema | F1 ato | F1 item | F1 atributo | JSON válido | Acerto exato | s/fala |
 |---|---|---|---|---|---|---|
-| B0 · regras | 0,061 | 0,121 | 0,167 | 100,0% | 12,5% | 0,001 |
-| B1 · Qwen sem adaptador | 0,000 | 0,098 | 0,000 | 75,0% | 8,3% | 1,412 |
-| LoRA-02 (40 passos) | 0,000 | 0,000 | 0,000 | 100,0% | 16,7% | 0,324 |
+| B0 · regras | 0,134 | 0,182 | 0,070 | 100,0% | 14,5% | 0,001 |
+| B1 · Qwen sem adaptador | em execução | | | | | |
+| LoRA-04 · Qwen com adaptador | 0,521 | 0,634 | 0,372 | 99,5% | 56,3% | 1,887 |
 
-O adaptador passou a gerar JSON válido, mas respondeu lista vazia em todas as falas: o resultado da primeira adaptação
-é negativo para extração. Análise, limitações e plano até a E3 em [`docs/E2-modelo-dados.md`](docs/E2-modelo-dados.md);
-registro das execuções em [`docs/experimentos.md`](docs/experimentos.md).
+A primeira adaptação (LoRA-02, 40 passos) respondia lista vazia em todas as falas. O diagnóstico mostrou que os poucos
+exemplos vazios deslocam a decisão do primeiro token para `[]` no início do treino. A correção foi treinar mais e
+escolher o checkpoint pela extração na validação. No holdout de 24 falas, o F1 de item foi de 0,098 (B1) e 0,000
+(LoRA-02) para 0,683 (LoRA-04). Diagnóstico, limitações e plano até a E3 em
+[`docs/E2-modelo-dados.md`](docs/E2-modelo-dados.md); registro das execuções em
+[`docs/experimentos.md`](docs/experimentos.md).
 
 ## Limitações e uso responsável
 

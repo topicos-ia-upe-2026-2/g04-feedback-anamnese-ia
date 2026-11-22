@@ -77,6 +77,8 @@ uv pip install --python .venv/bin/python -r requirements-ml.txt
 export PYTHONPATH="$PWD" HF_HUB_DISABLE_XET=1 HF_HUB_DOWNLOAD_TIMEOUT=60
 .venv/bin/python -m pytest tests -q
 .venv/bin/ruff check --target-version py39 motor tests configs
+.venv/bin/python -m motor.train --config configs/lora04.yaml --run lora04   # nova rodada em pastas próprias
+.venv/bin/python -m motor.select --run lora04                               # checkpoint pela validação
 ```
 
 ## Regras de trabalho
@@ -91,7 +93,10 @@ export PYTHONPATH="$PWD" HF_HUB_DISABLE_XET=1 HF_HUB_DOWNLOAD_TIMEOUT=60
 - B0, B1 e LoRA (e qualquer novo baseline) usam as mesmas amostras, o mesmo prompt, temperatura 0, `max_tokens` 192 e
   o mesmo parser.
 - O holdout de 24 falas já foi inspecionado no diagnóstico do template. Não é teste cego: não escolha
-  hiperparâmetros por ele, e use validação ou um novo conjunto retido.
+  hiperparâmetros por ele. Escolha checkpoints com `motor.select` (F1 de extração na validação) e compare sistemas
+  na partição de teste completa (`evidencias/teste_completo/`).
+- Não use a perda nem o último passo para escolher adaptador: o deslocamento para `[]` reaparece no meio do treino
+  com perda baixa (ver `evidencias/diagnostico_colapso/`).
 - Uma nova rodada de treino recebe identificação, configuração e métricas próprias, sem sobrescrever as evidências
   anteriores. Reexecutar os scripts substitui arquivos de mesmo nome: copie antes.
 - Não afirme validação clínica, avaliação humana, eficácia pedagógica, autorização de licença ou aceite do professor
