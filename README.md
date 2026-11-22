@@ -6,7 +6,8 @@ Projeto aplicado da disciplina **Tópicos Avançados em Inteligência Artificial
 |---|---|
 | G04 | Leonardo Marcelo (@LeonardoMarcelo), André Lucas (@andredutradev) |
 
-**Etapa atual:** E1 · Definição do projeto. Documento completo: [`docs/E1-definicao.md`](docs/E1-definicao.md) · [PDF](docs/E1-definicao.pdf).
+**Etapa atual:** E2 · Dados preparados e primeira adaptação. Relatório: [`docs/E2-modelo-dados.md`](docs/E2-modelo-dados.md) · [PDF](docs/E2-modelo-dados.pdf).
+Definição do projeto (E1): [`docs/E1-definicao.md`](docs/E1-definicao.md) · [PDF](docs/E1-definicao.pdf).
 
 > **Em uma frase:** a partir do áudio da anamnese que o estudante de medicina faz com um paciente real, o sistema
 > transcreve a entrevista, identifica o que cada pergunta do estudante investigou (Qwen3-4B-Instruct-2507 ajustado com
@@ -310,7 +311,7 @@ preparação.
 git clone https://github.com/dair-iitd/MediTOD.git ../MediTOD
 git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
 # áudios: baixar Data.zip em https://springernature.figshare.com/articles/dataset/Collection_of_simulated_medical_exams/16550013
-# os arquivos ficam fora do repositório; data/ e *.json já estão no .gitignore
+# na E2, `python -m motor.data` baixa os dois JSON do commit fixado e confere o SHA-256 (ver "Como executar")
 ```
 
 > Arquivos de dados grandes **não** são versionados neste repositório.
@@ -386,11 +387,45 @@ git -C ../MediTOD checkout 0b7a87c3553c9056bc8371b0809811003f94b261
 
 ## Como executar
 
-Não há código nesta etapa: a E1 é a definição do projeto.
+O experimento da E2 roda localmente em macOS com Apple Silicon (MLX/Metal) e Python 3.12. Não precisa de token nem de
+serviço pago; os downloads são públicos (MediTOD no GitHub e o modelo no Hugging Face, cerca de 2,3 GB). Partindo de `src/`:
+
+```bash
+uv venv --python 3.12 .venv
+uv pip install --python .venv/bin/python -r requirements-ml.txt
+export PYTHONPATH="$PWD" HF_HUB_DISABLE_XET=1 HF_HUB_DOWNLOAD_TIMEOUT=60
+.venv/bin/python -m pytest tests -q                      # regressões de dados, parser e métricas
+.venv/bin/python -m motor.data                           # baixa, valida, prepara e divide os dados
+.venv/bin/python -m motor.evaluate --variant b0          # baseline por regras
+.venv/bin/python -m motor.evaluate --variant b1          # Qwen sem adaptador
+.venv/bin/python -m motor.train                          # LoRA piloto
+.venv/bin/python -m motor.evaluate --variant lora        # Qwen com adaptador
+.venv/bin/python configs/registrar_proveniencia.py       # vincula métricas, modelo e adaptador por hash
+```
+
+Detalhes, contrato do extrator e uso programático em [`src/README.md`](src/README.md). Reexecutar substitui as
+evidências de mesmo nome em `evidencias/`; copie antes se quiser preservar a rodada registrada.
+
+**Origem dos dados:** [`evidencias/manifesto_dados.json`](evidencias/manifesto_dados.json) (URL, commit, SHA-256,
+contagens, normalizações) e [`evidencias/splits_dialogos.json`](evidencias/splits_dialogos.json) (IDs por partição).
+
+**Adaptadores:** gerados em `src/artifacts/lora_piloto/` (7,3 MB cada) e mantidos fora do repositório, assim como os
+dados preparados e as previsões, porque as anotações do MediTOD não têm licença identificada (D6). Os hashes estão em
+[`evidencias/execucao_treino.json`](evidencias/execucao_treino.json), e os comandos acima os reconstroem.
 
 ## Resultados
 
-Nenhum resultado nesta etapa.
+Primeiros resultados da E2, medidos nas mesmas 24 falas retidas (holdout diagnóstico, em inglês, não cego):
+
+| Sistema | F1 ato | F1 item | F1 atributo | JSON válido | Acerto exato | s/fala |
+|---|---|---|---|---|---|---|
+| B0 · regras | 0,061 | 0,121 | 0,167 | 100,0% | 12,5% | 0,001 |
+| B1 · Qwen sem adaptador | 0,000 | 0,098 | 0,000 | 75,0% | 8,3% | 1,412 |
+| LoRA-02 (40 passos) | 0,000 | 0,000 | 0,000 | 100,0% | 16,7% | 0,324 |
+
+O adaptador passou a gerar JSON válido, mas respondeu lista vazia em todas as falas: o resultado da primeira adaptação
+é negativo para extração. Análise, limitações e plano até a E3 em [`docs/E2-modelo-dados.md`](docs/E2-modelo-dados.md);
+registro das execuções em [`docs/experimentos.md`](docs/experimentos.md).
 
 ## Limitações e uso responsável
 
@@ -405,8 +440,8 @@ Nenhum resultado nesta etapa.
   avalia a anamnese inteira. O mapeamento CMAS → roteiro de anamnese ainda não foi validado pela cliente.
 - **Idioma.** O extrator é ajustado sobre dados em inglês e, como hipótese, sobre sua tradução; o desempenho em
   anamneses reais em português é desconhecido até ser medido.
-- **Dados e licenças.** Anotações do MediTOD sem licença identificada → nada de dados, traduções ou adaptadores
-  derivados no repositório.
+- **Dados e licenças.** Anotações do MediTOD sem licença identificada → nada de dados, traduções, previsões ou
+  adaptadores derivados no repositório; apenas código, configurações, IDs, estatísticas agregadas e logs.
 - **Feedback sem julgamento pessoal.** Os três blocos (acertos, o que melhorar, o que deixou de fazer) descrevem condutas
   observáveis com cautela e indicam uma oportunidade de prática (Bastos e Castro et al., 2021; van de Ridder et al., 2015).
 - **Custo.** Execução local, sem serviço pago.
