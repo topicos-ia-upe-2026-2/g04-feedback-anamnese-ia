@@ -1,0 +1,264 @@
+{
+  "n": 24,
+  "invalid_outputs": 0,
+  "json_schema_valid_rate": 1.0,
+  "act_micro": {
+    "tp": 1,
+    "fp": 12,
+    "fn": 19,
+    "precision": 0.07692307692307693,
+    "recall": 0.05,
+    "f1": 0.060606060606060615
+  },
+  "slot_value_micro": {
+    "tp": 2,
+    "fp": 11,
+    "fn": 18,
+    "precision": 0.15384615384615385,
+    "recall": 0.1,
+    "f1": 0.12121212121212123
+  },
+  "attribute_micro": {
+    "tp": 1,
+    "fp": 1,
+    "fn": 9,
+    "precision": 0.5,
+    "recall": 0.1,
+    "f1": 0.16666666666666669
+  },
+  "per_slot": {
+    "exposure": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "habit": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "medical history": {
+      "tp": 0,
+      "fp": 3,
+      "fn": 3,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "residence": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "symptom": {
+      "tp": 2,
+      "fp": 7,
+      "fn": 9,
+      "precision": 0.2222222222222222,
+      "recall": 0.18181818181818182,
+      "f1": 0.19999999999999998
+    },
+    "travel": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "macro_slots": [
+    "exposure",
+    "habit",
+    "medical history",
+    "residence",
+    "symptom",
+    "travel"
+  ],
+  "macro_convention": "Mean over gold-supported slots, fixed across systems; zero_division=0",
+  "slot_value_macro_f1": 0.03333333333333333,
+  "exact_turn_accuracy": 0.125,
+  "variant": "b0",
+  "created_utc": "2026-11-03T22:48:28.731593+00:00",
+  "holdout_sha256": "1699057205767186c67020b5dd682c79d0c1305140cac921cd16c756c3725283",
+  "predictions_sha256": "75c3781fe09a278f3f6670125c638880338ace3b79ebcd1121a957f0c68d95b3",
+  "load_seconds": 0.019760000000019318,
+  "total_seconds": 0.0445833329999914,
+  "peak_process_rss_bytes": 58671104,
+  "latency_seconds": {
+    "mean": 0.0009884165416641129,
+    "min": 5.787500003862078e-05,
+    "max": 0.005993915999965793
+  },
+  "decoding": {
+    "temperature": 0,
+    "max_tokens": 192,
+    "seed": 42
+  },
+  "metric_definition": "Exact micro sets per turn: act=(slot,value,sorted attributes); slot_value=(slot,value); attribute=(slot,value,attribute). Casefold/whitespace only. Invalid JSON contributes gold FN. Not the original paper metric.",
+  "label_budget": "B0 vocabulary from all training rows; LoRA pilot subset256/40steps. This comparison does not equalize annotation budget.",
+  "per_sample": [
+    {
+      "sample_id": "208:59",
+      "valid": true,
+      "error": null,
+      "seconds": 0.005993915999965793
+    },
+    {
+      "sample_id": "105:96",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0006702079999740818
+    },
+    {
+      "sample_id": "123:6",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0007989999999153952
+    },
+    {
+      "sample_id": "616:72",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0005803330000162532
+    },
+    {
+      "sample_id": "427:34",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0007770830000026763
+    },
+    {
+      "sample_id": "616:92",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0025030000000469954
+    },
+    {
+      "sample_id": "222:72",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0009898340000518147
+    },
+    {
+      "sample_id": "217:28",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0004993329999933849
+    },
+    {
+      "sample_id": "427:16",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0006284169999162259
+    },
+    {
+      "sample_id": "427:12",
+      "valid": true,
+      "error": null,
+      "seconds": 0.000997707999999875
+    },
+    {
+      "sample_id": "214:54",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0006627909999679105
+    },
+    {
+      "sample_id": "228:6",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0008310839999694508
+    },
+    {
+      "sample_id": "1011:60",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0005472079999435664
+    },
+    {
+      "sample_id": "211:42",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0006133330000466231
+    },
+    {
+      "sample_id": "120:44",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0006772500000806758
+    },
+    {
+      "sample_id": "208:67",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0009767499999497886
+    },
+    {
+      "sample_id": "508:76",
+      "valid": true,
+      "error": null,
+      "seconds": 0.000694500000008702
+    },
+    {
+      "sample_id": "508:74",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0007876660000647462
+    },
+    {
+      "sample_id": "120:124",
+      "valid": true,
+      "error": null,
+      "seconds": 5.787500003862078e-05
+    },
+    {
+      "sample_id": "105:62",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0005232500000147411
+    },
+    {
+      "sample_id": "217:58",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0006155840000019452
+    },
+    {
+      "sample_id": "1011:104",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0009006660000068223
+    },
+    {
+      "sample_id": "1011:12",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0006109580000384085
+    },
+    {
+      "sample_id": "228:4",
+      "valid": true,
+      "error": null,
+      "seconds": 0.0007842499999242136
+    }
+  ],
+  "model_id": null,
+  "model_revision": null,
+  "model_sha256": null,
+  "adapter_sha256": null,
+  "source_evaluate_sha256": "96a83319f66abbab742735626f11c2f13351063fec4f4dc57a162f681ad9220d",
+  "provenance_observed_utc": "2026-11-03T23:00:43.020695+00:00",
+  "provenance_note": "Metadata appended after execution, with source and artifact hash checks. The adapter matches the saved training checkpoint and the evaluator matches the training source manifest. Base weight hash comes from that manifest. Prediction files are unchanged.",
+  "chat_template_sha256": null,
+  "holdout_status": "Diagnostic: inspected to debug experiment 01 template; not a blind test."
+}

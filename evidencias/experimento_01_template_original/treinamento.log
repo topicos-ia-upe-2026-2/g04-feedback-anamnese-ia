@@ -1,0 +1,27 @@
+╭─ [1mmlx_lm.lora[0m ────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│    model                                                                                                             │
+│  [1m~/.cache/huggingface/hub/models--mlx-community--Qwen3-4B-Instruct-2507-4bit/snapshots/50d4277[0m  │
+│  [1m56c6b1b2fe0c0a10f67fbda1fc8e82c1b[0m                                                                                   │
+│    type            [1mlora · 4 layers · rank 8[0m                                                                          │
+│    dataset                                                                                                           │
+│  [1m<projeto>/etapa_2/codigo/data/pilot[0m          │
+│    optimizer       [1madam · lr 1.0e-04[0m                                                                                 │
+│    batch · iters   [1m1 · 40[0m                                                                                            │
+│    max seq         [1m512[0m                                                                                               │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+Trainable parameters: 0.046% (1.835M/4022.468M)
+  [1miter   train_loss     tok/s     tokens[0m
+     1    [1mval[0m [1m5.930[0m    2.10s
+     5    [1m3.402 ▼[0m    [1m   20[0m      0.1k
+    10    [1m1.630 ▼[0m    [1m   54[0m      0.2k
+    15    [1m1.315 ▼[0m    [1m   44[0m      0.3k
+    20    [1mval[0m [1m0.821[0m    1.09s
+    20    [1m0.684 ▼[0m    [1m   65[0m      0.5k
+  [1msave[0m  0000020_adapters.safetensors
+    25    [1m0.819 ▲[0m    [1m   52[0m      0.6k
+    30    [1m0.419 ▼[0m    [1m   55[0m      0.7k
+    35    [1m0.630 ▲[0m    [1m   49[0m      0.8k
+    40    [1mval[0m [1m0.450[0m    1.21s
+    40    [1m0.671 ▲[0m    [1m   62[0m      1.0k
+  [1msave[0m  0000040_adapters.safetensors
+[1mtrain[0m ██████████████████████████████ [1m100%[0m · [1m   40[0m/40

@@ -1,0 +1,206 @@
+{
+  "started_utc": "2026-11-03T22:59:14.401352+00:00",
+  "command": [
+    "<projeto>/.venv/bin/python",
+    "-u",
+    "-m",
+    "motor.train",
+    "--worker",
+    "<projeto>/etapa_2/codigo/artifacts/lora_runtime.yaml"
+  ],
+  "model_id": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "config": {
+    "train": true,
+    "fine_tune_type": "lora",
+    "seed": 42,
+    "num_layers": 4,
+    "batch_size": 1,
+    "iters": 40,
+    "val_batches": 4,
+    "learning_rate": 0.0001,
+    "steps_per_report": 5,
+    "steps_per_eval": 20,
+    "save_every": 20,
+    "max_seq_length": 512,
+    "grad_checkpoint": true,
+    "mask_prompt": true,
+    "optimizer": "adam",
+    "lora_parameters": {
+      "rank": 8,
+      "dropout": 0.0,
+      "scale": 16.0
+    },
+    "model": "~/.cache/huggingface/hub/models--mlx-community--Qwen3-4B-Instruct-2507-4bit/snapshots/50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+    "data": "<projeto>/etapa_2/codigo/data/pilot",
+    "adapter_path": "<projeto>/etapa_2/codigo/artifacts/lora_piloto"
+  },
+  "config_source_sha256": "7fd9b90fb5522d2c7d188be60752ff9aad5bfe8e44f5bc6689f15b3c6a67ebd6",
+  "data_manifest_sha256": "9773883b1bdeeb44a3c6fdeb5ed9a6eb24cd15ef4c9fa9e85c8d3cef59c45a78",
+  "pilot_manifest_sha256": "4564791c7da5d2205d2c24d8fad02b748f1c74f23dd23629c89b84ada3df9fd8",
+  "template_source_sha256": "64f85b198065d0fba2a81f37e10ed68161ce2c19a754c7100e67e0ca2ee9c326",
+  "source_files_sha256": {
+    "model.py": "089683d033c5b6c87249121910a344c4e8cc2a080fcb1449445e537e9cb78acb",
+    "train.py": "0c96e83b744a81767f0f2d9c6d21f478a0daf8a91b3e382fc8ed67d0729dfa4c",
+    "evaluate.py": "96a83319f66abbab742735626f11c2f13351063fec4f4dc57a162f681ad9220d",
+    "data.py": "528d132b2b02efc6fe1b9e547a6a95979952c696f59494c496df6fdb88ca6fde"
+  },
+  "python": "3.12.13 (main, Aug  7 2026, 02:15:23) [Clang 22.1.3 ]",
+  "platform": "macOS-27.0.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "physical_memory_bytes": 17179869184,
+  "versions": {
+    "mlx": "0.32.4",
+    "mlx-metal": "0.32.4",
+    "mlx-lm": "0.32.2",
+    "transformers": "5.22.1",
+    "huggingface-hub": "2.4.0",
+    "numpy": "2.5.4"
+  },
+  "model_files": {
+    "model.safetensors": "2a73c6c248601ab904e035548abd8e6abb65ea27dcb5f342fb0a8910eb44173f",
+    "added_tokens.json": "c0284b582e14987fbd3d5a2cb2bd139084371ed9acbae488829a1c900833c680",
+    "tokenizer_config.json": "4397cc477eb6d79715ccd2000accd6b3531928f30029665832fa1b255f24d2b9",
+    "special_tokens_map.json": "76862e765266b85aa9459767e33cbaf13970f327a0e88d1c65846c2ddd3a1ecd",
+    "config.json": "574349e5a343236546fda55e4744a76e181f534182d7dc60ff1bad7e7a502849",
+    "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+    "generation_config.json": "835fffe355c9438e7a25be099b3fccaa98350b83451f9fd2d99512e74f1ade48",
+    "README.md": "7b17ce562d7ea121c86d2ffdf660eed3726ac5b52cacfa9f1de11a65969f5657",
+    "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+    "chat_template.jinja": "40c21f34cf67d8c760ef72f8ad3ae5afad514299d4b06e91dd9a8d705af7b541",
+    ".gitattributes": "34448b82c17d60fec9b65b1f093c115ddbaadc04beb1b0140b6bfed2e012a930",
+    "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910",
+    "model.safetensors.index.json": "388d811b8b7c2608dd04cce1bcb04a8bf715d19b42790894e6d3427ff429a777"
+  },
+  "exit_code": 0,
+  "wall_seconds": 22.266962291000027,
+  "peak_child_rss_bytes": 2530852864,
+  "artifacts": {
+    "artifacts/lora_piloto/adapters.safetensors": {
+      "sha256": "83d98600ac303238a352f31b53e6ed6dc4fd97d3b71f9bcd78fa1dc5d8fadff2",
+      "bytes": 7346007
+    },
+    "artifacts/lora_piloto/adapter_config.json": {
+      "sha256": "8f443e4e8ccc37546405b04a8134633244c4bc8c26a9f970173c4b8cd19b670e",
+      "bytes": 1125
+    },
+    "artifacts/lora_piloto/0000020_adapters.safetensors": {
+      "sha256": "342729a5e6fea9258408d3fdd1b1a5e55c6ba467ab11f6cb2a99af24bbe78953",
+      "bytes": 7346007
+    },
+    "artifacts/lora_piloto/0000040_adapters.safetensors": {
+      "sha256": "83d98600ac303238a352f31b53e6ed6dc4fd97d3b71f9bcd78fa1dc5d8fadff2",
+      "bytes": 7346007
+    }
+  },
+  "log_sha256": "e1a42f204290cbca3aa97f01ff974522fb11488aca8aeef68676e1b5572056af",
+  "training_events": [
+    {
+      "phase": "validation",
+      "iteration": 0,
+      "val_loss": 2.979583740234375,
+      "val_time": 1.1597131249998256
+    },
+    {
+      "phase": "train",
+      "iteration": 5,
+      "train_loss": 1.5689135551452638,
+      "learning_rate": 9.999999747378752e-05,
+      "iterations_per_second": 2.5645393025158607,
+      "tokens_per_second": 53.3424174923299,
+      "trained_tokens": 104,
+      "peak_memory": 3.090657504
+    },
+    {
+      "phase": "train",
+      "iteration": 10,
+      "train_loss": 0.6395538330078125,
+      "learning_rate": 9.999999747378752e-05,
+      "iterations_per_second": 2.4141957611653266,
+      "tokens_per_second": 44.90404115767508,
+      "trained_tokens": 197,
+      "peak_memory": 3.140269784
+    },
+    {
+      "phase": "train",
+      "iteration": 15,
+      "train_loss": 0.7202708721160889,
+      "learning_rate": 9.999999747378752e-05,
+      "iterations_per_second": 2.344241649376432,
+      "tokens_per_second": 37.50786639002291,
+      "trained_tokens": 277,
+      "peak_memory": 3.140269784
+    },
+    {
+      "phase": "validation",
+      "iteration": 19,
+      "val_loss": 0.6535590887069702,
+      "val_time": 1.1033573330000763
+    },
+    {
+      "phase": "train",
+      "iteration": 20,
+      "train_loss": 0.5199320793151856,
+      "learning_rate": 9.999999747378752e-05,
+      "iterations_per_second": 2.426604564070923,
+      "tokens_per_second": 54.84126314800286,
+      "trained_tokens": 390,
+      "peak_memory": 3.14028446
+    },
+    {
+      "phase": "train",
+      "iteration": 25,
+      "train_loss": 0.36641511917114256,
+      "learning_rate": 9.999999747378752e-05,
+      "iterations_per_second": 2.4578323528524453,
+      "tokens_per_second": 41.78314999849157,
+      "trained_tokens": 475,
+      "peak_memory": 3.14028446
+    },
+    {
+      "phase": "train",
+      "iteration": 30,
+      "train_loss": 0.24725184440612794,
+      "learning_rate": 9.999999747378752e-05,
+      "iterations_per_second": 2.2346767371425558,
+      "tokens_per_second": 49.609823564564735,
+      "trained_tokens": 586,
+      "peak_memory": 3.299172089
+    },
+    {
+      "phase": "train",
+      "iteration": 35,
+      "train_loss": 0.7116989135742188,
+      "learning_rate": 9.999999747378752e-05,
+      "iterations_per_second": 2.3093327774037187,
+      "tokens_per_second": 45.72478899259363,
+      "trained_tokens": 685,
+      "peak_memory": 3.299172089
+    },
+    {
+      "phase": "validation",
+      "iteration": 39,
+      "val_loss": 0.510434627532959,
+      "val_time": 1.2138958330001515
+    },
+    {
+      "phase": "train",
+      "iteration": 40,
+      "train_loss": 0.6199201107025146,
+      "learning_rate": 9.999999747378752e-05,
+      "iterations_per_second": 2.4154943317747826,
+      "tokens_per_second": 53.62397416540017,
+      "trained_tokens": 796,
+      "peak_memory": 3.299172089
+    }
+  ],
+  "peak_mlx_allocated_gb": 3.299172089,
+  "training_events_sha256": "0fa199c521ca7c11eb8972dcdb514783507157a21990f7df3e5b1b903dec6272",
+  "sanitizacao": {
+    "nota": "Em 22/11/2026, caminhos absolutos da máquina de execução foram substituídos por \"<projeto>\" (raiz do pacote) e \"~/.cache/huggingface\". Apenas texto de caminho mudou; os hashes dos arquivos alterados foram recalculados e os originais estão em \"hashes_originais\". Adaptadores (.safetensors), métricas, eventos e previsões não foram alterados.",
+    "hashes_originais": {
+      "treinamento.log": "3182ce284be6b69764a0db858615b4d8759397231c3b56f1f0f5227f093e1930",
+      "artifacts/lora_piloto/adapter_config.json": "5f166174782d2269ed4255321de20f3cba96875d34a5381ed10844120fb614db"
+    }
+  }
+}

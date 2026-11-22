@@ -1,0 +1,11 @@
+{"phase": "validation", "iteration": 0, "val_loss": 5.929853439331055, "val_time": 2.0971192079998673}
+{"phase": "train", "iteration": 5, "train_loss": 3.401985931396484, "learning_rate": 9.999999747378752e-05, "iterations_per_second": 0.8035353466058822, "tokens_per_second": 19.92767659582588, "trained_tokens": 124, "peak_memory": 3.09072304}
+{"phase": "train", "iteration": 10, "train_loss": 1.6296232223510743, "learning_rate": 9.999999747378752e-05, "iterations_per_second": 2.369175464685568, "tokens_per_second": 53.54336550189383, "trained_tokens": 237, "peak_memory": 3.140251352}
+{"phase": "train", "iteration": 15, "train_loss": 1.3152544021606445, "learning_rate": 9.999999747378752e-05, "iterations_per_second": 2.2001269999548736, "tokens_per_second": 44.00253999909747, "trained_tokens": 337, "peak_memory": 3.140251352}
+{"phase": "validation", "iteration": 19, "val_loss": 0.8206689953804016, "val_time": 1.0869521250001526}
+{"phase": "train", "iteration": 20, "train_loss": 0.6838858127593994, "learning_rate": 9.999999747378752e-05, "iterations_per_second": 2.4374267853964833, "tokens_per_second": 64.83555249154645, "trained_tokens": 470, "peak_memory": 3.140300802}
+{"phase": "train", "iteration": 25, "train_loss": 0.8190369606018066, "learning_rate": 9.999999747378752e-05, "iterations_per_second": 2.4749265696588045, "tokens_per_second": 51.97345796283489, "trained_tokens": 575, "peak_memory": 3.140300802}
+{"phase": "train", "iteration": 30, "train_loss": 0.41931543350219724, "learning_rate": 9.999999747378752e-05, "iterations_per_second": 2.083228412402084, "tokens_per_second": 54.580584404934605, "trained_tokens": 706, "peak_memory": 3.299172047}
+{"phase": "train", "iteration": 35, "train_loss": 0.6298181533813476, "learning_rate": 9.999999747378752e-05, "iterations_per_second": 2.067692032278196, "tokens_per_second": 49.211070368221066, "trained_tokens": 825, "peak_memory": 3.299172047}
+{"phase": "validation", "iteration": 39, "val_loss": 0.45016059279441833, "val_time": 1.214566958999967}
+{"phase": "train", "iteration": 40, "train_loss": 0.6708118915557861, "learning_rate": 9.999999747378752e-05, "iterations_per_second": 2.381322242253236, "tokens_per_second": 62.39064274703479, "trained_tokens": 956, "peak_memory": 3.299172047}

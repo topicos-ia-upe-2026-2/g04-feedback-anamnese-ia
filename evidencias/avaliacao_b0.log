@@ -1,0 +1,45 @@
+b0 1/24 valid=True 0.01s
+b0 2/24 valid=True 0.00s
+b0 3/24 valid=True 0.00s
+b0 4/24 valid=True 0.00s
+b0 5/24 valid=True 0.00s
+b0 6/24 valid=True 0.00s
+b0 7/24 valid=True 0.00s
+b0 8/24 valid=True 0.00s
+b0 9/24 valid=True 0.00s
+b0 10/24 valid=True 0.00s
+b0 11/24 valid=True 0.00s
+b0 12/24 valid=True 0.00s
+b0 13/24 valid=True 0.00s
+b0 14/24 valid=True 0.00s
+b0 15/24 valid=True 0.00s
+b0 16/24 valid=True 0.00s
+b0 17/24 valid=True 0.00s
+b0 18/24 valid=True 0.00s
+b0 19/24 valid=True 0.00s
+b0 20/24 valid=True 0.00s
+b0 21/24 valid=True 0.00s
+b0 22/24 valid=True 0.00s
+b0 23/24 valid=True 0.00s
+b0 24/24 valid=True 0.00s
+{
+  "variant": "b0",
+  "n": 24,
+  "json_schema_valid_rate": 1.0,
+  "act_micro": {
+    "tp": 1,
+    "fp": 12,
+    "fn": 19,
+    "precision": 0.07692307692307693,
+    "recall": 0.05,
+    "f1": 0.060606060606060615
+  },
+  "slot_value_micro": {
+    "tp": 2,
+    "fp": 11,
+    "fn": 18,
+    "precision": 0.15384615384615385,
+    "recall": 0.1,
+    "f1": 0.12121212121212123
+  }
+}

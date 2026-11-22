@@ -1,0 +1,263 @@
+{
+  "n": 24,
+  "invalid_outputs": 24,
+  "json_schema_valid_rate": 0.0,
+  "act_micro": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 20,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "slot_value_micro": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 20,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "attribute_micro": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 10,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "per_slot": {
+    "exposure": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "habit": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "medical history": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 3,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "residence": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "symptom": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 11,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "travel": {
+      "tp": 0,
+      "fp": 0,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "macro_slots": [
+    "exposure",
+    "habit",
+    "medical history",
+    "residence",
+    "symptom",
+    "travel"
+  ],
+  "macro_convention": "Mean over gold-supported slots, fixed across systems; zero_division=0",
+  "slot_value_macro_f1": 0.0,
+  "exact_turn_accuracy": 0.0,
+  "variant": "lora",
+  "created_utc": "2026-11-03T22:56:02.316902+00:00",
+  "holdout_sha256": "1699057205767186c67020b5dd682c79d0c1305140cac921cd16c756c3725283",
+  "predictions_sha256": "463fa38c0854dab40d9dbf30dc7f88b4265d49a1d989c3a238350e9f5f3aa75b",
+  "load_seconds": 1.328807124999912,
+  "total_seconds": 11.23242725,
+  "peak_process_rss_bytes": 2624389120,
+  "latency_seconds": {
+    "mean": 0.412456314208337,
+    "min": 0.3690575830000853,
+    "max": 0.5555131250000613
+  },
+  "decoding": {
+    "temperature": 0,
+    "max_tokens": 192,
+    "seed": 42
+  },
+  "metric_definition": "Exact micro sets per turn: act=(slot,value,sorted attributes); slot_value=(slot,value); attribute=(slot,value,attribute). Casefold/whitespace only. Invalid JSON contributes gold FN. Not the original paper metric.",
+  "label_budget": "B0 vocabulary from all training rows; LoRA pilot subset256/40steps. This comparison does not equalize annotation budget.",
+  "per_sample": [
+    {
+      "sample_id": "208:59",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.49171054199996433
+    },
+    {
+      "sample_id": "105:96",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.37678154200011704
+    },
+    {
+      "sample_id": "123:6",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.4110663750000185
+    },
+    {
+      "sample_id": "616:72",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.40079583399983676
+    },
+    {
+      "sample_id": "427:34",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.3981452499999705
+    },
+    {
+      "sample_id": "616:92",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.45409729099992546
+    },
+    {
+      "sample_id": "222:72",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.4045688329999848
+    },
+    {
+      "sample_id": "217:28",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.3690575830000853
+    },
+    {
+      "sample_id": "427:16",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.38028825000014876
+    },
+    {
+      "sample_id": "427:12",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.39023970899984306
+    },
+    {
+      "sample_id": "214:54",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.4032033329999649
+    },
+    {
+      "sample_id": "228:6",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.4041261250001753
+    },
+    {
+      "sample_id": "1011:60",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.3947918329999993
+    },
+    {
+      "sample_id": "211:42",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.39033358300002874
+    },
+    {
+      "sample_id": "120:44",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.39269679199992424
+    },
+    {
+      "sample_id": "208:67",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.39683320800008914
+    },
+    {
+      "sample_id": "508:76",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.38819100000000617
+    },
+    {
+      "sample_id": "508:74",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.4324464999999691
+    },
+    {
+      "sample_id": "120:124",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.4576600420000432
+    },
+    {
+      "sample_id": "105:62",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.4072937920000186
+    },
+    {
+      "sample_id": "217:58",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.3880986659999053
+    },
+    {
+      "sample_id": "1011:104",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.5555131250000613
+    },
+    {
+      "sample_id": "1011:12",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.3996293330001208
+    },
+    {
+      "sample_id": "228:4",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 0.41138299999988703
+    }
+  ],
+  "peak_mlx_allocated_bytes": 3081576414,
+  "model_id": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "model_sha256": "2a73c6c248601ab904e035548abd8e6abb65ea27dcb5f342fb0a8910eb44173f",
+  "adapter_sha256": "f689436985b2847c359aaf7705642e8d54a0b6ad378dd0c33619bfaf6c7e88c0",
+  "source_evaluate_sha256": "96a83319f66abbab742735626f11c2f13351063fec4f4dc57a162f681ad9220d",
+  "provenance_observed_utc": "2026-11-03T22:56:51.896461+00:00",
+  "provenance_note": "Metadata appended after execution, with source and artifact hash checks. Weights and evaluator were not modified between these runs. Predictions unchanged."
+}
