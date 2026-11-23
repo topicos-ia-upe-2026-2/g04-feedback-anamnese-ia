@@ -1,7 +1,2 @@
 # Dependências do projeto — atualizar conforme a etapa
-# Exemplos (remover o que não usar):
-# torch
-# transformers
-# datasets
-# scikit-learn
-# streamlit
+# E1: apenas documentação; nenhuma dependência.
