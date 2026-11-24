@@ -1,0 +1,47 @@
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 13 files: 100%|██████████| 13/13 [05:39<00:00, 26.09s/it]Fetching 13 files: 100%|██████████| 13/13 [05:39<00:00, 26.09s/it]
+b1 1/24 valid=False 2.12s
+b1 2/24 valid=True 1.42s
+b1 3/24 valid=True 1.27s
+b1 4/24 valid=True 0.75s
+b1 5/24 valid=True 1.25s
+b1 6/24 valid=False 4.17s
+b1 7/24 valid=True 1.49s
+b1 8/24 valid=True 1.96s
+b1 9/24 valid=False 1.53s
+b1 10/24 valid=False 1.96s
+b1 11/24 valid=True 0.84s
+b1 12/24 valid=True 2.02s
+b1 13/24 valid=True 1.00s
+b1 14/24 valid=True 0.72s
+b1 15/24 valid=False 1.25s
+b1 16/24 valid=True 3.57s
+b1 17/24 valid=True 0.96s
+b1 18/24 valid=True 1.01s
+b1 19/24 valid=True 0.36s
+b1 20/24 valid=False 1.36s
+b1 21/24 valid=True 0.82s
+b1 22/24 valid=True 0.44s
+b1 23/24 valid=True 1.08s
+b1 24/24 valid=True 2.01s
+{
+  "variant": "b1",
+  "n": 24,
+  "json_schema_valid_rate": 0.75,
+  "act_micro": {
+    "tp": 0,
+    "fp": 21,
+    "fn": 20,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "slot_value_micro": {
+    "tp": 2,
+    "fp": 19,
+    "fn": 18,
+    "precision": 0.09523809523809523,
+    "recall": 0.1,
+    "f1": 0.0975609756097561
+  }
+}

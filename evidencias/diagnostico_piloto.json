@@ -1,0 +1,13 @@
+{
+  "experiment": "02 official non-thinking chat template",
+  "n_holdout": 24,
+  "empty_predictions": 24,
+  "nonempty_gold_turns": 20,
+  "inquire_gold_acts": 20,
+  "interpretation": "No extraction gain. All predictions empty despite valid JSON. Pilot is not ready for coverage or omission feedback.",
+  "train_ids_unchanged_from_experiment_01": true,
+  "hyperparameters_unchanged": true,
+  "holdout_blind": false,
+  "observed_template_failure_first_run": true,
+  "loss_reduction_is_not_task_improvement": true
+}

@@ -1,2 +1,6 @@
 # Dependências do projeto — atualizar conforme a etapa
-# E1: apenas documentação; nenhuma dependência.
+# E2: o experimento roda em macOS com Apple Silicon (MLX/Metal) e Python 3.12.
+# A lista exata, resolvida no ambiente da execução registrada, está em src/requirements-ml.txt:
+#   uv venv --python 3.12 .venv
+#   uv pip install --python .venv/bin/python -r src/requirements-ml.txt
+# Este arquivo fica sem pacotes porque a CI (Ubuntu) só compila a sintaxe de src/ e o MLX-Metal não instala em Linux.

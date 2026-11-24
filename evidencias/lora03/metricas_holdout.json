@@ -1,0 +1,269 @@
+{
+  "n": 24,
+  "invalid_outputs": 0,
+  "json_schema_valid_rate": 1.0,
+  "act_micro": {
+    "tp": 3,
+    "fp": 19,
+    "fn": 17,
+    "precision": 0.13636363636363635,
+    "recall": 0.15,
+    "f1": 0.14285714285714282
+  },
+  "slot_value_micro": {
+    "tp": 5,
+    "fp": 17,
+    "fn": 15,
+    "precision": 0.22727272727272727,
+    "recall": 0.25,
+    "f1": 0.23809523809523808
+  },
+  "attribute_micro": {
+    "tp": 0,
+    "fp": 1,
+    "fn": 10,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "per_slot": {
+    "exposure": {
+      "tp": 1,
+      "fp": 0,
+      "fn": 0,
+      "precision": 1.0,
+      "recall": 1.0,
+      "f1": 1.0
+    },
+    "family history": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "habit": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "medical history": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 3,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "residence": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "symptom": {
+      "tp": 4,
+      "fp": 9,
+      "fn": 7,
+      "precision": 0.3076923076923077,
+      "recall": 0.36363636363636365,
+      "f1": 0.33333333333333337
+    },
+    "travel": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "macro_slots": [
+    "exposure",
+    "habit",
+    "medical history",
+    "residence",
+    "symptom",
+    "travel"
+  ],
+  "macro_convention": "Mean over gold-supported slots, fixed across systems; zero_division=0",
+  "slot_value_macro_f1": 0.22222222222222224,
+  "exact_turn_accuracy": 0.25,
+  "variant": "lora",
+  "tag": "holdout",
+  "adapter": "artifacts/lora03/melhor",
+  "rows_file": "data/prepared/holdout_rows.jsonl",
+  "created_utc": "2026-11-22T21:34:27.860209+00:00",
+  "holdout_sha256": "1699057205767186c67020b5dd682c79d0c1305140cac921cd16c756c3725283",
+  "rows_sha256": "1699057205767186c67020b5dd682c79d0c1305140cac921cd16c756c3725283",
+  "predictions_sha256": "59013f8919e97e75ae9a021460c053dc4313ba0fb019beb3d7ad3bfba27930cf",
+  "empty_predictions": 3,
+  "load_seconds": 1.3682187090016669,
+  "total_seconds": 44.81248429200059,
+  "peak_process_rss_bytes": 2640101376,
+  "latency_seconds": {
+    "mean": 1.8100953820412542,
+    "min": 1.2595684160041856,
+    "max": 2.2864797090005595
+  },
+  "decoding": {
+    "temperature": 0,
+    "max_tokens": 192,
+    "seed": 42
+  },
+  "metric_definition": "Exact micro sets per turn: act=(slot,value,sorted attributes); slot_value=(slot,value); attribute=(slot,value,attribute). Casefold/whitespace only. Invalid JSON contributes gold FN. Not the original paper metric.",
+  "label_budget": "B0 vocabulary from all training rows; LoRA pilot subset256/40steps. This comparison does not equalize annotation budget.",
+  "per_sample": [
+    {
+      "sample_id": "208:59",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7011781249966589
+    },
+    {
+      "sample_id": "105:96",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6201049589944887
+    },
+    {
+      "sample_id": "123:6",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9701499170041643
+    },
+    {
+      "sample_id": "616:72",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7244940829987172
+    },
+    {
+      "sample_id": "427:34",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8769346659973962
+    },
+    {
+      "sample_id": "616:92",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2864797090005595
+    },
+    {
+      "sample_id": "222:72",
+      "valid": true,
+      "error": null,
+      "seconds": 1.2595684160041856
+    },
+    {
+      "sample_id": "217:28",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6803020420047687
+    },
+    {
+      "sample_id": "427:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1787558750002063
+    },
+    {
+      "sample_id": "427:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0701960419974057
+    },
+    {
+      "sample_id": "214:54",
+      "valid": true,
+      "error": null,
+      "seconds": 1.823015875001147
+    },
+    {
+      "sample_id": "228:6",
+      "valid": true,
+      "error": null,
+      "seconds": 1.930709583000862
+    },
+    {
+      "sample_id": "1011:60",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6476739589998033
+    },
+    {
+      "sample_id": "211:42",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6354857920014183
+    },
+    {
+      "sample_id": "120:44",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7177745419976418
+    },
+    {
+      "sample_id": "208:67",
+      "valid": true,
+      "error": null,
+      "seconds": 2.051024000000325
+    },
+    {
+      "sample_id": "508:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7598652500018943
+    },
+    {
+      "sample_id": "508:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0067530829983298
+    },
+    {
+      "sample_id": "120:124",
+      "valid": true,
+      "error": null,
+      "seconds": 1.5422215840007993
+    },
+    {
+      "sample_id": "105:62",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7306869169988204
+    },
+    {
+      "sample_id": "217:58",
+      "valid": true,
+      "error": null,
+      "seconds": 1.5416351669991855
+    },
+    {
+      "sample_id": "1011:104",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2347889999946347
+    },
+    {
+      "sample_id": "1011:12",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6374942909969832
+    },
+    {
+      "sample_id": "228:4",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8149962919997051
+    }
+  ],
+  "peak_mlx_allocated_bytes": 3087130526
+}

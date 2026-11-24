@@ -1,0 +1,39 @@
+................F.                                                       [100%]
+=================================== FAILURES ===================================
+____ test_real_tokenizer_supervised_target_is_json_without_hidden_reasoning ____
+
+    def test_real_tokenizer_supervised_target_is_json_without_hidden_reasoning():
+        from huggingface_hub import try_to_load_from_cache
+        from transformers import AutoTokenizer
+    
+        model = importlib.import_module('motor.model')
+        cached = try_to_load_from_cache(model.MODEL_ID, 'tokenizer_config.json', revision=model.MODEL_REVISION)
+        if not isinstance(cached, str):
+            pytest.skip('Integration test requires the pinned tokenizer in local HF cache')
+        from pathlib import Path
+        tokenizer = AutoTokenizer.from_pretrained(str(Path(cached).parent), local_files_only=True)
+        messages = model.build_messages('Do you smoke?')
+        original_prefix = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_dict=False)
+        if hasattr(model, 'configure_tokenizer'):
+            model.configure_tokenizer(tokenizer)
+        prefix = tokenizer.apply_chat_template(messages, add_generation_prompt=True, return_dict=False)
+        full = tokenizer.apply_chat_template(messages + [{'role': 'assistant', 'content': '[]'}], return_dict=False)
+        assert prefix == original_prefix
+        assert full[:len(prefix)] == prefix
+        continuation = tokenizer.decode(full[len(prefix):])
+>       assert '<think>' not in continuation
+E       AssertionError: assert '<think>' not in '<think>\n\n...<|im_end|>\n'
+E         
+E         '<think>' is contained here:
+E           <think>
+E           
+E           </think>
+E           
+E           []<|im_end|>
+
+docs/projeto_IA/etapa_2/codigo/tests/test_data_model.py:152: AssertionError
+----------------------------- Captured stderr call -----------------------------
+[transformers] PyTorch was not found. Models won't be available and only tokenizers, configuration and file/data utilities can be used.
+=========================== short test summary info ============================
+FAILED docs/projeto_IA/etapa_2/codigo/tests/test_data_model.py::test_real_tokenizer_supervised_target_is_json_without_hidden_reasoning
+1 failed, 17 passed in 0.60s

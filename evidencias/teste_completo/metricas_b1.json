@@ -1,0 +1,6264 @@
+{
+  "n": 1014,
+  "invalid_outputs": 127,
+  "json_schema_valid_rate": 0.8747534516765286,
+  "act_micro": {
+    "tp": 2,
+    "fp": 989,
+    "fn": 919,
+    "precision": 0.0020181634712411706,
+    "recall": 0.002171552660152009,
+    "f1": 0.002092050209205021
+  },
+  "slot_value_micro": {
+    "tp": 119,
+    "fp": 871,
+    "fn": 802,
+    "precision": 0.1202020202020202,
+    "recall": 0.12920738327904452,
+    "f1": 0.12454212454212454
+  },
+  "attribute_micro": {
+    "tp": 31,
+    "fp": 5937,
+    "fn": 179,
+    "precision": 0.0051943699731903485,
+    "recall": 0.14761904761904762,
+    "f1": 0.010035610229847848
+  },
+  "per_slot": {
+    "basic information": {
+      "tp": 0,
+      "fp": 22,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "exposure": {
+      "tp": 2,
+      "fp": 48,
+      "fn": 39,
+      "precision": 0.04,
+      "recall": 0.04878048780487805,
+      "f1": 0.043956043956043966
+    },
+    "family history": {
+      "tp": 4,
+      "fp": 52,
+      "fn": 42,
+      "precision": 0.07142857142857142,
+      "recall": 0.08695652173913043,
+      "f1": 0.0784313725490196
+    },
+    "habit": {
+      "tp": 24,
+      "fp": 85,
+      "fn": 52,
+      "precision": 0.22018348623853212,
+      "recall": 0.3157894736842105,
+      "f1": 0.2594594594594595
+    },
+    "medical history": {
+      "tp": 6,
+      "fp": 69,
+      "fn": 125,
+      "precision": 0.08,
+      "recall": 0.04580152671755725,
+      "f1": 0.058252427184466014
+    },
+    "medical test": {
+      "tp": 0,
+      "fp": 7,
+      "fn": 9,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "medication": {
+      "tp": 6,
+      "fp": 57,
+      "fn": 41,
+      "precision": 0.09523809523809523,
+      "recall": 0.1276595744680851,
+      "f1": 0.10909090909090909
+    },
+    "occupation": {
+      "tp": 0,
+      "fp": 10,
+      "fn": 6,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "other": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 5,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "residence": {
+      "tp": 1,
+      "fp": 39,
+      "fn": 21,
+      "precision": 0.025,
+      "recall": 0.045454545454545456,
+      "f1": 0.03225806451612903
+    },
+    "symptom": {
+      "tp": 76,
+      "fp": 450,
+      "fn": 422,
+      "precision": 0.1444866920152091,
+      "recall": 0.15261044176706828,
+      "f1": 0.1484375
+    },
+    "symptom (dermatology)": {
+      "tp": 0,
+      "fp": 12,
+      "fn": 20,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "travel": {
+      "tp": 0,
+      "fp": 19,
+      "fn": 19,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "macro_slots": [
+    "basic information",
+    "exposure",
+    "family history",
+    "habit",
+    "medical history",
+    "medical test",
+    "medication",
+    "occupation",
+    "other",
+    "residence",
+    "symptom",
+    "symptom (dermatology)",
+    "travel"
+  ],
+  "macro_convention": "Mean over gold-supported slots, fixed across systems; zero_division=0",
+  "slot_value_macro_f1": 0.056145059750463626,
+  "exact_turn_accuracy": 0.046351084812623275,
+  "variant": "b1",
+  "tag": "b1",
+  "adapter": null,
+  "rows_file": "data/prepared/test_rows.jsonl",
+  "created_utc": "2026-11-22T23:53:58.148979+00:00",
+  "holdout_sha256": null,
+  "rows_sha256": "882818ea2ba4c9add25afba973bf8e4b51653749b70be9b65f7940ca5efc5553",
+  "predictions_sha256": "e0110e4ac409875545b2b893a39a5b399c0096af0512c0ffa0d12ebf73185e08",
+  "empty_predictions": 46,
+  "load_seconds": 2.5994898329954594,
+  "total_seconds": 2834.376803416999,
+  "peak_process_rss_bytes": 2639396864,
+  "latency_seconds": {
+    "mean": 2.7925481742771936,
+    "min": 0.7944297090070904,
+    "max": 10.100970416002383
+  },
+  "decoding": {
+    "temperature": 0,
+    "max_tokens": 192,
+    "seed": 42
+  },
+  "metric_definition": "Exact micro sets per turn: act=(slot,value,sorted attributes); slot_value=(slot,value); attribute=(slot,value,attribute). Casefold/whitespace only. Invalid JSON contributes gold FN. Not the original paper metric.",
+  "label_budget": "B0 vocabulary from all training rows; LoRA pilot subset256/40steps. This comparison does not equalize annotation budget.",
+  "per_sample": [
+    {
+      "sample_id": "1010:0",
+      "valid": true,
+      "error": null,
+      "seconds": 0.7944297090070904
+    },
+    {
+      "sample_id": "1010:2",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.896400415993412
+    },
+    {
+      "sample_id": "1010:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3431885419995524
+    },
+    {
+      "sample_id": "1010:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2960530420023133
+    },
+    {
+      "sample_id": "1010:8",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.715632917002949
+    },
+    {
+      "sample_id": "1010:10",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.657390708998719
+    },
+    {
+      "sample_id": "1010:12",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0655281669969554
+    },
+    {
+      "sample_id": "1010:14",
+      "valid": true,
+      "error": null,
+      "seconds": 4.140054083996802
+    },
+    {
+      "sample_id": "1010:16",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.953556041997217
+    },
+    {
+      "sample_id": "1010:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.953298333006387
+    },
+    {
+      "sample_id": "1010:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.835915499999828
+    },
+    {
+      "sample_id": "1010:22",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9577730419987347
+    },
+    {
+      "sample_id": "1010:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.693553458004317
+    },
+    {
+      "sample_id": "1010:26",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0466408749998664
+    },
+    {
+      "sample_id": "1010:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4597677499987185
+    },
+    {
+      "sample_id": "1010:30",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.6939569160022074
+    },
+    {
+      "sample_id": "1010:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.946274000001722
+    },
+    {
+      "sample_id": "1010:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.295060750002449
+    },
+    {
+      "sample_id": "1010:36",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.6557029169998714
+    },
+    {
+      "sample_id": "1010:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5712162499985425
+    },
+    {
+      "sample_id": "1010:40",
+      "valid": true,
+      "error": null,
+      "seconds": 3.4794479999982286
+    },
+    {
+      "sample_id": "1010:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.518754666001769
+    },
+    {
+      "sample_id": "1010:44",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3688173330010613
+    },
+    {
+      "sample_id": "1010:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.699729500003741
+    },
+    {
+      "sample_id": "1010:48",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0321707089970005
+    },
+    {
+      "sample_id": "1010:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.410765916996752
+    },
+    {
+      "sample_id": "1010:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.712923792001675
+    },
+    {
+      "sample_id": "1010:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.8538265419992968
+    },
+    {
+      "sample_id": "1010:56",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3993549999941024
+    },
+    {
+      "sample_id": "1010:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.752912208001362
+    },
+    {
+      "sample_id": "1010:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.586652875004802
+    },
+    {
+      "sample_id": "1010:62",
+      "valid": true,
+      "error": null,
+      "seconds": 3.447139416995924
+    },
+    {
+      "sample_id": "1010:64",
+      "valid": true,
+      "error": null,
+      "seconds": 4.087523499998497
+    },
+    {
+      "sample_id": "1010:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9334095410013106
+    },
+    {
+      "sample_id": "1010:68",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 2.7648102919993107
+    },
+    {
+      "sample_id": "1010:70",
+      "valid": true,
+      "error": null,
+      "seconds": 3.072540375003882
+    },
+    {
+      "sample_id": "1010:72",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.911100458994042
+    },
+    {
+      "sample_id": "1010:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1825150419972488
+    },
+    {
+      "sample_id": "1010:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9920444999952451
+    },
+    {
+      "sample_id": "1010:78",
+      "valid": true,
+      "error": null,
+      "seconds": 2.008763000005274
+    },
+    {
+      "sample_id": "1010:80",
+      "valid": true,
+      "error": null,
+      "seconds": 2.322721750002529
+    },
+    {
+      "sample_id": "1010:82",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9420600420053233
+    },
+    {
+      "sample_id": "1010:84",
+      "valid": true,
+      "error": null,
+      "seconds": 1.944512208996457
+    },
+    {
+      "sample_id": "1010:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5981801669986453
+    },
+    {
+      "sample_id": "1010:88",
+      "valid": true,
+      "error": null,
+      "seconds": 4.081696125002054
+    },
+    {
+      "sample_id": "1010:90",
+      "valid": true,
+      "error": null,
+      "seconds": 4.301251749995572
+    },
+    {
+      "sample_id": "1010:92",
+      "valid": true,
+      "error": null,
+      "seconds": 2.207793749999837
+    },
+    {
+      "sample_id": "1010:94",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8638250000003609
+    },
+    {
+      "sample_id": "1011:0",
+      "valid": true,
+      "error": null,
+      "seconds": 3.5261469580000266
+    },
+    {
+      "sample_id": "1011:2",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.910553082998376
+    },
+    {
+      "sample_id": "1011:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4753072500025155
+    },
+    {
+      "sample_id": "1011:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3875521250010934
+    },
+    {
+      "sample_id": "1011:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.687581541998952
+    },
+    {
+      "sample_id": "1011:10",
+      "valid": true,
+      "error": null,
+      "seconds": 5.2723327499988955
+    },
+    {
+      "sample_id": "1011:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.497980499996629
+    },
+    {
+      "sample_id": "1011:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0401997919980204
+    },
+    {
+      "sample_id": "1011:16",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.5072864169997047
+    },
+    {
+      "sample_id": "1011:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.507908415995189
+    },
+    {
+      "sample_id": "1011:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3121787499985658
+    },
+    {
+      "sample_id": "1011:22",
+      "valid": true,
+      "error": null,
+      "seconds": 2.741854332998628
+    },
+    {
+      "sample_id": "1011:24",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8841064170046593
+    },
+    {
+      "sample_id": "1011:26",
+      "valid": true,
+      "error": null,
+      "seconds": 1.962064792001911
+    },
+    {
+      "sample_id": "1011:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7367737500026124
+    },
+    {
+      "sample_id": "1011:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.8167935829987982
+    },
+    {
+      "sample_id": "1011:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1506761249984265
+    },
+    {
+      "sample_id": "1011:34",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3652182080040802
+    },
+    {
+      "sample_id": "1011:36",
+      "valid": true,
+      "error": null,
+      "seconds": 2.097724749997724
+    },
+    {
+      "sample_id": "1011:38",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2936435410010745
+    },
+    {
+      "sample_id": "1011:40",
+      "valid": true,
+      "error": null,
+      "seconds": 3.955694709002273
+    },
+    {
+      "sample_id": "1011:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6822235840008943
+    },
+    {
+      "sample_id": "1011:44",
+      "valid": true,
+      "error": null,
+      "seconds": 2.405007082998054
+    },
+    {
+      "sample_id": "1011:46",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.6371987080055987
+    },
+    {
+      "sample_id": "1011:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.8190864589996636
+    },
+    {
+      "sample_id": "1011:50",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.265285250003217
+    },
+    {
+      "sample_id": "1011:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.548361000001023
+    },
+    {
+      "sample_id": "1011:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.544032707999577
+    },
+    {
+      "sample_id": "1011:56",
+      "valid": true,
+      "error": null,
+      "seconds": 2.88765208300174
+    },
+    {
+      "sample_id": "1011:58",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.6902689580019796
+    },
+    {
+      "sample_id": "1011:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2110310420030146
+    },
+    {
+      "sample_id": "1011:62",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3615114579952206
+    },
+    {
+      "sample_id": "1011:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3894581249987823
+    },
+    {
+      "sample_id": "1011:66",
+      "valid": true,
+      "error": null,
+      "seconds": 4.6325707500000135
+    },
+    {
+      "sample_id": "1011:68",
+      "valid": true,
+      "error": null,
+      "seconds": 4.200995958999556
+    },
+    {
+      "sample_id": "1011:70",
+      "valid": true,
+      "error": null,
+      "seconds": 3.5443569160051993
+    },
+    {
+      "sample_id": "1011:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3472059589985292
+    },
+    {
+      "sample_id": "1011:74",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2589307090020156
+    },
+    {
+      "sample_id": "1011:76",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7101549169965438
+    },
+    {
+      "sample_id": "1011:78",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7586450410017278
+    },
+    {
+      "sample_id": "1011:80",
+      "valid": true,
+      "error": null,
+      "seconds": 2.145697290994576
+    },
+    {
+      "sample_id": "1011:82",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9249963749971357
+    },
+    {
+      "sample_id": "1011:84",
+      "valid": true,
+      "error": null,
+      "seconds": 4.000328916998114
+    },
+    {
+      "sample_id": "1011:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6725973330030683
+    },
+    {
+      "sample_id": "1011:88",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6383607079987996
+    },
+    {
+      "sample_id": "1011:90",
+      "valid": true,
+      "error": null,
+      "seconds": 2.32049129200459
+    },
+    {
+      "sample_id": "1011:92",
+      "valid": true,
+      "error": null,
+      "seconds": 2.091449207997357
+    },
+    {
+      "sample_id": "1011:94",
+      "valid": true,
+      "error": null,
+      "seconds": 2.277401125000324
+    },
+    {
+      "sample_id": "1011:96",
+      "valid": true,
+      "error": null,
+      "seconds": 2.446589375002077
+    },
+    {
+      "sample_id": "1011:98",
+      "valid": true,
+      "error": null,
+      "seconds": 2.419226209000044
+    },
+    {
+      "sample_id": "1011:100",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1200055410008645
+    },
+    {
+      "sample_id": "1011:102",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 7.306571415996586
+    },
+    {
+      "sample_id": "1011:104",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4453116250006133
+    },
+    {
+      "sample_id": "1011:106",
+      "valid": true,
+      "error": null,
+      "seconds": 1.0548131660034414
+    },
+    {
+      "sample_id": "105:0",
+      "valid": true,
+      "error": null,
+      "seconds": 3.4996144579999964
+    },
+    {
+      "sample_id": "105:2",
+      "valid": true,
+      "error": null,
+      "seconds": 4.10786250000092
+    },
+    {
+      "sample_id": "105:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.541974542000389
+    },
+    {
+      "sample_id": "105:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.435162957997818
+    },
+    {
+      "sample_id": "105:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.645215417003783
+    },
+    {
+      "sample_id": "105:10",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3116437080025207
+    },
+    {
+      "sample_id": "105:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.087127832994156
+    },
+    {
+      "sample_id": "105:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2767965829989407
+    },
+    {
+      "sample_id": "105:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7160828329942888
+    },
+    {
+      "sample_id": "105:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7810167080024257
+    },
+    {
+      "sample_id": "105:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.687756083003478
+    },
+    {
+      "sample_id": "105:22",
+      "valid": true,
+      "error": null,
+      "seconds": 2.414478041995608
+    },
+    {
+      "sample_id": "105:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9043732909995015
+    },
+    {
+      "sample_id": "105:26",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6940384170011384
+    },
+    {
+      "sample_id": "105:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.758168124993972
+    },
+    {
+      "sample_id": "105:30",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1068240419990616
+    },
+    {
+      "sample_id": "105:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.761693959000695
+    },
+    {
+      "sample_id": "105:34",
+      "valid": true,
+      "error": null,
+      "seconds": 3.184336792000977
+    },
+    {
+      "sample_id": "105:36",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.4777506249956787
+    },
+    {
+      "sample_id": "105:38",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.610068500005582
+    },
+    {
+      "sample_id": "105:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3316271669973503
+    },
+    {
+      "sample_id": "105:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5124958749947837
+    },
+    {
+      "sample_id": "105:44",
+      "valid": true,
+      "error": null,
+      "seconds": 2.378310499996587
+    },
+    {
+      "sample_id": "105:46",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3928048340021633
+    },
+    {
+      "sample_id": "105:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.982379041997774
+    },
+    {
+      "sample_id": "105:50",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.861542708000343
+    },
+    {
+      "sample_id": "105:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.926577874997747
+    },
+    {
+      "sample_id": "105:54",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.6901982499985024
+    },
+    {
+      "sample_id": "105:56",
+      "valid": true,
+      "error": null,
+      "seconds": 2.724646541995753
+    },
+    {
+      "sample_id": "105:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3670375410001725
+    },
+    {
+      "sample_id": "105:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5075889590007137
+    },
+    {
+      "sample_id": "105:62",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.6664280829936615
+    },
+    {
+      "sample_id": "105:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6971200420011883
+    },
+    {
+      "sample_id": "105:66",
+      "valid": true,
+      "error": null,
+      "seconds": 3.848682125004416
+    },
+    {
+      "sample_id": "105:68",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9531101250031497
+    },
+    {
+      "sample_id": "105:70",
+      "valid": true,
+      "error": null,
+      "seconds": 2.556771583003865
+    },
+    {
+      "sample_id": "105:72",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9841860829983489
+    },
+    {
+      "sample_id": "105:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0308635830006097
+    },
+    {
+      "sample_id": "105:76",
+      "valid": true,
+      "error": null,
+      "seconds": 2.169785582998884
+    },
+    {
+      "sample_id": "105:78",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6368044999981066
+    },
+    {
+      "sample_id": "105:80",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 1.899118790999637
+    },
+    {
+      "sample_id": "105:82",
+      "valid": true,
+      "error": null,
+      "seconds": 3.826082999999926
+    },
+    {
+      "sample_id": "105:84",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1181332080013817
+    },
+    {
+      "sample_id": "105:86",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9515073340007802
+    },
+    {
+      "sample_id": "105:88",
+      "valid": true,
+      "error": null,
+      "seconds": 3.269037958001718
+    },
+    {
+      "sample_id": "105:90",
+      "valid": true,
+      "error": null,
+      "seconds": 2.696507874999952
+    },
+    {
+      "sample_id": "105:92",
+      "valid": true,
+      "error": null,
+      "seconds": 2.545446042000549
+    },
+    {
+      "sample_id": "105:94",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5391420829982962
+    },
+    {
+      "sample_id": "105:96",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7894799999994575
+    },
+    {
+      "sample_id": "105:98",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4382720420035184
+    },
+    {
+      "sample_id": "105:100",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6248007909962325
+    },
+    {
+      "sample_id": "105:102",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6584435840049991
+    },
+    {
+      "sample_id": "105:104",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1820690410022507
+    },
+    {
+      "sample_id": "105:106",
+      "valid": true,
+      "error": null,
+      "seconds": 2.176120500000252
+    },
+    {
+      "sample_id": "105:108",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2411703750040033
+    },
+    {
+      "sample_id": "105:110",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2281389580020914
+    },
+    {
+      "sample_id": "120:0",
+      "valid": true,
+      "error": null,
+      "seconds": 3.5903068339976016
+    },
+    {
+      "sample_id": "120:2",
+      "valid": true,
+      "error": null,
+      "seconds": 3.605866874997446
+    },
+    {
+      "sample_id": "120:4",
+      "valid": true,
+      "error": null,
+      "seconds": 1.974319374996412
+    },
+    {
+      "sample_id": "120:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3597892920006416
+    },
+    {
+      "sample_id": "120:8",
+      "valid": true,
+      "error": null,
+      "seconds": 5.137968583003385
+    },
+    {
+      "sample_id": "120:10",
+      "valid": true,
+      "error": null,
+      "seconds": 2.544275000000198
+    },
+    {
+      "sample_id": "120:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5647752919976483
+    },
+    {
+      "sample_id": "120:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5455571670026984
+    },
+    {
+      "sample_id": "120:16",
+      "valid": true,
+      "error": null,
+      "seconds": 5.951689708999766
+    },
+    {
+      "sample_id": "120:18",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2404054579965305
+    },
+    {
+      "sample_id": "120:20",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.766781999998784
+    },
+    {
+      "sample_id": "120:22",
+      "valid": true,
+      "error": null,
+      "seconds": 3.4727693750028266
+    },
+    {
+      "sample_id": "120:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5558432920006453
+    },
+    {
+      "sample_id": "120:26",
+      "valid": true,
+      "error": null,
+      "seconds": 2.584930416000134
+    },
+    {
+      "sample_id": "120:28",
+      "valid": true,
+      "error": null,
+      "seconds": 3.8678862919987296
+    },
+    {
+      "sample_id": "120:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.920564583997475
+    },
+    {
+      "sample_id": "120:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.307868290998158
+    },
+    {
+      "sample_id": "120:34",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9680782920040656
+    },
+    {
+      "sample_id": "120:36",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5729565000001458
+    },
+    {
+      "sample_id": "120:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2693397920011193
+    },
+    {
+      "sample_id": "120:40",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.5411405420018127
+    },
+    {
+      "sample_id": "120:42",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2717110839948873
+    },
+    {
+      "sample_id": "120:44",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.976334416998725
+    },
+    {
+      "sample_id": "120:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1153736250053043
+    },
+    {
+      "sample_id": "120:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.89004891699733
+    },
+    {
+      "sample_id": "120:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.015033333998872
+    },
+    {
+      "sample_id": "120:52",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1658336670006975
+    },
+    {
+      "sample_id": "120:54",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1822326250039623
+    },
+    {
+      "sample_id": "120:56",
+      "valid": true,
+      "error": null,
+      "seconds": 3.205098583996005
+    },
+    {
+      "sample_id": "120:58",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.4471953329993994
+    },
+    {
+      "sample_id": "120:60",
+      "valid": true,
+      "error": null,
+      "seconds": 3.634031584006152
+    },
+    {
+      "sample_id": "120:62",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7918853749943082
+    },
+    {
+      "sample_id": "120:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4170640419979463
+    },
+    {
+      "sample_id": "120:66",
+      "valid": true,
+      "error": null,
+      "seconds": 3.7160789579938864
+    },
+    {
+      "sample_id": "120:68",
+      "valid": true,
+      "error": null,
+      "seconds": 4.1283370410019415
+    },
+    {
+      "sample_id": "120:70",
+      "valid": true,
+      "error": null,
+      "seconds": 3.6895447920032893
+    },
+    {
+      "sample_id": "120:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.782056541000202
+    },
+    {
+      "sample_id": "120:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.659391624998534
+    },
+    {
+      "sample_id": "120:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9728678329993272
+    },
+    {
+      "sample_id": "120:78",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1702611670043552
+    },
+    {
+      "sample_id": "120:80",
+      "valid": true,
+      "error": null,
+      "seconds": 2.814650749998691
+    },
+    {
+      "sample_id": "120:82",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4700159580024774
+    },
+    {
+      "sample_id": "120:84",
+      "valid": true,
+      "error": null,
+      "seconds": 2.278312750000623
+    },
+    {
+      "sample_id": "120:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0907733750063926
+    },
+    {
+      "sample_id": "120:88",
+      "valid": true,
+      "error": null,
+      "seconds": 2.217170417003217
+    },
+    {
+      "sample_id": "120:90",
+      "valid": true,
+      "error": null,
+      "seconds": 3.864011459001631
+    },
+    {
+      "sample_id": "120:92",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 4.681953584004077
+    },
+    {
+      "sample_id": "120:94",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5698983339971164
+    },
+    {
+      "sample_id": "120:96",
+      "valid": true,
+      "error": null,
+      "seconds": 2.867034542003239
+    },
+    {
+      "sample_id": "120:98",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5537340419978136
+    },
+    {
+      "sample_id": "120:100",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5119644590013195
+    },
+    {
+      "sample_id": "120:102",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5273288329990464
+    },
+    {
+      "sample_id": "120:104",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8909660409990465
+    },
+    {
+      "sample_id": "120:106",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1926757499968517
+    },
+    {
+      "sample_id": "120:108",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3214227909993497
+    },
+    {
+      "sample_id": "120:110",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3545267500012415
+    },
+    {
+      "sample_id": "120:112",
+      "valid": true,
+      "error": null,
+      "seconds": 4.1164260000005015
+    },
+    {
+      "sample_id": "120:114",
+      "valid": true,
+      "error": null,
+      "seconds": 2.859128458003397
+    },
+    {
+      "sample_id": "120:116",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0905838329999824
+    },
+    {
+      "sample_id": "120:118",
+      "valid": true,
+      "error": null,
+      "seconds": 4.2681927920057205
+    },
+    {
+      "sample_id": "120:120",
+      "valid": true,
+      "error": null,
+      "seconds": 2.467050749997725
+    },
+    {
+      "sample_id": "120:122",
+      "valid": true,
+      "error": null,
+      "seconds": 3.907446165998408
+    },
+    {
+      "sample_id": "120:124",
+      "valid": true,
+      "error": null,
+      "seconds": 2.152000666996173
+    },
+    {
+      "sample_id": "123:0",
+      "valid": true,
+      "error": null,
+      "seconds": 3.6119156670029042
+    },
+    {
+      "sample_id": "123:2",
+      "valid": true,
+      "error": null,
+      "seconds": 5.740000000005239
+    },
+    {
+      "sample_id": "123:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9429310410050675
+    },
+    {
+      "sample_id": "123:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9230401249951683
+    },
+    {
+      "sample_id": "123:8",
+      "valid": true,
+      "error": null,
+      "seconds": 3.5575768330018036
+    },
+    {
+      "sample_id": "123:10",
+      "valid": true,
+      "error": null,
+      "seconds": 4.005876667004486
+    },
+    {
+      "sample_id": "123:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4108307500064257
+    },
+    {
+      "sample_id": "123:14",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 7.209110167001199
+    },
+    {
+      "sample_id": "123:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6070785830015666
+    },
+    {
+      "sample_id": "123:18",
+      "valid": true,
+      "error": null,
+      "seconds": 4.0683242910017725
+    },
+    {
+      "sample_id": "123:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7097873329985305
+    },
+    {
+      "sample_id": "123:22",
+      "valid": true,
+      "error": null,
+      "seconds": 3.695008249997045
+    },
+    {
+      "sample_id": "123:24",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9817882089992054
+    },
+    {
+      "sample_id": "123:26",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.0666451249999227
+    },
+    {
+      "sample_id": "123:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.466970958004822
+    },
+    {
+      "sample_id": "123:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3195207500029937
+    },
+    {
+      "sample_id": "123:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.286050458002137
+    },
+    {
+      "sample_id": "123:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6101621670022723
+    },
+    {
+      "sample_id": "123:36",
+      "valid": true,
+      "error": null,
+      "seconds": 3.8831852079965756
+    },
+    {
+      "sample_id": "123:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4689025829939055
+    },
+    {
+      "sample_id": "123:40",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9679230000037933
+    },
+    {
+      "sample_id": "123:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1298320419955417
+    },
+    {
+      "sample_id": "123:44",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7660797080025077
+    },
+    {
+      "sample_id": "123:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3049354160029907
+    },
+    {
+      "sample_id": "123:48",
+      "valid": true,
+      "error": null,
+      "seconds": 3.016982082997856
+    },
+    {
+      "sample_id": "123:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7865194580008392
+    },
+    {
+      "sample_id": "123:52",
+      "valid": true,
+      "error": null,
+      "seconds": 3.834201416000724
+    },
+    {
+      "sample_id": "123:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6057349580005393
+    },
+    {
+      "sample_id": "123:56",
+      "valid": true,
+      "error": null,
+      "seconds": 3.427442374995735
+    },
+    {
+      "sample_id": "123:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2751395419982146
+    },
+    {
+      "sample_id": "123:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5789877089991933
+    },
+    {
+      "sample_id": "123:62",
+      "valid": true,
+      "error": null,
+      "seconds": 2.513024583000515
+    },
+    {
+      "sample_id": "123:64",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2260504590012715
+    },
+    {
+      "sample_id": "123:66",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.5791014170026756
+    },
+    {
+      "sample_id": "123:68",
+      "valid": true,
+      "error": null,
+      "seconds": 2.470878874999471
+    },
+    {
+      "sample_id": "123:70",
+      "valid": true,
+      "error": null,
+      "seconds": 2.358350292000978
+    },
+    {
+      "sample_id": "123:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.950487208996492
+    },
+    {
+      "sample_id": "123:74",
+      "valid": true,
+      "error": null,
+      "seconds": 1.982743542001117
+    },
+    {
+      "sample_id": "123:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9804812500005937
+    },
+    {
+      "sample_id": "123:78",
+      "valid": true,
+      "error": null,
+      "seconds": 4.783606417004194
+    },
+    {
+      "sample_id": "123:80",
+      "valid": true,
+      "error": null,
+      "seconds": 4.370920624998689
+    },
+    {
+      "sample_id": "123:82",
+      "valid": true,
+      "error": null,
+      "seconds": 3.286859874999209
+    },
+    {
+      "sample_id": "123:84",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1022784579981817
+    },
+    {
+      "sample_id": "123:86",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9340854589972878
+    },
+    {
+      "sample_id": "123:88",
+      "valid": true,
+      "error": null,
+      "seconds": 2.064051166998979
+    },
+    {
+      "sample_id": "123:90",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5026752079938888
+    },
+    {
+      "sample_id": "123:92",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3164469999974244
+    },
+    {
+      "sample_id": "123:94",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8625285000016447
+    },
+    {
+      "sample_id": "123:96",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8246618329940247
+    },
+    {
+      "sample_id": "123:98",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9012581659990246
+    },
+    {
+      "sample_id": "123:100",
+      "valid": true,
+      "error": null,
+      "seconds": 2.451501166993694
+    },
+    {
+      "sample_id": "123:102",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0551774589985143
+    },
+    {
+      "sample_id": "123:104",
+      "valid": true,
+      "error": null,
+      "seconds": 1.5865443330039852
+    },
+    {
+      "sample_id": "123:106",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 7.0779471669957275
+    },
+    {
+      "sample_id": "123:108",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0591213339939713
+    },
+    {
+      "sample_id": "201:0",
+      "valid": true,
+      "error": null,
+      "seconds": 0.9480319590002182
+    },
+    {
+      "sample_id": "201:2",
+      "valid": true,
+      "error": null,
+      "seconds": 3.757286166000995
+    },
+    {
+      "sample_id": "201:4",
+      "valid": true,
+      "error": null,
+      "seconds": 3.082931249999092
+    },
+    {
+      "sample_id": "201:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.334505334001733
+    },
+    {
+      "sample_id": "201:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6611317499991856
+    },
+    {
+      "sample_id": "201:10",
+      "valid": true,
+      "error": null,
+      "seconds": 3.4817750830043224
+    },
+    {
+      "sample_id": "201:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.753108708995569
+    },
+    {
+      "sample_id": "201:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.720845208998071
+    },
+    {
+      "sample_id": "201:16",
+      "valid": true,
+      "error": null,
+      "seconds": 3.472021457993833
+    },
+    {
+      "sample_id": "201:18",
+      "valid": true,
+      "error": null,
+      "seconds": 3.015053208997415
+    },
+    {
+      "sample_id": "201:20",
+      "valid": true,
+      "error": null,
+      "seconds": 4.833355499999016
+    },
+    {
+      "sample_id": "201:22",
+      "valid": true,
+      "error": null,
+      "seconds": 3.051403499994194
+    },
+    {
+      "sample_id": "201:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.753363666997757
+    },
+    {
+      "sample_id": "201:26",
+      "valid": true,
+      "error": null,
+      "seconds": 3.437756666004134
+    },
+    {
+      "sample_id": "201:28",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.61268637500325
+    },
+    {
+      "sample_id": "201:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3194078330052434
+    },
+    {
+      "sample_id": "201:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4394315000026836
+    },
+    {
+      "sample_id": "201:34",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.0809202080054092
+    },
+    {
+      "sample_id": "201:36",
+      "valid": true,
+      "error": null,
+      "seconds": 3.110029334005958
+    },
+    {
+      "sample_id": "201:38",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3142476250068285
+    },
+    {
+      "sample_id": "201:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.8290474169989466
+    },
+    {
+      "sample_id": "201:42",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.8833594160023495
+    },
+    {
+      "sample_id": "201:44",
+      "valid": true,
+      "error": null,
+      "seconds": 2.800549499996123
+    },
+    {
+      "sample_id": "201:46",
+      "valid": true,
+      "error": null,
+      "seconds": 4.811213875000249
+    },
+    {
+      "sample_id": "201:48",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0886944589947234
+    },
+    {
+      "sample_id": "201:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5653842500032624
+    },
+    {
+      "sample_id": "201:52",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1102905000007013
+    },
+    {
+      "sample_id": "201:54",
+      "valid": true,
+      "error": null,
+      "seconds": 3.9700430840021
+    },
+    {
+      "sample_id": "201:56",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 3.2755863749989658
+    },
+    {
+      "sample_id": "201:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2321132500001113
+    },
+    {
+      "sample_id": "201:60",
+      "valid": true,
+      "error": null,
+      "seconds": 3.761712166997313
+    },
+    {
+      "sample_id": "201:62",
+      "valid": true,
+      "error": null,
+      "seconds": 2.658012833002431
+    },
+    {
+      "sample_id": "201:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1350243339984445
+    },
+    {
+      "sample_id": "201:66",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9345831250029732
+    },
+    {
+      "sample_id": "201:68",
+      "valid": true,
+      "error": null,
+      "seconds": 2.351221375000023
+    },
+    {
+      "sample_id": "201:70",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5994312500042724
+    },
+    {
+      "sample_id": "201:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.254047000002174
+    },
+    {
+      "sample_id": "201:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1144125840000925
+    },
+    {
+      "sample_id": "201:76",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6635793749956065
+    },
+    {
+      "sample_id": "201:78",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9702834579948103
+    },
+    {
+      "sample_id": "201:80",
+      "valid": true,
+      "error": null,
+      "seconds": 1.909048667002935
+    },
+    {
+      "sample_id": "201:82",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8050958750027348
+    },
+    {
+      "sample_id": "201:84",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7828165410028305
+    },
+    {
+      "sample_id": "201:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.105586500001664
+    },
+    {
+      "sample_id": "201:88",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9278528750000987
+    },
+    {
+      "sample_id": "201:90",
+      "valid": true,
+      "error": null,
+      "seconds": 4.164672917002463
+    },
+    {
+      "sample_id": "201:92",
+      "valid": true,
+      "error": null,
+      "seconds": 4.377662999999302
+    },
+    {
+      "sample_id": "201:94",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2478700840001693
+    },
+    {
+      "sample_id": "201:96",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 7.4093950419992325
+    },
+    {
+      "sample_id": "201:98",
+      "valid": true,
+      "error": null,
+      "seconds": 2.19910125000024
+    },
+    {
+      "sample_id": "208:1",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4111287920022733
+    },
+    {
+      "sample_id": "208:3",
+      "valid": true,
+      "error": null,
+      "seconds": 4.338070709003659
+    },
+    {
+      "sample_id": "208:5",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9141642910035443
+    },
+    {
+      "sample_id": "208:7",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1385436250056955
+    },
+    {
+      "sample_id": "208:9",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9837134999979753
+    },
+    {
+      "sample_id": "208:11",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9069791250003618
+    },
+    {
+      "sample_id": "208:13",
+      "valid": true,
+      "error": null,
+      "seconds": 2.215962458998547
+    },
+    {
+      "sample_id": "208:15",
+      "valid": true,
+      "error": null,
+      "seconds": 4.3454818749960396
+    },
+    {
+      "sample_id": "208:17",
+      "valid": true,
+      "error": null,
+      "seconds": 3.7454544170032023
+    },
+    {
+      "sample_id": "208:19",
+      "valid": true,
+      "error": null,
+      "seconds": 3.6919224169978406
+    },
+    {
+      "sample_id": "208:21",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3025007089963765
+    },
+    {
+      "sample_id": "208:23",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.7567276250047144
+    },
+    {
+      "sample_id": "208:25",
+      "valid": true,
+      "error": null,
+      "seconds": 2.976314833998913
+    },
+    {
+      "sample_id": "208:27",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4145697499989183
+    },
+    {
+      "sample_id": "208:29",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3294194580012118
+    },
+    {
+      "sample_id": "208:31",
+      "valid": true,
+      "error": null,
+      "seconds": 3.633269250000012
+    },
+    {
+      "sample_id": "208:33",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3048064159956994
+    },
+    {
+      "sample_id": "208:35",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.2815047500043875
+    },
+    {
+      "sample_id": "208:37",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7364709579996997
+    },
+    {
+      "sample_id": "208:39",
+      "valid": true,
+      "error": null,
+      "seconds": 2.773605166999914
+    },
+    {
+      "sample_id": "208:41",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.5749538329982897
+    },
+    {
+      "sample_id": "208:43",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3545979159971466
+    },
+    {
+      "sample_id": "208:45",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6447372500042547
+    },
+    {
+      "sample_id": "208:47",
+      "valid": true,
+      "error": null,
+      "seconds": 3.249936542000796
+    },
+    {
+      "sample_id": "208:49",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5930484579948825
+    },
+    {
+      "sample_id": "208:51",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.1443193339946447
+    },
+    {
+      "sample_id": "208:53",
+      "valid": true,
+      "error": null,
+      "seconds": 3.914268541993806
+    },
+    {
+      "sample_id": "208:55",
+      "valid": true,
+      "error": null,
+      "seconds": 3.7081797079954413
+    },
+    {
+      "sample_id": "208:57",
+      "valid": true,
+      "error": null,
+      "seconds": 3.615472208002757
+    },
+    {
+      "sample_id": "208:59",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.2064075419984874
+    },
+    {
+      "sample_id": "208:61",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2124805000057677
+    },
+    {
+      "sample_id": "208:63",
+      "valid": true,
+      "error": null,
+      "seconds": 2.606970792003267
+    },
+    {
+      "sample_id": "208:65",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.6002206670018495
+    },
+    {
+      "sample_id": "208:67",
+      "valid": true,
+      "error": null,
+      "seconds": 5.474270209000679
+    },
+    {
+      "sample_id": "208:69",
+      "valid": true,
+      "error": null,
+      "seconds": 4.089849791002052
+    },
+    {
+      "sample_id": "208:71",
+      "valid": true,
+      "error": null,
+      "seconds": 2.640933375005261
+    },
+    {
+      "sample_id": "208:73",
+      "valid": true,
+      "error": null,
+      "seconds": 1.992855457996484
+    },
+    {
+      "sample_id": "208:75",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 1.9186500830037403
+    },
+    {
+      "sample_id": "208:77",
+      "valid": true,
+      "error": null,
+      "seconds": 3.617978624999523
+    },
+    {
+      "sample_id": "208:79",
+      "valid": true,
+      "error": null,
+      "seconds": 4.152096417004941
+    },
+    {
+      "sample_id": "208:81",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.0271278750005877
+    },
+    {
+      "sample_id": "208:83",
+      "valid": true,
+      "error": null,
+      "seconds": 3.7532070000015665
+    },
+    {
+      "sample_id": "208:85",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.5418216249963734
+    },
+    {
+      "sample_id": "208:87",
+      "valid": true,
+      "error": null,
+      "seconds": 2.888563250002335
+    },
+    {
+      "sample_id": "208:89",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4444647500058636
+    },
+    {
+      "sample_id": "208:91",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3003027500017197
+    },
+    {
+      "sample_id": "208:93",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1498489169971435
+    },
+    {
+      "sample_id": "208:95",
+      "valid": true,
+      "error": null,
+      "seconds": 2.351146458000585
+    },
+    {
+      "sample_id": "208:97",
+      "valid": true,
+      "error": null,
+      "seconds": 3.6856663749931613
+    },
+    {
+      "sample_id": "208:99",
+      "valid": true,
+      "error": null,
+      "seconds": 2.686330040996836
+    },
+    {
+      "sample_id": "208:101",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 7.449168459002976
+    },
+    {
+      "sample_id": "208:103",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6293607089974103
+    },
+    {
+      "sample_id": "211:0",
+      "valid": true,
+      "error": null,
+      "seconds": 0.9439324170016334
+    },
+    {
+      "sample_id": "211:2",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2544473339949036
+    },
+    {
+      "sample_id": "211:4",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.003434707999986
+    },
+    {
+      "sample_id": "211:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4590002079930855
+    },
+    {
+      "sample_id": "211:8",
+      "valid": true,
+      "error": null,
+      "seconds": 5.301490165998985
+    },
+    {
+      "sample_id": "211:10",
+      "valid": true,
+      "error": null,
+      "seconds": 2.825530957998126
+    },
+    {
+      "sample_id": "211:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.438393749995157
+    },
+    {
+      "sample_id": "211:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.252599708001071
+    },
+    {
+      "sample_id": "211:16",
+      "valid": true,
+      "error": null,
+      "seconds": 1.910259167001641
+    },
+    {
+      "sample_id": "211:18",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.283051958002034
+    },
+    {
+      "sample_id": "211:20",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 5.152179625001736
+    },
+    {
+      "sample_id": "211:22",
+      "valid": true,
+      "error": null,
+      "seconds": 5.965352583996719
+    },
+    {
+      "sample_id": "211:24",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3978851249994477
+    },
+    {
+      "sample_id": "211:26",
+      "valid": true,
+      "error": null,
+      "seconds": 2.450047208003525
+    },
+    {
+      "sample_id": "211:28",
+      "valid": true,
+      "error": null,
+      "seconds": 3.71033012499538
+    },
+    {
+      "sample_id": "211:30",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.895157292005024
+    },
+    {
+      "sample_id": "211:32",
+      "valid": true,
+      "error": null,
+      "seconds": 3.4456743330010795
+    },
+    {
+      "sample_id": "211:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.106025334003789
+    },
+    {
+      "sample_id": "211:36",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1933744159978232
+    },
+    {
+      "sample_id": "211:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5025563330054865
+    },
+    {
+      "sample_id": "211:40",
+      "valid": true,
+      "error": null,
+      "seconds": 3.879266791998816
+    },
+    {
+      "sample_id": "211:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.06579475000035
+    },
+    {
+      "sample_id": "211:44",
+      "valid": true,
+      "error": null,
+      "seconds": 3.285706124996068
+    },
+    {
+      "sample_id": "211:46",
+      "valid": true,
+      "error": null,
+      "seconds": 3.183788000002096
+    },
+    {
+      "sample_id": "211:48",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7830858749948675
+    },
+    {
+      "sample_id": "211:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.233599667000817
+    },
+    {
+      "sample_id": "211:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4932605420035543
+    },
+    {
+      "sample_id": "211:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3889456249962677
+    },
+    {
+      "sample_id": "211:56",
+      "valid": true,
+      "error": null,
+      "seconds": 3.8921017500033486
+    },
+    {
+      "sample_id": "211:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.779828916005499
+    },
+    {
+      "sample_id": "211:60",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.375947874999838
+    },
+    {
+      "sample_id": "211:62",
+      "valid": true,
+      "error": null,
+      "seconds": 4.02951700000267
+    },
+    {
+      "sample_id": "211:64",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 10.100970416002383
+    },
+    {
+      "sample_id": "214:0",
+      "valid": true,
+      "error": null,
+      "seconds": 5.120013374995324
+    },
+    {
+      "sample_id": "214:2",
+      "valid": true,
+      "error": null,
+      "seconds": 4.244532249998883
+    },
+    {
+      "sample_id": "214:4",
+      "valid": true,
+      "error": null,
+      "seconds": 3.6517145409961813
+    },
+    {
+      "sample_id": "214:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.378151834003802
+    },
+    {
+      "sample_id": "214:8",
+      "valid": true,
+      "error": null,
+      "seconds": 6.2966500829934375
+    },
+    {
+      "sample_id": "214:10",
+      "valid": true,
+      "error": null,
+      "seconds": 2.585968583000067
+    },
+    {
+      "sample_id": "214:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5082837919981102
+    },
+    {
+      "sample_id": "214:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4901919580006506
+    },
+    {
+      "sample_id": "214:16",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.0912320830029785
+    },
+    {
+      "sample_id": "214:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.329712708997249
+    },
+    {
+      "sample_id": "214:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0582084999987273
+    },
+    {
+      "sample_id": "214:22",
+      "valid": true,
+      "error": null,
+      "seconds": 1.863445708004292
+    },
+    {
+      "sample_id": "214:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2661623749954742
+    },
+    {
+      "sample_id": "214:26",
+      "valid": true,
+      "error": null,
+      "seconds": 2.888356000003114
+    },
+    {
+      "sample_id": "214:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7197137080001994
+    },
+    {
+      "sample_id": "214:30",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.9877438330004225
+    },
+    {
+      "sample_id": "214:32",
+      "valid": true,
+      "error": null,
+      "seconds": 4.753237874996557
+    },
+    {
+      "sample_id": "214:34",
+      "valid": true,
+      "error": null,
+      "seconds": 3.199703457998112
+    },
+    {
+      "sample_id": "214:36",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9927905410004314
+    },
+    {
+      "sample_id": "214:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6859692500001984
+    },
+    {
+      "sample_id": "214:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.43485808299738
+    },
+    {
+      "sample_id": "214:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0404945839982247
+    },
+    {
+      "sample_id": "214:44",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.752327708003577
+    },
+    {
+      "sample_id": "214:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6062987500044983
+    },
+    {
+      "sample_id": "214:48",
+      "valid": true,
+      "error": null,
+      "seconds": 1.2659334170020884
+    },
+    {
+      "sample_id": "214:50",
+      "valid": true,
+      "error": null,
+      "seconds": 1.1645216250035446
+    },
+    {
+      "sample_id": "214:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3516655420025927
+    },
+    {
+      "sample_id": "214:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1243505829988862
+    },
+    {
+      "sample_id": "214:56",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9505069170045317
+    },
+    {
+      "sample_id": "214:58",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7417886250041192
+    },
+    {
+      "sample_id": "214:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3323949580008048
+    },
+    {
+      "sample_id": "214:62",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9344227080000564
+    },
+    {
+      "sample_id": "214:64",
+      "valid": true,
+      "error": null,
+      "seconds": 3.93796362500143
+    },
+    {
+      "sample_id": "214:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4262111670032027
+    },
+    {
+      "sample_id": "214:68",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1961123750006664
+    },
+    {
+      "sample_id": "214:70",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0299436660061474
+    },
+    {
+      "sample_id": "214:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2744215830025496
+    },
+    {
+      "sample_id": "214:74",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.8207811249958468
+    },
+    {
+      "sample_id": "214:76",
+      "valid": true,
+      "error": null,
+      "seconds": 2.8074662500002887
+    },
+    {
+      "sample_id": "214:78",
+      "valid": true,
+      "error": null,
+      "seconds": 1.993479374999879
+    },
+    {
+      "sample_id": "214:80",
+      "valid": true,
+      "error": null,
+      "seconds": 1.3861062089999905
+    },
+    {
+      "sample_id": "214:82",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.326056249999965
+    },
+    {
+      "sample_id": "214:84",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7357185000000754
+    },
+    {
+      "sample_id": "217:0",
+      "valid": true,
+      "error": null,
+      "seconds": 0.9324955829943065
+    },
+    {
+      "sample_id": "217:2",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9820658339958754
+    },
+    {
+      "sample_id": "217:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3991066250018775
+    },
+    {
+      "sample_id": "217:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.266579584000283
+    },
+    {
+      "sample_id": "217:8",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.034126667000237
+    },
+    {
+      "sample_id": "217:10",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.776713667000877
+    },
+    {
+      "sample_id": "217:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.951321957996697
+    },
+    {
+      "sample_id": "217:14",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1588015419984004
+    },
+    {
+      "sample_id": "217:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4822972909969394
+    },
+    {
+      "sample_id": "217:18",
+      "valid": true,
+      "error": null,
+      "seconds": 3.309838665998541
+    },
+    {
+      "sample_id": "217:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9808029170017107
+    },
+    {
+      "sample_id": "217:22",
+      "valid": true,
+      "error": null,
+      "seconds": 3.395846250001341
+    },
+    {
+      "sample_id": "217:24",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 4.638843000000634
+    },
+    {
+      "sample_id": "217:26",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4212114999972982
+    },
+    {
+      "sample_id": "217:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9936694579955656
+    },
+    {
+      "sample_id": "217:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7119723750001867
+    },
+    {
+      "sample_id": "217:32",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8273417500022333
+    },
+    {
+      "sample_id": "217:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2977608750006766
+    },
+    {
+      "sample_id": "217:36",
+      "valid": true,
+      "error": null,
+      "seconds": 1.326874416001374
+    },
+    {
+      "sample_id": "217:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5582570410042536
+    },
+    {
+      "sample_id": "217:40",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 3.84432495800138
+    },
+    {
+      "sample_id": "217:42",
+      "valid": true,
+      "error": null,
+      "seconds": 3.850438875000691
+    },
+    {
+      "sample_id": "217:44",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.079117749999568
+    },
+    {
+      "sample_id": "217:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5632452499994542
+    },
+    {
+      "sample_id": "217:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.047382208002091
+    },
+    {
+      "sample_id": "217:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2602066659965203
+    },
+    {
+      "sample_id": "217:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.061477457995352
+    },
+    {
+      "sample_id": "217:54",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1784305840046727
+    },
+    {
+      "sample_id": "217:56",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9606240419961978
+    },
+    {
+      "sample_id": "217:58",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6541054580011405
+    },
+    {
+      "sample_id": "217:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.030993500004115
+    },
+    {
+      "sample_id": "217:62",
+      "valid": true,
+      "error": null,
+      "seconds": 1.5955179169977782
+    },
+    {
+      "sample_id": "217:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1038574160047574
+    },
+    {
+      "sample_id": "217:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0672684169985587
+    },
+    {
+      "sample_id": "217:68",
+      "valid": true,
+      "error": null,
+      "seconds": 1.293695000000298
+    },
+    {
+      "sample_id": "217:70",
+      "valid": true,
+      "error": null,
+      "seconds": 1.892610416005482
+    },
+    {
+      "sample_id": "217:72",
+      "valid": true,
+      "error": null,
+      "seconds": 3.332025125004293
+    },
+    {
+      "sample_id": "222:0",
+      "valid": true,
+      "error": null,
+      "seconds": 3.4991454999981215
+    },
+    {
+      "sample_id": "222:2",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2879054170043673
+    },
+    {
+      "sample_id": "222:4",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7959007090030354
+    },
+    {
+      "sample_id": "222:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0587452500039944
+    },
+    {
+      "sample_id": "222:8",
+      "valid": true,
+      "error": null,
+      "seconds": 1.5432115829971735
+    },
+    {
+      "sample_id": "222:10",
+      "valid": true,
+      "error": null,
+      "seconds": 1.753727165996679
+    },
+    {
+      "sample_id": "222:12",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 1.590205666005204
+    },
+    {
+      "sample_id": "222:14",
+      "valid": true,
+      "error": null,
+      "seconds": 3.589287458002218
+    },
+    {
+      "sample_id": "222:16",
+      "valid": true,
+      "error": null,
+      "seconds": 4.513425459001155
+    },
+    {
+      "sample_id": "222:18",
+      "valid": true,
+      "error": null,
+      "seconds": 5.60271916599595
+    },
+    {
+      "sample_id": "222:20",
+      "valid": true,
+      "error": null,
+      "seconds": 3.17079725000076
+    },
+    {
+      "sample_id": "222:22",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9288645839988021
+    },
+    {
+      "sample_id": "222:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3801307920002728
+    },
+    {
+      "sample_id": "222:26",
+      "valid": true,
+      "error": null,
+      "seconds": 5.394437791997916
+    },
+    {
+      "sample_id": "222:28",
+      "valid": true,
+      "error": null,
+      "seconds": 3.300024249998387
+    },
+    {
+      "sample_id": "222:30",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9455922090055537
+    },
+    {
+      "sample_id": "222:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4108835000006366
+    },
+    {
+      "sample_id": "222:34",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2779157909972128
+    },
+    {
+      "sample_id": "222:36",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5033048749974114
+    },
+    {
+      "sample_id": "222:38",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.378378833003808
+    },
+    {
+      "sample_id": "222:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1605425419984385
+    },
+    {
+      "sample_id": "222:42",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.9495410000017728
+    },
+    {
+      "sample_id": "222:44",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3027197920018807
+    },
+    {
+      "sample_id": "222:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.261925250000786
+    },
+    {
+      "sample_id": "222:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2735334590033744
+    },
+    {
+      "sample_id": "222:50",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.1135826250028913
+    },
+    {
+      "sample_id": "222:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6953471659944626
+    },
+    {
+      "sample_id": "222:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2165823329996783
+    },
+    {
+      "sample_id": "222:56",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1328987089946168
+    },
+    {
+      "sample_id": "222:58",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.983622584004479
+    },
+    {
+      "sample_id": "222:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3460257499973522
+    },
+    {
+      "sample_id": "222:62",
+      "valid": true,
+      "error": null,
+      "seconds": 3.280799209001998
+    },
+    {
+      "sample_id": "222:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0524871250017895
+    },
+    {
+      "sample_id": "222:66",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7352312079965486
+    },
+    {
+      "sample_id": "222:68",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3562047079976765
+    },
+    {
+      "sample_id": "222:70",
+      "valid": true,
+      "error": null,
+      "seconds": 3.858236708001641
+    },
+    {
+      "sample_id": "222:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.895773458003532
+    },
+    {
+      "sample_id": "222:74",
+      "valid": true,
+      "error": null,
+      "seconds": 3.6484860409982502
+    },
+    {
+      "sample_id": "222:76",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0010672920034267
+    },
+    {
+      "sample_id": "222:78",
+      "valid": true,
+      "error": null,
+      "seconds": 1.5802510830035317
+    },
+    {
+      "sample_id": "226:0",
+      "valid": true,
+      "error": null,
+      "seconds": 0.9174665000027744
+    },
+    {
+      "sample_id": "226:2",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 4.5139589159953175
+    },
+    {
+      "sample_id": "226:4",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 5.771782124997117
+    },
+    {
+      "sample_id": "226:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.23660095899686
+    },
+    {
+      "sample_id": "226:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2405216249972
+    },
+    {
+      "sample_id": "226:10",
+      "valid": true,
+      "error": null,
+      "seconds": 3.293878832999326
+    },
+    {
+      "sample_id": "226:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.280292584000563
+    },
+    {
+      "sample_id": "226:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2172120830000495
+    },
+    {
+      "sample_id": "226:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3361306249935296
+    },
+    {
+      "sample_id": "226:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2208893330025603
+    },
+    {
+      "sample_id": "226:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2104113750028773
+    },
+    {
+      "sample_id": "226:22",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8524038340037805
+    },
+    {
+      "sample_id": "226:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1703231249994133
+    },
+    {
+      "sample_id": "226:26",
+      "valid": true,
+      "error": null,
+      "seconds": 1.849094208999304
+    },
+    {
+      "sample_id": "226:28",
+      "valid": true,
+      "error": null,
+      "seconds": 3.047636290997616
+    },
+    {
+      "sample_id": "226:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.568856666999636
+    },
+    {
+      "sample_id": "226:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.105457708996255
+    },
+    {
+      "sample_id": "226:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2823813329960103
+    },
+    {
+      "sample_id": "226:36",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2655777079999098
+    },
+    {
+      "sample_id": "226:38",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.3325659170004656
+    },
+    {
+      "sample_id": "226:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2442491660040105
+    },
+    {
+      "sample_id": "226:42",
+      "valid": true,
+      "error": null,
+      "seconds": 1.798542249998718
+    },
+    {
+      "sample_id": "226:44",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0739280409979983
+    },
+    {
+      "sample_id": "226:46",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.4374739170016255
+    },
+    {
+      "sample_id": "226:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.839224999996077
+    },
+    {
+      "sample_id": "226:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.367326541003422
+    },
+    {
+      "sample_id": "226:52",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0112982919963542
+    },
+    {
+      "sample_id": "226:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.208456500004104
+    },
+    {
+      "sample_id": "226:56",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9431453330034856
+    },
+    {
+      "sample_id": "226:58",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 1.8713675830003922
+    },
+    {
+      "sample_id": "226:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.276486292001209
+    },
+    {
+      "sample_id": "226:62",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3714560420048656
+    },
+    {
+      "sample_id": "226:64",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 2.826945042004809
+    },
+    {
+      "sample_id": "226:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.57641995800077
+    },
+    {
+      "sample_id": "226:68",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9031138749996899
+    },
+    {
+      "sample_id": "226:70",
+      "valid": true,
+      "error": null,
+      "seconds": 3.4012967079979717
+    },
+    {
+      "sample_id": "226:72",
+      "valid": true,
+      "error": null,
+      "seconds": 4.228598417001194
+    },
+    {
+      "sample_id": "226:74",
+      "valid": true,
+      "error": null,
+      "seconds": 3.6396505420052563
+    },
+    {
+      "sample_id": "226:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.868052917001478
+    },
+    {
+      "sample_id": "226:78",
+      "valid": true,
+      "error": null,
+      "seconds": 2.254648250003811
+    },
+    {
+      "sample_id": "226:80",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2692396250058664
+    },
+    {
+      "sample_id": "226:82",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2604196249958477
+    },
+    {
+      "sample_id": "226:84",
+      "valid": true,
+      "error": null,
+      "seconds": 2.000133082998218
+    },
+    {
+      "sample_id": "226:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2535707499991986
+    },
+    {
+      "sample_id": "226:88",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.860448790997907
+    },
+    {
+      "sample_id": "226:90",
+      "valid": true,
+      "error": null,
+      "seconds": 6.119542041997192
+    },
+    {
+      "sample_id": "226:92",
+      "valid": true,
+      "error": null,
+      "seconds": 4.245663792004052
+    },
+    {
+      "sample_id": "226:94",
+      "valid": true,
+      "error": null,
+      "seconds": 4.022761583000829
+    },
+    {
+      "sample_id": "226:96",
+      "valid": true,
+      "error": null,
+      "seconds": 2.486592458000814
+    },
+    {
+      "sample_id": "226:98",
+      "valid": true,
+      "error": null,
+      "seconds": 1.3894592079959693
+    },
+    {
+      "sample_id": "226:100",
+      "valid": true,
+      "error": null,
+      "seconds": 1.1058255829993868
+    },
+    {
+      "sample_id": "228:0",
+      "valid": true,
+      "error": null,
+      "seconds": 0.9375691669993103
+    },
+    {
+      "sample_id": "228:2",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.1174962089935434
+    },
+    {
+      "sample_id": "228:4",
+      "valid": true,
+      "error": null,
+      "seconds": 3.393397707994154
+    },
+    {
+      "sample_id": "228:6",
+      "valid": true,
+      "error": null,
+      "seconds": 3.771189208004216
+    },
+    {
+      "sample_id": "228:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7842605830010143
+    },
+    {
+      "sample_id": "228:10",
+      "valid": true,
+      "error": null,
+      "seconds": 6.249144791996514
+    },
+    {
+      "sample_id": "228:12",
+      "valid": true,
+      "error": null,
+      "seconds": 3.110274375001609
+    },
+    {
+      "sample_id": "228:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.632135833002394
+    },
+    {
+      "sample_id": "228:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.486245499996585
+    },
+    {
+      "sample_id": "228:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.38181858399912
+    },
+    {
+      "sample_id": "228:20",
+      "valid": true,
+      "error": null,
+      "seconds": 3.5482094580002013
+    },
+    {
+      "sample_id": "228:22",
+      "valid": true,
+      "error": null,
+      "seconds": 2.73854924999614
+    },
+    {
+      "sample_id": "228:24",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8937740420005866
+    },
+    {
+      "sample_id": "228:26",
+      "valid": true,
+      "error": null,
+      "seconds": 2.091062999999849
+    },
+    {
+      "sample_id": "228:28",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.733152082997549
+    },
+    {
+      "sample_id": "228:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.835670917003881
+    },
+    {
+      "sample_id": "228:32",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.123972166002204
+    },
+    {
+      "sample_id": "228:34",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.9186071660005837
+    },
+    {
+      "sample_id": "228:36",
+      "valid": true,
+      "error": null,
+      "seconds": 3.248721290998219
+    },
+    {
+      "sample_id": "228:38",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0599932500044815
+    },
+    {
+      "sample_id": "228:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.177687709001475
+    },
+    {
+      "sample_id": "228:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1520510420014034
+    },
+    {
+      "sample_id": "228:44",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8617540419945726
+    },
+    {
+      "sample_id": "228:46",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8846728749995236
+    },
+    {
+      "sample_id": "228:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.351562458999979
+    },
+    {
+      "sample_id": "228:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5111127919954015
+    },
+    {
+      "sample_id": "228:52",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9527941249980358
+    },
+    {
+      "sample_id": "228:54",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8580510840038187
+    },
+    {
+      "sample_id": "228:56",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 1.8967975830018986
+    },
+    {
+      "sample_id": "228:58",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8616951250005513
+    },
+    {
+      "sample_id": "228:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0752791249979055
+    },
+    {
+      "sample_id": "228:62",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6359251250032685
+    },
+    {
+      "sample_id": "228:64",
+      "valid": true,
+      "error": null,
+      "seconds": 3.6019726250015083
+    },
+    {
+      "sample_id": "228:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.841801957998541
+    },
+    {
+      "sample_id": "228:68",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2288614999997662
+    },
+    {
+      "sample_id": "228:70",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7199658329991507
+    },
+    {
+      "sample_id": "228:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.105394875005004
+    },
+    {
+      "sample_id": "228:74",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9244466250020196
+    },
+    {
+      "sample_id": "228:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9134384159988258
+    },
+    {
+      "sample_id": "228:78",
+      "valid": true,
+      "error": null,
+      "seconds": 2.341403459002322
+    },
+    {
+      "sample_id": "228:80",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8268697500025155
+    },
+    {
+      "sample_id": "228:82",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.790950292001071
+    },
+    {
+      "sample_id": "228:84",
+      "valid": true,
+      "error": null,
+      "seconds": 1.2682305830021505
+    },
+    {
+      "sample_id": "405:0",
+      "valid": true,
+      "error": null,
+      "seconds": 0.9548568749960396
+    },
+    {
+      "sample_id": "405:2",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9450679579967982
+    },
+    {
+      "sample_id": "405:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7625076250042184
+    },
+    {
+      "sample_id": "405:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4568531249969965
+    },
+    {
+      "sample_id": "405:8",
+      "valid": true,
+      "error": null,
+      "seconds": 3.772007792002114
+    },
+    {
+      "sample_id": "405:10",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 4.608876041995245
+    },
+    {
+      "sample_id": "405:12",
+      "valid": true,
+      "error": null,
+      "seconds": 3.47286562500085
+    },
+    {
+      "sample_id": "405:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5841459579969523
+    },
+    {
+      "sample_id": "405:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.8020963329981896
+    },
+    {
+      "sample_id": "405:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.760041125002317
+    },
+    {
+      "sample_id": "405:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4289203750013257
+    },
+    {
+      "sample_id": "405:22",
+      "valid": true,
+      "error": null,
+      "seconds": 2.018917415996839
+    },
+    {
+      "sample_id": "405:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1866464170016116
+    },
+    {
+      "sample_id": "405:26",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7373854580000625
+    },
+    {
+      "sample_id": "405:28",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7298185840045335
+    },
+    {
+      "sample_id": "405:30",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9274777500031632
+    },
+    {
+      "sample_id": "405:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2507622499979334
+    },
+    {
+      "sample_id": "405:34",
+      "valid": true,
+      "error": null,
+      "seconds": 1.1908738339989213
+    },
+    {
+      "sample_id": "405:36",
+      "valid": true,
+      "error": null,
+      "seconds": 2.260846582998056
+    },
+    {
+      "sample_id": "405:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.300169417001598
+    },
+    {
+      "sample_id": "405:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3425338750021183
+    },
+    {
+      "sample_id": "405:42",
+      "valid": true,
+      "error": null,
+      "seconds": 5.637948625000718
+    },
+    {
+      "sample_id": "405:44",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9616368749993853
+    },
+    {
+      "sample_id": "405:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4202509169990662
+    },
+    {
+      "sample_id": "405:48",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.197574791003717
+    },
+    {
+      "sample_id": "405:50",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.5986589579988504
+    },
+    {
+      "sample_id": "405:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.802130791998934
+    },
+    {
+      "sample_id": "405:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.518723749999481
+    },
+    {
+      "sample_id": "405:56",
+      "valid": true,
+      "error": null,
+      "seconds": 3.9132695000007516
+    },
+    {
+      "sample_id": "405:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2945658329990692
+    },
+    {
+      "sample_id": "405:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.845798290996754
+    },
+    {
+      "sample_id": "405:62",
+      "valid": true,
+      "error": null,
+      "seconds": 3.5320529590026126
+    },
+    {
+      "sample_id": "405:64",
+      "valid": true,
+      "error": null,
+      "seconds": 3.966402083999128
+    },
+    {
+      "sample_id": "405:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5968684170002234
+    },
+    {
+      "sample_id": "405:68",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.35310825000488
+    },
+    {
+      "sample_id": "405:70",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6159025839951937
+    },
+    {
+      "sample_id": "405:72",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6946109999989858
+    },
+    {
+      "sample_id": "405:74",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 1.9385923330046353
+    },
+    {
+      "sample_id": "405:76",
+      "valid": true,
+      "error": null,
+      "seconds": 3.615462458001275
+    },
+    {
+      "sample_id": "405:78",
+      "valid": true,
+      "error": null,
+      "seconds": 2.180524165996758
+    },
+    {
+      "sample_id": "405:80",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.1633686249988386
+    },
+    {
+      "sample_id": "405:82",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3372465829961584
+    },
+    {
+      "sample_id": "405:84",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7597242499978165
+    },
+    {
+      "sample_id": "405:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.942416416000924
+    },
+    {
+      "sample_id": "405:88",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3160338750021765
+    },
+    {
+      "sample_id": "405:90",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.900458834003075
+    },
+    {
+      "sample_id": "422:0",
+      "valid": true,
+      "error": null,
+      "seconds": 3.8588828330030083
+    },
+    {
+      "sample_id": "422:2",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4897353339983965
+    },
+    {
+      "sample_id": "422:4",
+      "valid": true,
+      "error": null,
+      "seconds": 3.14229545899434
+    },
+    {
+      "sample_id": "422:6",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.7200464170018677
+    },
+    {
+      "sample_id": "422:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.747990916999697
+    },
+    {
+      "sample_id": "422:10",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0826815830005216
+    },
+    {
+      "sample_id": "422:12",
+      "valid": true,
+      "error": null,
+      "seconds": 3.148153041001933
+    },
+    {
+      "sample_id": "422:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.48226175000309
+    },
+    {
+      "sample_id": "422:16",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.4139051669990295
+    },
+    {
+      "sample_id": "422:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1540783750024275
+    },
+    {
+      "sample_id": "422:20",
+      "valid": true,
+      "error": null,
+      "seconds": 4.0376004580029985
+    },
+    {
+      "sample_id": "422:22",
+      "valid": true,
+      "error": null,
+      "seconds": 2.75464029199793
+    },
+    {
+      "sample_id": "422:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.360472166001273
+    },
+    {
+      "sample_id": "422:26",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2456835830016644
+    },
+    {
+      "sample_id": "422:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2378660829999717
+    },
+    {
+      "sample_id": "422:30",
+      "valid": true,
+      "error": null,
+      "seconds": 1.981087166997895
+    },
+    {
+      "sample_id": "422:32",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9050503329999628
+    },
+    {
+      "sample_id": "422:34",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9043292499991367
+    },
+    {
+      "sample_id": "422:36",
+      "valid": true,
+      "error": null,
+      "seconds": 2.134094083994569
+    },
+    {
+      "sample_id": "422:38",
+      "valid": true,
+      "error": null,
+      "seconds": 1.946559416996024
+    },
+    {
+      "sample_id": "422:40",
+      "valid": true,
+      "error": null,
+      "seconds": 3.8057444999940344
+    },
+    {
+      "sample_id": "422:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0741526249985327
+    },
+    {
+      "sample_id": "422:44",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4272431249992223
+    },
+    {
+      "sample_id": "422:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.095353000004252
+    },
+    {
+      "sample_id": "422:48",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9254775830049766
+    },
+    {
+      "sample_id": "422:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.343984042003285
+    },
+    {
+      "sample_id": "422:52",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 2.5228150000039022
+    },
+    {
+      "sample_id": "422:54",
+      "valid": true,
+      "error": null,
+      "seconds": 3.118072042001586
+    },
+    {
+      "sample_id": "422:56",
+      "valid": true,
+      "error": null,
+      "seconds": 2.81350858299993
+    },
+    {
+      "sample_id": "422:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9936908329982543
+    },
+    {
+      "sample_id": "422:60",
+      "valid": true,
+      "error": null,
+      "seconds": 1.857796625001356
+    },
+    {
+      "sample_id": "422:62",
+      "valid": true,
+      "error": null,
+      "seconds": 2.920967958001711
+    },
+    {
+      "sample_id": "422:64",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.068212041995139
+    },
+    {
+      "sample_id": "422:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.611577582996688
+    },
+    {
+      "sample_id": "422:68",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.622474666000926
+    },
+    {
+      "sample_id": "422:70",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.4317503749989555
+    },
+    {
+      "sample_id": "422:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4142979579992243
+    },
+    {
+      "sample_id": "422:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.280843625005218
+    },
+    {
+      "sample_id": "422:76",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4720567500044126
+    },
+    {
+      "sample_id": "422:78",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1982449580027605
+    },
+    {
+      "sample_id": "422:80",
+      "valid": true,
+      "error": null,
+      "seconds": 2.545541209001385
+    },
+    {
+      "sample_id": "422:82",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9987392499970156
+    },
+    {
+      "sample_id": "422:84",
+      "valid": true,
+      "error": null,
+      "seconds": 3.707062333000067
+    },
+    {
+      "sample_id": "422:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5212570000003325
+    },
+    {
+      "sample_id": "422:88",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9591689160006354
+    },
+    {
+      "sample_id": "422:90",
+      "valid": true,
+      "error": null,
+      "seconds": 2.325697416999901
+    },
+    {
+      "sample_id": "422:92",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8338965410002857
+    },
+    {
+      "sample_id": "422:94",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3888619170029415
+    },
+    {
+      "sample_id": "422:96",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0908305840057437
+    },
+    {
+      "sample_id": "422:98",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8995296669963864
+    },
+    {
+      "sample_id": "422:100",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6089807919997838
+    },
+    {
+      "sample_id": "422:102",
+      "valid": true,
+      "error": null,
+      "seconds": 1.0533357499953127
+    },
+    {
+      "sample_id": "427:0",
+      "valid": true,
+      "error": null,
+      "seconds": 0.9562117919995217
+    },
+    {
+      "sample_id": "427:2",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5341687920008553
+    },
+    {
+      "sample_id": "427:4",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 5.956468999997014
+    },
+    {
+      "sample_id": "427:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5097947500034934
+    },
+    {
+      "sample_id": "427:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.738907749997452
+    },
+    {
+      "sample_id": "427:10",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.036292290998972
+    },
+    {
+      "sample_id": "427:12",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.908089917000325
+    },
+    {
+      "sample_id": "427:14",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.261250667004788
+    },
+    {
+      "sample_id": "427:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4266157499951078
+    },
+    {
+      "sample_id": "427:18",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.5361768750008196
+    },
+    {
+      "sample_id": "427:20",
+      "valid": true,
+      "error": null,
+      "seconds": 3.5323494159965776
+    },
+    {
+      "sample_id": "427:22",
+      "valid": true,
+      "error": null,
+      "seconds": 2.07635387499613
+    },
+    {
+      "sample_id": "427:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3147646249999525
+    },
+    {
+      "sample_id": "427:26",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.54810679199727
+    },
+    {
+      "sample_id": "427:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9301237909967313
+    },
+    {
+      "sample_id": "427:30",
+      "valid": true,
+      "error": null,
+      "seconds": 3.130003999998735
+    },
+    {
+      "sample_id": "427:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.732417915998667
+    },
+    {
+      "sample_id": "427:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.898645250003028
+    },
+    {
+      "sample_id": "427:36",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5900956249970477
+    },
+    {
+      "sample_id": "427:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2283335830070428
+    },
+    {
+      "sample_id": "427:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3466289169955417
+    },
+    {
+      "sample_id": "427:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7349108750058804
+    },
+    {
+      "sample_id": "427:44",
+      "valid": true,
+      "error": null,
+      "seconds": 3.443159749993356
+    },
+    {
+      "sample_id": "427:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9416599579999456
+    },
+    {
+      "sample_id": "427:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7895679170032963
+    },
+    {
+      "sample_id": "427:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3561378329977742
+    },
+    {
+      "sample_id": "427:52",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2913655000011204
+    },
+    {
+      "sample_id": "427:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.8253683329967316
+    },
+    {
+      "sample_id": "427:56",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4688678749953397
+    },
+    {
+      "sample_id": "427:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.160706624999875
+    },
+    {
+      "sample_id": "427:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3697987499981537
+    },
+    {
+      "sample_id": "427:62",
+      "valid": true,
+      "error": null,
+      "seconds": 1.956777500003227
+    },
+    {
+      "sample_id": "427:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1267647499989835
+    },
+    {
+      "sample_id": "427:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.981106749997707
+    },
+    {
+      "sample_id": "427:68",
+      "valid": true,
+      "error": null,
+      "seconds": 4.69805408299726
+    },
+    {
+      "sample_id": "427:70",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1938708749949
+    },
+    {
+      "sample_id": "427:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0612511669969535
+    },
+    {
+      "sample_id": "427:74",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9896596669932478
+    },
+    {
+      "sample_id": "427:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7910993749974295
+    },
+    {
+      "sample_id": "427:78",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4397232920018723
+    },
+    {
+      "sample_id": "427:80",
+      "valid": true,
+      "error": null,
+      "seconds": 2.035751542003709
+    },
+    {
+      "sample_id": "427:82",
+      "valid": true,
+      "error": null,
+      "seconds": 2.660107166004309
+    },
+    {
+      "sample_id": "427:84",
+      "valid": true,
+      "error": null,
+      "seconds": 5.463314874999924
+    },
+    {
+      "sample_id": "427:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3259697500034235
+    },
+    {
+      "sample_id": "427:88",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1660903329975554
+    },
+    {
+      "sample_id": "427:90",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4642129999992903
+    },
+    {
+      "sample_id": "427:92",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9282095419985126
+    },
+    {
+      "sample_id": "427:94",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1763003329979256
+    },
+    {
+      "sample_id": "427:96",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4831369999956223
+    },
+    {
+      "sample_id": "427:98",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7422782499997993
+    },
+    {
+      "sample_id": "427:100",
+      "valid": true,
+      "error": null,
+      "seconds": 3.819539625001198
+    },
+    {
+      "sample_id": "427:102",
+      "valid": true,
+      "error": null,
+      "seconds": 4.319244833000994
+    },
+    {
+      "sample_id": "427:104",
+      "valid": true,
+      "error": null,
+      "seconds": 4.5611442499939585
+    },
+    {
+      "sample_id": "427:106",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 7.631494458997622
+    },
+    {
+      "sample_id": "504:0",
+      "valid": true,
+      "error": null,
+      "seconds": 1.5632637500020792
+    },
+    {
+      "sample_id": "504:2",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.6838966670038644
+    },
+    {
+      "sample_id": "504:4",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9370859999980894
+    },
+    {
+      "sample_id": "504:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3005474590027006
+    },
+    {
+      "sample_id": "504:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1618318330001784
+    },
+    {
+      "sample_id": "504:10",
+      "valid": true,
+      "error": null,
+      "seconds": 2.431557541996881
+    },
+    {
+      "sample_id": "504:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3376171669951873
+    },
+    {
+      "sample_id": "504:14",
+      "valid": true,
+      "error": null,
+      "seconds": 3.6288151670014486
+    },
+    {
+      "sample_id": "504:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7705127500012168
+    },
+    {
+      "sample_id": "504:18",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9871878340054536
+    },
+    {
+      "sample_id": "504:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4162926670032903
+    },
+    {
+      "sample_id": "504:22",
+      "valid": true,
+      "error": null,
+      "seconds": 3.31764570800442
+    },
+    {
+      "sample_id": "504:24",
+      "valid": true,
+      "error": null,
+      "seconds": 3.037215667005512
+    },
+    {
+      "sample_id": "504:26",
+      "valid": true,
+      "error": null,
+      "seconds": 3.05492137499823
+    },
+    {
+      "sample_id": "504:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7681614579996676
+    },
+    {
+      "sample_id": "504:30",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.5614302500034682
+    },
+    {
+      "sample_id": "504:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.885057957995741
+    },
+    {
+      "sample_id": "504:34",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.6493782500037923
+    },
+    {
+      "sample_id": "504:36",
+      "valid": true,
+      "error": null,
+      "seconds": 1.98261416600144
+    },
+    {
+      "sample_id": "504:38",
+      "valid": true,
+      "error": null,
+      "seconds": 1.835841749998508
+    },
+    {
+      "sample_id": "504:40",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7931095419990015
+    },
+    {
+      "sample_id": "504:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2782175000029383
+    },
+    {
+      "sample_id": "504:44",
+      "valid": true,
+      "error": null,
+      "seconds": 1.2718762079966837
+    },
+    {
+      "sample_id": "504:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.364548958001251
+    },
+    {
+      "sample_id": "504:48",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9597220830037259
+    },
+    {
+      "sample_id": "504:50",
+      "valid": true,
+      "error": null,
+      "seconds": 3.640347250002378
+    },
+    {
+      "sample_id": "504:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.730030999999144
+    },
+    {
+      "sample_id": "504:54",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.8637920409964863
+    },
+    {
+      "sample_id": "504:56",
+      "valid": true,
+      "error": null,
+      "seconds": 4.019404292004765
+    },
+    {
+      "sample_id": "504:58",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.118344499998784
+    },
+    {
+      "sample_id": "504:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.516559542003961
+    },
+    {
+      "sample_id": "504:62",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0950153750018217
+    },
+    {
+      "sample_id": "504:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2955537919988274
+    },
+    {
+      "sample_id": "504:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4170088340033544
+    },
+    {
+      "sample_id": "504:68",
+      "valid": true,
+      "error": null,
+      "seconds": 2.280456916996627
+    },
+    {
+      "sample_id": "504:70",
+      "valid": true,
+      "error": null,
+      "seconds": 2.127857250001398
+    },
+    {
+      "sample_id": "504:72",
+      "valid": true,
+      "error": null,
+      "seconds": 4.143667249998543
+    },
+    {
+      "sample_id": "504:74",
+      "valid": true,
+      "error": null,
+      "seconds": 4.51209179199941
+    },
+    {
+      "sample_id": "504:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9765775830019265
+    },
+    {
+      "sample_id": "504:78",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6215938750028727
+    },
+    {
+      "sample_id": "504:80",
+      "valid": true,
+      "error": null,
+      "seconds": 1.1829552499984857
+    },
+    {
+      "sample_id": "508:0",
+      "valid": true,
+      "error": null,
+      "seconds": 2.923813875000633
+    },
+    {
+      "sample_id": "508:2",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2308593339985237
+    },
+    {
+      "sample_id": "508:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.610218750000058
+    },
+    {
+      "sample_id": "508:6",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3072147500060964
+    },
+    {
+      "sample_id": "508:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1481435829991824
+    },
+    {
+      "sample_id": "508:10",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9853157909965375
+    },
+    {
+      "sample_id": "508:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6438288329954958
+    },
+    {
+      "sample_id": "508:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.997730124996451
+    },
+    {
+      "sample_id": "508:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3930199170063133
+    },
+    {
+      "sample_id": "508:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4955126249988098
+    },
+    {
+      "sample_id": "508:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.536216666994733
+    },
+    {
+      "sample_id": "508:22",
+      "valid": true,
+      "error": null,
+      "seconds": 2.680565458998899
+    },
+    {
+      "sample_id": "508:24",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2857643339957576
+    },
+    {
+      "sample_id": "508:26",
+      "valid": true,
+      "error": null,
+      "seconds": 5.7878574170026695
+    },
+    {
+      "sample_id": "508:28",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0401556249998976
+    },
+    {
+      "sample_id": "508:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.34825033400557
+    },
+    {
+      "sample_id": "508:32",
+      "valid": true,
+      "error": null,
+      "seconds": 3.315129167000123
+    },
+    {
+      "sample_id": "508:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.875256792001892
+    },
+    {
+      "sample_id": "508:36",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.7460419580020243
+    },
+    {
+      "sample_id": "508:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7450080000053276
+    },
+    {
+      "sample_id": "508:40",
+      "valid": true,
+      "error": null,
+      "seconds": 1.858587290997093
+    },
+    {
+      "sample_id": "508:42",
+      "valid": true,
+      "error": null,
+      "seconds": 3.03592179199768
+    },
+    {
+      "sample_id": "508:44",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.1356747089957935
+    },
+    {
+      "sample_id": "508:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4192024590010988
+    },
+    {
+      "sample_id": "508:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.670930624997709
+    },
+    {
+      "sample_id": "508:50",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.76820279200183
+    },
+    {
+      "sample_id": "508:52",
+      "valid": true,
+      "error": null,
+      "seconds": 2.7225803330002236
+    },
+    {
+      "sample_id": "508:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.658539208001457
+    },
+    {
+      "sample_id": "508:56",
+      "valid": true,
+      "error": null,
+      "seconds": 2.412187875001109
+    },
+    {
+      "sample_id": "508:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4155231669938075
+    },
+    {
+      "sample_id": "508:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.302166583998769
+    },
+    {
+      "sample_id": "508:62",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9460368750005728
+    },
+    {
+      "sample_id": "508:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.8077992500038818
+    },
+    {
+      "sample_id": "508:66",
+      "valid": true,
+      "error": null,
+      "seconds": 2.213751041002979
+    },
+    {
+      "sample_id": "508:68",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7879340830040746
+    },
+    {
+      "sample_id": "508:70",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0902550839964533
+    },
+    {
+      "sample_id": "508:72",
+      "valid": true,
+      "error": null,
+      "seconds": 3.5789570410051965
+    },
+    {
+      "sample_id": "508:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.803041833001771
+    },
+    {
+      "sample_id": "508:76",
+      "valid": true,
+      "error": null,
+      "seconds": 2.481053167000937
+    },
+    {
+      "sample_id": "508:78",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6351052089958102
+    },
+    {
+      "sample_id": "508:80",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4206182499983697
+    },
+    {
+      "sample_id": "508:82",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3827013749978505
+    },
+    {
+      "sample_id": "508:84",
+      "valid": true,
+      "error": null,
+      "seconds": 4.00940154199634
+    },
+    {
+      "sample_id": "508:86",
+      "valid": true,
+      "error": null,
+      "seconds": 4.238544040999841
+    },
+    {
+      "sample_id": "508:88",
+      "valid": true,
+      "error": null,
+      "seconds": 4.1468683750063065
+    },
+    {
+      "sample_id": "508:90",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4254716669966
+    },
+    {
+      "sample_id": "508:92",
+      "valid": true,
+      "error": null,
+      "seconds": 1.320929999994405
+    },
+    {
+      "sample_id": "508:94",
+      "valid": true,
+      "error": null,
+      "seconds": 2.827768457995262
+    },
+    {
+      "sample_id": "525:0",
+      "valid": true,
+      "error": null,
+      "seconds": 1.0967155840044143
+    },
+    {
+      "sample_id": "525:2",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6795650409985683
+    },
+    {
+      "sample_id": "525:4",
+      "valid": true,
+      "error": null,
+      "seconds": 4.471005125000374
+    },
+    {
+      "sample_id": "525:6",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1868614999984857
+    },
+    {
+      "sample_id": "525:8",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9517187910023495
+    },
+    {
+      "sample_id": "525:10",
+      "valid": true,
+      "error": null,
+      "seconds": 2.32840183400549
+    },
+    {
+      "sample_id": "525:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.166310084001452
+    },
+    {
+      "sample_id": "525:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.298476208001375
+    },
+    {
+      "sample_id": "525:16",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.9581147499993676
+    },
+    {
+      "sample_id": "525:18",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.632059791998472
+    },
+    {
+      "sample_id": "525:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6324430830063648
+    },
+    {
+      "sample_id": "525:22",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.379242290997354
+    },
+    {
+      "sample_id": "525:24",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.527743915998144
+    },
+    {
+      "sample_id": "525:26",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.7752727500046603
+    },
+    {
+      "sample_id": "525:28",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8923798340038047
+    },
+    {
+      "sample_id": "525:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.653295790994889
+    },
+    {
+      "sample_id": "525:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.459762500002398
+    },
+    {
+      "sample_id": "525:34",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.6945029999988037
+    },
+    {
+      "sample_id": "525:36",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8396738340015872
+    },
+    {
+      "sample_id": "525:38",
+      "valid": true,
+      "error": null,
+      "seconds": 2.061417832999723
+    },
+    {
+      "sample_id": "525:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.278526708003483
+    },
+    {
+      "sample_id": "525:42",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.6788304159999825
+    },
+    {
+      "sample_id": "525:44",
+      "valid": true,
+      "error": null,
+      "seconds": 1.922837250000157
+    },
+    {
+      "sample_id": "525:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3904433330026222
+    },
+    {
+      "sample_id": "525:48",
+      "valid": true,
+      "error": null,
+      "seconds": 4.9778423750030925
+    },
+    {
+      "sample_id": "525:50",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 4.542136333999224
+    },
+    {
+      "sample_id": "525:52",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.043641292002576
+    },
+    {
+      "sample_id": "525:54",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1812373749999097
+    },
+    {
+      "sample_id": "525:56",
+      "valid": true,
+      "error": null,
+      "seconds": 3.139292709005531
+    },
+    {
+      "sample_id": "525:58",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6118284999975003
+    },
+    {
+      "sample_id": "525:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.812830082999426
+    },
+    {
+      "sample_id": "525:62",
+      "valid": true,
+      "error": null,
+      "seconds": 3.068484499999613
+    },
+    {
+      "sample_id": "525:64",
+      "valid": true,
+      "error": null,
+      "seconds": 3.706555874996411
+    },
+    {
+      "sample_id": "525:66",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0508704999956535
+    },
+    {
+      "sample_id": "525:68",
+      "valid": true,
+      "error": null,
+      "seconds": 6.552182375002303
+    },
+    {
+      "sample_id": "525:70",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 2.155186791998858
+    },
+    {
+      "sample_id": "525:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.19669787499879
+    },
+    {
+      "sample_id": "525:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.110038209000777
+    },
+    {
+      "sample_id": "525:76",
+      "valid": true,
+      "error": null,
+      "seconds": 3.7188053330028197
+    },
+    {
+      "sample_id": "525:78",
+      "valid": true,
+      "error": null,
+      "seconds": 4.423805165999511
+    },
+    {
+      "sample_id": "525:80",
+      "valid": true,
+      "error": null,
+      "seconds": 4.008220333998906
+    },
+    {
+      "sample_id": "525:82",
+      "valid": true,
+      "error": null,
+      "seconds": 2.463835458001995
+    },
+    {
+      "sample_id": "525:84",
+      "valid": true,
+      "error": null,
+      "seconds": 1.941144707998319
+    },
+    {
+      "sample_id": "525:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1805363339954056
+    },
+    {
+      "sample_id": "525:88",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4438668340008007
+    },
+    {
+      "sample_id": "525:90",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2649771670039627
+    },
+    {
+      "sample_id": "525:92",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8250966659979895
+    },
+    {
+      "sample_id": "525:94",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9045077080008923
+    },
+    {
+      "sample_id": "525:96",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2886815840029158
+    },
+    {
+      "sample_id": "525:98",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3737049999981537
+    },
+    {
+      "sample_id": "525:100",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9064672500026063
+    },
+    {
+      "sample_id": "525:102",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3440378329978557
+    },
+    {
+      "sample_id": "525:104",
+      "valid": true,
+      "error": null,
+      "seconds": 2.085577292004018
+    },
+    {
+      "sample_id": "525:106",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8571331249986542
+    },
+    {
+      "sample_id": "525:108",
+      "valid": true,
+      "error": null,
+      "seconds": 1.481339250000019
+    },
+    {
+      "sample_id": "525:110",
+      "valid": true,
+      "error": null,
+      "seconds": 1.4969495829936932
+    },
+    {
+      "sample_id": "532:0",
+      "valid": true,
+      "error": null,
+      "seconds": 0.9625534580045496
+    },
+    {
+      "sample_id": "532:2",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2033928750024643
+    },
+    {
+      "sample_id": "532:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5183403749979334
+    },
+    {
+      "sample_id": "532:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9074991250017774
+    },
+    {
+      "sample_id": "532:8",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6875211669976125
+    },
+    {
+      "sample_id": "532:10",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.1049808750030934
+    },
+    {
+      "sample_id": "532:12",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.921974916003819
+    },
+    {
+      "sample_id": "532:14",
+      "valid": true,
+      "error": null,
+      "seconds": 1.957576082997548
+    },
+    {
+      "sample_id": "532:16",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.50371441700554
+    },
+    {
+      "sample_id": "532:18",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.9308490000039455
+    },
+    {
+      "sample_id": "532:20",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 3.04038879199652
+    },
+    {
+      "sample_id": "532:22",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0175142910011346
+    },
+    {
+      "sample_id": "532:24",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5142591659969185
+    },
+    {
+      "sample_id": "532:26",
+      "valid": true,
+      "error": null,
+      "seconds": 3.3357950419958797
+    },
+    {
+      "sample_id": "532:28",
+      "valid": true,
+      "error": null,
+      "seconds": 3.4952568750013597
+    },
+    {
+      "sample_id": "532:30",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5015712919994257
+    },
+    {
+      "sample_id": "532:32",
+      "valid": true,
+      "error": null,
+      "seconds": 2.739518834001501
+    },
+    {
+      "sample_id": "532:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.6990357080067042
+    },
+    {
+      "sample_id": "532:36",
+      "valid": true,
+      "error": null,
+      "seconds": 3.582021750000422
+    },
+    {
+      "sample_id": "532:38",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1431694999992033
+    },
+    {
+      "sample_id": "532:40",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.596686333999969
+    },
+    {
+      "sample_id": "532:42",
+      "valid": true,
+      "error": null,
+      "seconds": 2.717971459002001
+    },
+    {
+      "sample_id": "532:44",
+      "valid": true,
+      "error": null,
+      "seconds": 2.832196625000506
+    },
+    {
+      "sample_id": "532:46",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0662022920005256
+    },
+    {
+      "sample_id": "532:48",
+      "valid": true,
+      "error": null,
+      "seconds": 2.9436508330036304
+    },
+    {
+      "sample_id": "532:50",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5945365829975344
+    },
+    {
+      "sample_id": "532:52",
+      "valid": true,
+      "error": null,
+      "seconds": 3.1352595830030623
+    },
+    {
+      "sample_id": "532:54",
+      "valid": true,
+      "error": null,
+      "seconds": 2.837383124999178
+    },
+    {
+      "sample_id": "532:56",
+      "valid": true,
+      "error": null,
+      "seconds": 2.531376208004076
+    },
+    {
+      "sample_id": "532:58",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9495386249982403
+    },
+    {
+      "sample_id": "532:60",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3773953749987413
+    },
+    {
+      "sample_id": "532:62",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9954167920004693
+    },
+    {
+      "sample_id": "532:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0033518330019433
+    },
+    {
+      "sample_id": "532:66",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9994022910032072
+    },
+    {
+      "sample_id": "532:68",
+      "valid": true,
+      "error": null,
+      "seconds": 2.3698293339984957
+    },
+    {
+      "sample_id": "532:70",
+      "valid": true,
+      "error": null,
+      "seconds": 3.506053958000848
+    },
+    {
+      "sample_id": "532:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.824609541996324
+    },
+    {
+      "sample_id": "532:74",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0015515420018346
+    },
+    {
+      "sample_id": "532:76",
+      "valid": true,
+      "error": null,
+      "seconds": 1.6989485410013003
+    },
+    {
+      "sample_id": "532:78",
+      "valid": true,
+      "error": null,
+      "seconds": 1.4754830000019865
+    },
+    {
+      "sample_id": "532:80",
+      "valid": true,
+      "error": null,
+      "seconds": 3.8317813750036294
+    },
+    {
+      "sample_id": "532:82",
+      "valid": true,
+      "error": null,
+      "seconds": 4.302346666998346
+    },
+    {
+      "sample_id": "532:84",
+      "valid": true,
+      "error": null,
+      "seconds": 4.464716374997806
+    },
+    {
+      "sample_id": "532:86",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 7.667682374994911
+    },
+    {
+      "sample_id": "616:0",
+      "valid": true,
+      "error": null,
+      "seconds": 1.29169870899932
+    },
+    {
+      "sample_id": "616:2",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8222774169989862
+    },
+    {
+      "sample_id": "616:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.69335675000184
+    },
+    {
+      "sample_id": "616:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.512696124998911
+    },
+    {
+      "sample_id": "616:8",
+      "valid": true,
+      "error": null,
+      "seconds": 3.330994541000109
+    },
+    {
+      "sample_id": "616:10",
+      "valid": true,
+      "error": null,
+      "seconds": 2.742472750003799
+    },
+    {
+      "sample_id": "616:12",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5849559999987832
+    },
+    {
+      "sample_id": "616:14",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5210161249997327
+    },
+    {
+      "sample_id": "616:16",
+      "valid": true,
+      "error": null,
+      "seconds": 2.006600166998396
+    },
+    {
+      "sample_id": "616:18",
+      "valid": true,
+      "error": null,
+      "seconds": 2.552271833999839
+    },
+    {
+      "sample_id": "616:20",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1817927499942016
+    },
+    {
+      "sample_id": "616:22",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2672993749947636
+    },
+    {
+      "sample_id": "616:24",
+      "valid": true,
+      "error": null,
+      "seconds": 3.807447166997008
+    },
+    {
+      "sample_id": "616:26",
+      "valid": true,
+      "error": null,
+      "seconds": 4.021134709000762
+    },
+    {
+      "sample_id": "616:28",
+      "valid": true,
+      "error": null,
+      "seconds": 3.679238750002696
+    },
+    {
+      "sample_id": "616:30",
+      "valid": true,
+      "error": null,
+      "seconds": 3.7339076659991406
+    },
+    {
+      "sample_id": "616:32",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0494738749985117
+    },
+    {
+      "sample_id": "616:34",
+      "valid": true,
+      "error": null,
+      "seconds": 2.514382082998054
+    },
+    {
+      "sample_id": "616:36",
+      "valid": true,
+      "error": null,
+      "seconds": 3.505558541000937
+    },
+    {
+      "sample_id": "616:38",
+      "valid": true,
+      "error": null,
+      "seconds": 3.0483263329952024
+    },
+    {
+      "sample_id": "616:40",
+      "valid": true,
+      "error": null,
+      "seconds": 2.2658104169968283
+    },
+    {
+      "sample_id": "616:42",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2203416249976726
+    },
+    {
+      "sample_id": "616:44",
+      "valid": true,
+      "error": null,
+      "seconds": 2.177471290997346
+    },
+    {
+      "sample_id": "616:46",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0115784170047846
+    },
+    {
+      "sample_id": "616:48",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7790240409958642
+    },
+    {
+      "sample_id": "616:50",
+      "valid": true,
+      "error": null,
+      "seconds": 3.075622750002367
+    },
+    {
+      "sample_id": "616:52",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 3.966653249997762
+    },
+    {
+      "sample_id": "616:54",
+      "valid": false,
+      "error": "Unknown slot or invalid value",
+      "seconds": 6.680158291004773
+    },
+    {
+      "sample_id": "616:56",
+      "valid": true,
+      "error": null,
+      "seconds": 2.760101958003361
+    },
+    {
+      "sample_id": "616:58",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7793843340041349
+    },
+    {
+      "sample_id": "616:60",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9350939999931143
+    },
+    {
+      "sample_id": "616:62",
+      "valid": true,
+      "error": null,
+      "seconds": 3.2203925830035587
+    },
+    {
+      "sample_id": "616:64",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0840017090013134
+    },
+    {
+      "sample_id": "616:66",
+      "valid": true,
+      "error": null,
+      "seconds": 1.8581117080029799
+    },
+    {
+      "sample_id": "616:68",
+      "valid": true,
+      "error": null,
+      "seconds": 2.4362236250017304
+    },
+    {
+      "sample_id": "616:70",
+      "valid": true,
+      "error": null,
+      "seconds": 2.460613540999475
+    },
+    {
+      "sample_id": "616:72",
+      "valid": true,
+      "error": null,
+      "seconds": 2.069431625001016
+    },
+    {
+      "sample_id": "616:74",
+      "valid": true,
+      "error": null,
+      "seconds": 1.7074545839932398
+    },
+    {
+      "sample_id": "616:76",
+      "valid": true,
+      "error": null,
+      "seconds": 2.1354636660034885
+    },
+    {
+      "sample_id": "616:78",
+      "valid": true,
+      "error": null,
+      "seconds": 3.799988457998552
+    },
+    {
+      "sample_id": "616:80",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0940188329986995
+    },
+    {
+      "sample_id": "616:82",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0465218750032363
+    },
+    {
+      "sample_id": "616:84",
+      "valid": true,
+      "error": null,
+      "seconds": 2.5924522089990205
+    },
+    {
+      "sample_id": "616:86",
+      "valid": true,
+      "error": null,
+      "seconds": 2.725485540999216
+    },
+    {
+      "sample_id": "616:88",
+      "valid": true,
+      "error": null,
+      "seconds": 2.213802416998078
+    },
+    {
+      "sample_id": "616:90",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 6.653446000003896
+    },
+    {
+      "sample_id": "616:92",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 7.382439957997121
+    },
+    {
+      "sample_id": "616:94",
+      "valid": true,
+      "error": null,
+      "seconds": 2.164250040994375
+    }
+  ],
+  "peak_mlx_allocated_bytes": 2976237048
+}

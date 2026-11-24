@@ -1,0 +1,46 @@
+Fetching 13 files:   0%|          | 0/13 [00:00<?, ?it/s]Fetching 13 files: 100%|██████████| 13/13 [00:00<00:00, 5166.87it/s]
+lora 1/24 valid=False 0.49s
+lora 2/24 valid=False 0.38s
+lora 3/24 valid=False 0.41s
+lora 4/24 valid=False 0.40s
+lora 5/24 valid=False 0.40s
+lora 6/24 valid=False 0.45s
+lora 7/24 valid=False 0.40s
+lora 8/24 valid=False 0.37s
+lora 9/24 valid=False 0.38s
+lora 10/24 valid=False 0.39s
+lora 11/24 valid=False 0.40s
+lora 12/24 valid=False 0.40s
+lora 13/24 valid=False 0.39s
+lora 14/24 valid=False 0.39s
+lora 15/24 valid=False 0.39s
+lora 16/24 valid=False 0.40s
+lora 17/24 valid=False 0.39s
+lora 18/24 valid=False 0.43s
+lora 19/24 valid=False 0.46s
+lora 20/24 valid=False 0.41s
+lora 21/24 valid=False 0.39s
+lora 22/24 valid=False 0.56s
+lora 23/24 valid=False 0.40s
+lora 24/24 valid=False 0.41s
+{
+  "variant": "lora",
+  "n": 24,
+  "json_schema_valid_rate": 0.0,
+  "act_micro": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 20,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "slot_value_micro": {
+    "tp": 0,
+    "fp": 0,
+    "fn": 20,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  }
+}

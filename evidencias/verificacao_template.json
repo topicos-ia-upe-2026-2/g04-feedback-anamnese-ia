@@ -1,0 +1,6 @@
+{
+  "holdout_prefixes_identical": 24,
+  "supervised_targets_json_only": 272,
+  "mismatches": 0,
+  "official_template_revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+}

@@ -4,26 +4,23 @@
 
 ## 1. Problema e contexto
 
-<!-- Cliente, beneficiário, processo atual e resultado esperado -->
+Ver E1, seção 1 (`docs/E1-definicao.md`): docente de semiologia sem condição de dar retorno individual a mais de vinte estudantes; o sistema devolve feedback por pergunta da anamnese.
 
 ## 2. Fundamentação científica
 
-<!-- Artigo-base (título, autores, ano, DOI/URL), método e componentes utilizados/adaptados.
-Correspondência entre o método do artigo e a implementação do grupo. -->
+MediTOD (Saley et al., EMNLP 2024, doi:10.18653/v1/2024.emnlp-main.936). Usamos o esquema CMAS para extrair atos `inquire` das falas do entrevistador, uma tarefa adaptada: o artigo avalia a NLU das falas do paciente, e seus números não são comparáveis aos nossos.
 
 ## 3. Modelo e adaptação
 
-<!-- Modelo pré-treinado, origem dos pesos, licença, o que foi ajustado
-(full, parcial ou adaptadores) e recursos computacionais usados -->
+Qwen3-4B-Instruct-2507 (Apache-2.0), conversão `mlx-community/Qwen3-4B-Instruct-2507-4bit` (revisão `50d4277`). LoRA rank 8 nas projeções de atenção e MLP das últimas 4 camadas (1.835.008 parâmetros treináveis), pesos-base em 4 bits congelados. Apple M5, 16 GiB, MLX 0.32.4 / MLX-LM 0.32.2. Detalhes em `docs/E2-modelo-dados.md`, seção 4.
 
 ## 4. Dados
 
-<!-- Fonte, licença, preparação, partições (treino/validação/teste) e justificativa do protocolo -->
+MediTOD `raw_data/` no commit `0b7a87c`, conferido por SHA-256; anotações sem licença identificada (D6). Amostra = fala do médico + 2 falas anteriores; alvo = atos `inquire`. Partição 80/10/10 por grupos de diálogos com conteúdo idêntico (18 pares duplicados, 213 grupos): 8.940 / 1.143 / 1.014 falas. Detalhes e manifesto em `docs/E2-modelo-dados.md`, seções 2 e 3.
 
 ## 5. Experimentos
 
-<!-- Baseline, configuração do ajuste, protocolo, métricas e comparação.
-Detalhes em experimentos.md. -->
+E2: B0 (regras), B1 (Qwen sem adaptador) e LoRA no mesmo holdout de 24 falas, com o mesmo prompt, decodificação e parser. Registro completo em `docs/experimentos.md`.
 
 ## 6. Aplicação
 
@@ -31,7 +28,7 @@ Detalhes em experimentos.md. -->
 
 ## 7. Resultados e análise de falhas
 
-<!-- Comparação final com baseline, exemplos de sucesso e falha, custo/latência quando relevante -->
+E2, partição de teste completa (1.014 falas): F1 de item 0,182 (B0) e 0,634 (LoRA-04), com acerto exato por fala de 14,5% e 56,3%. A primeira adaptação (LoRA-02) colapsava para lista vazia; a causa (deslocamento do primeiro token pelos alvos vazios no início do treino) e a correção (treino mais longo com checkpoint escolhido pela validação) estão em `docs/E2-modelo-dados.md`, seções 6.5 a 6.7.
 
 ## 8. Limitações e uso responsável
 

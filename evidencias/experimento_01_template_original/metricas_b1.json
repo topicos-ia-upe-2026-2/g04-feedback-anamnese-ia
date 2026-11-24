@@ -1,0 +1,271 @@
+{
+  "n": 24,
+  "invalid_outputs": 6,
+  "json_schema_valid_rate": 0.75,
+  "act_micro": {
+    "tp": 0,
+    "fp": 21,
+    "fn": 20,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "slot_value_micro": {
+    "tp": 2,
+    "fp": 19,
+    "fn": 18,
+    "precision": 0.09523809523809523,
+    "recall": 0.1,
+    "f1": 0.0975609756097561
+  },
+  "attribute_micro": {
+    "tp": 0,
+    "fp": 105,
+    "fn": 10,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "per_slot": {
+    "basic information": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 0,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "exposure": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "habit": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 1,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "medical history": {
+      "tp": 0,
+      "fp": 1,
+      "fn": 3,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    },
+    "residence": {
+      "tp": 1,
+      "fp": 1,
+      "fn": 1,
+      "precision": 0.5,
+      "recall": 0.5,
+      "f1": 0.5
+    },
+    "symptom": {
+      "tp": 1,
+      "fp": 10,
+      "fn": 10,
+      "precision": 0.09090909090909091,
+      "recall": 0.09090909090909091,
+      "f1": 0.09090909090909091
+    },
+    "travel": {
+      "tp": 0,
+      "fp": 2,
+      "fn": 2,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0
+    }
+  },
+  "macro_slots": [
+    "exposure",
+    "habit",
+    "medical history",
+    "residence",
+    "symptom",
+    "travel"
+  ],
+  "macro_convention": "Mean over gold-supported slots, fixed across systems; zero_division=0",
+  "slot_value_macro_f1": 0.0984848484848485,
+  "exact_turn_accuracy": 0.08333333333333333,
+  "variant": "b1",
+  "created_utc": "2026-11-03T22:54:46.902834+00:00",
+  "holdout_sha256": "1699057205767186c67020b5dd682c79d0c1305140cac921cd16c756c3725283",
+  "predictions_sha256": "d5628bf2a74925bd58dc5719ff371e0cfcc60d657fcd8c620e539434e8b6eeb5",
+  "load_seconds": 342.7834754590001,
+  "total_seconds": 378.13732270900005,
+  "peak_process_rss_bytes": 1857650688,
+  "latency_seconds": {
+    "mean": 1.4728446821666903,
+    "min": 0.3637157919999936,
+    "max": 4.169377624999925
+  },
+  "decoding": {
+    "temperature": 0,
+    "max_tokens": 192,
+    "seed": 42
+  },
+  "metric_definition": "Exact micro sets per turn: act=(slot,value,sorted attributes); slot_value=(slot,value); attribute=(slot,value,attribute). Casefold/whitespace only. Invalid JSON contributes gold FN. Not the original paper metric.",
+  "label_budget": "B0 vocabulary from all training rows; LoRA pilot subset256/40steps. This comparison does not equalize annotation budget.",
+  "per_sample": [
+    {
+      "sample_id": "208:59",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 2.118081458000006
+    },
+    {
+      "sample_id": "105:96",
+      "valid": true,
+      "error": null,
+      "seconds": 1.4163132500000302
+    },
+    {
+      "sample_id": "123:6",
+      "valid": true,
+      "error": null,
+      "seconds": 1.2685114999999314
+    },
+    {
+      "sample_id": "616:72",
+      "valid": true,
+      "error": null,
+      "seconds": 0.7504380410000522
+    },
+    {
+      "sample_id": "427:34",
+      "valid": true,
+      "error": null,
+      "seconds": 1.251909625000053
+    },
+    {
+      "sample_id": "616:92",
+      "valid": false,
+      "error": "Model output is not strict JSON",
+      "seconds": 4.169377624999925
+    },
+    {
+      "sample_id": "222:72",
+      "valid": true,
+      "error": null,
+      "seconds": 1.4930555840001034
+    },
+    {
+      "sample_id": "217:28",
+      "valid": true,
+      "error": null,
+      "seconds": 1.9559792499999276
+    },
+    {
+      "sample_id": "427:16",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.5275738330001332
+    },
+    {
+      "sample_id": "427:12",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.9558675000000676
+    },
+    {
+      "sample_id": "214:54",
+      "valid": true,
+      "error": null,
+      "seconds": 0.8409242079999331
+    },
+    {
+      "sample_id": "228:6",
+      "valid": true,
+      "error": null,
+      "seconds": 2.02048241600005
+    },
+    {
+      "sample_id": "1011:60",
+      "valid": true,
+      "error": null,
+      "seconds": 1.001210207999975
+    },
+    {
+      "sample_id": "211:42",
+      "valid": true,
+      "error": null,
+      "seconds": 0.719192165999857
+    },
+    {
+      "sample_id": "120:44",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.2500567910001337
+    },
+    {
+      "sample_id": "208:67",
+      "valid": true,
+      "error": null,
+      "seconds": 3.5709065830001236
+    },
+    {
+      "sample_id": "508:76",
+      "valid": true,
+      "error": null,
+      "seconds": 0.9627016250001361
+    },
+    {
+      "sample_id": "508:74",
+      "valid": true,
+      "error": null,
+      "seconds": 1.014443958000129
+    },
+    {
+      "sample_id": "120:124",
+      "valid": true,
+      "error": null,
+      "seconds": 0.3637157919999936
+    },
+    {
+      "sample_id": "105:62",
+      "valid": false,
+      "error": "Unknown attribute or invalid attributes list",
+      "seconds": 1.3613507919999392
+    },
+    {
+      "sample_id": "217:58",
+      "valid": true,
+      "error": null,
+      "seconds": 0.817712290999907
+    },
+    {
+      "sample_id": "1011:104",
+      "valid": true,
+      "error": null,
+      "seconds": 0.4374895840001045
+    },
+    {
+      "sample_id": "1011:12",
+      "valid": true,
+      "error": null,
+      "seconds": 1.0754041669999879
+    },
+    {
+      "sample_id": "228:4",
+      "valid": true,
+      "error": null,
+      "seconds": 2.0055741250000665
+    }
+  ],
+  "peak_mlx_allocated_bytes": 2827076766,
+  "model_id": "mlx-community/Qwen3-4B-Instruct-2507-4bit",
+  "model_revision": "50d427756c6b1b2fe0c0a10f67fbda1fc8e82c1b",
+  "model_sha256": "2a73c6c248601ab904e035548abd8e6abb65ea27dcb5f342fb0a8910eb44173f",
+  "adapter_sha256": null,
+  "source_evaluate_sha256": "96a83319f66abbab742735626f11c2f13351063fec4f4dc57a162f681ad9220d",
+  "provenance_observed_utc": "2026-11-03T22:56:51.896219+00:00",
+  "provenance_note": "Metadata appended after execution, with source and artifact hash checks. Weights and evaluator were not modified between these runs. Predictions unchanged."
+}

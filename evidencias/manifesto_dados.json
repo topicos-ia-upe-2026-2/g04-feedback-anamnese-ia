@@ -1,0 +1,181 @@
+{
+  "created_utc": "2026-11-03T22:47:28.227853+00:00",
+  "source_commit": "0b7a87c3553c9056bc8371b0809811003f94b261",
+  "license_status": "No dataset LICENSE found; no redistribution authorization asserted. Raw/prepared data and adapters remain local and gitignored.",
+  "task": "Retrospective extraction of doctor inquire acts, not paper patient inform NLU.",
+  "language": "English; no translation or human review performed in this pilot.",
+  "seed": 42,
+  "history_turns": 2,
+  "sources": {
+    "dialogs.json": {
+      "url": "https://raw.githubusercontent.com/dair-iitd/MediTOD/0b7a87c3553c9056bc8371b0809811003f94b261/raw_data/dialogs.json",
+      "sha256": "9d79ecaa10e8da630f9accdb52a1be9a7b9bd812b9e3d19b77579e320a4123b6",
+      "bytes": 4440978
+    },
+    "annotations.json": {
+      "url": "https://raw.githubusercontent.com/dair-iitd/MediTOD/0b7a87c3553c9056bc8371b0809811003f94b261/raw_data/annotations.json",
+      "sha256": "828a802da0c5d1c42e92ac15b0fb79b2d34c20e78c9d1c70e1b4423424982c59",
+      "bytes": 4330472
+    }
+  },
+  "dialogue_counts": {
+    "train": 186,
+    "valid": 24,
+    "test": 21
+  },
+  "split_method": "seed42 80/10/10 by SHA-256 groups of full ordered (speaker,text) sequence",
+  "unique_content_groups": 213,
+  "duplicate_dialogue_groups": [
+    [
+      "106",
+      "206"
+    ],
+    [
+      "112",
+      "212"
+    ],
+    [
+      "118",
+      "218"
+    ],
+    [
+      "124",
+      "624"
+    ],
+    [
+      "130",
+      "630"
+    ],
+    [
+      "136",
+      "636"
+    ],
+    [
+      "224",
+      "324"
+    ],
+    [
+      "230",
+      "330"
+    ],
+    [
+      "236",
+      "336"
+    ],
+    [
+      "306",
+      "406"
+    ],
+    [
+      "312",
+      "412"
+    ],
+    [
+      "318",
+      "418"
+    ],
+    [
+      "424",
+      "524"
+    ],
+    [
+      "430",
+      "530"
+    ],
+    [
+      "436",
+      "536"
+    ],
+    [
+      "506",
+      "606"
+    ],
+    [
+      "512",
+      "612"
+    ],
+    [
+      "518",
+      "618"
+    ]
+  ],
+  "group_counts": {
+    "train": 171,
+    "valid": 21,
+    "test": 21
+  },
+  "sample_counts": {
+    "train": 8940,
+    "valid": 1143,
+    "test": 1014
+  },
+  "total_doctor_turns": 11097,
+  "total_inquire_acts": 10070,
+  "source_inquire_acts_all_speakers": 10082,
+  "inquire_excluded_non_doctor": 12,
+  "slot_counts": {
+    "symptom": 5523,
+    "medical history": 1404,
+    "other": 77,
+    "symptom (dermatology)": 160,
+    "medication": 519,
+    "travel": 199,
+    "family history": 457,
+    "residence": 243,
+    "occupation": 91,
+    "exposure": 488,
+    "habit": 795,
+    "medical test": 105,
+    "basic information": 9
+  },
+  "normalization": {
+    "frquency check": "frequency check",
+    "missing_value": "",
+    "value_whitespace": "collapsed",
+    "compound_values": "preserved unsplit",
+    "only_attributes": "Boolean True keys ending in check"
+  },
+  "all_annotation_uids_aligned": true,
+  "dialogue_split_intersections": 0,
+  "full_dialogue_content_intersections": 0,
+  "holdout": {
+    "n": 24,
+    "selection": "seed42 stratified: 4 empty, 8 with attributes, 12 other",
+    "sample_ids": [
+      "208:59",
+      "105:96",
+      "123:6",
+      "616:72",
+      "427:34",
+      "616:92",
+      "222:72",
+      "217:28",
+      "427:16",
+      "427:12",
+      "214:54",
+      "228:6",
+      "1011:60",
+      "211:42",
+      "120:44",
+      "208:67",
+      "508:76",
+      "508:74",
+      "120:124",
+      "105:62",
+      "217:58",
+      "1011:104",
+      "1011:12",
+      "228:4"
+    ],
+    "sha256": "1699057205767186c67020b5dd682c79d0c1305140cac921cd16c756c3725283"
+  },
+  "processed_files": {
+    "holdout_rows.jsonl": "1699057205767186c67020b5dd682c79d0c1305140cac921cd16c756c3725283",
+    "test.jsonl": "78524e3c48435b3019ba513e005d56b4d933269a7b78825f53bce45445164d41",
+    "test_rows.jsonl": "882818ea2ba4c9add25afba973bf8e4b51653749b70be9b65f7940ca5efc5553",
+    "train.jsonl": "71d8827690169790acde706f7a0ccc339f3a63783a321bd1025d497ff5e7c2c7",
+    "train_rows.jsonl": "b7a28679bb5f689f5995d125e40dde3681381ade3199ee5602e9a31d755143f7",
+    "valid.jsonl": "67d87a2208a840645e4fc66e412ee5d11465f7ea98b38125bbd0fc9517a075aa",
+    "valid_rows.jsonl": "34aba5b162f78a90878e9a64a927e6fbc1ac9c8c21f645978933a78229380e9a"
+  }
+}

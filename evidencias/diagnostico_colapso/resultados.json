@@ -1,0 +1,35 @@
+{
+  "data": "2026-11-22",
+  "pergunta": "Por que o LoRA-02 responde [] em todas as falas?",
+  "primeiro_token": {
+    "descricao": "Uma lista vazia é um único token '[]'; uma lista com atos começa pelo token '['. A decisão entre os dois acontece no primeiro token da resposta.",
+    "exemplos_de_treino_vistos_em_40_passos": {"distintos": 40, "de": 256, "com_alvo_vazio": 5},
+    "holdout_falas_com_pergunta_n20": {
+      "B1_sem_adaptador": {"p_token_vazio": 0.000, "p_token_abre_lista": 0.999},
+      "LoRA02_checkpoint_20": {"p_token_vazio": 0.534, "p_token_abre_lista": 0.454},
+      "LoRA02_final_40": {"p_token_vazio": 0.962, "p_token_abre_lista": 0.012}
+    },
+    "treino_visto_falas_com_pergunta_n35": {
+      "LoRA02_checkpoint_20": {"p_token_vazio": 0.524},
+      "LoRA02_final_40": {"p_token_vazio": 0.963}
+    }
+  },
+  "separacao_por_tipo_de_fala": {
+    "amostra": "120 falas da validação (semente 0): 23 sem pergunta, 97 com pergunta",
+    "metrica_auc": "chance de uma fala sem pergunta receber P('[]') maior que uma fala com pergunta",
+    "resultados": {
+      "B1_sem_adaptador": {"p_vazio_sem_pergunta": 0.258, "p_vazio_com_pergunta": 0.000, "auc": 0.89, "respostas_vazias_em_falas_com_pergunta": 0.00},
+      "LoRA02_checkpoint_20": {"p_vazio_sem_pergunta": 0.632, "p_vazio_com_pergunta": 0.524, "auc": 0.70, "respostas_vazias_em_falas_com_pergunta": 0.58},
+      "LoRA02_final_40": {"p_vazio_sem_pergunta": 0.973, "p_vazio_com_pergunta": 0.961, "auc": 0.85, "respostas_vazias_em_falas_com_pergunta": 1.00},
+      "A_reproducao_LoRA02": {"p_vazio_sem_pergunta": 0.963, "p_vazio_com_pergunta": 0.957, "auc": 0.81, "respostas_vazias_em_falas_com_pergunta": 1.00},
+      "B_mesmos_40_passos_sem_alvos_vazios": {"p_vazio_sem_pergunta": 0.176, "p_vazio_com_pergunta": 0.002, "auc": 0.87, "respostas_vazias_em_falas_com_pergunta": 0.00},
+      "C_mesma_receita_400_passos": {"p_vazio_sem_pergunta": 0.616, "p_vazio_com_pergunta": 0.257, "auc": 0.89, "respostas_vazias_em_falas_com_pergunta": 0.03}
+    }
+  },
+  "reproducao": {
+    "perdas_validacao_original": [2.980, 0.654, 0.510],
+    "perdas_validacao_reproducao_A": [2.992, 0.666, 0.533],
+    "observacao": "Mesma ordem de exemplos e curvas quase iguais; o hash do adaptador difere por não determinismo numérico da GPU."
+  },
+  "conclusao": "Causa raiz: os poucos exemplos com alvo vazio geram gradientes grandes no primeiro token (o modelo original dá probabilidade ~0 a '[]' e esse token é 1/3 da perda desses exemplos), enquanto os exemplos com pergunta quase não geram gradiente ali (o modelo já prevê '[' com 0,999). Isso desloca globalmente a decisão para '[]'. O modelo continua ordenando as falas (AUC 0,85), mas o desvio é maior que a separação. Com 40 passos e taxa constante, o treino parou no pico do desvio; com mais passos os exemplos com pergunta compensam (C). Sem os vazios, o desvio não ocorre (B)."
+}
